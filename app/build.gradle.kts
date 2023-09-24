@@ -22,6 +22,8 @@ kotlin {
             implementation(compose.material3)
             @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
             implementation(compose.components.resources)
+
+            implementation("com.airbnb.android:lottie-compose:6.1.0")
         },
         androidDeps = {
             implementation("androidx.appcompat:appcompat:1.5.1")

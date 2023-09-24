@@ -8,14 +8,6 @@ object AppColors {
 
     val TransparentPrimary = Color(0x804B84F1)
 
-    val GreenUser = Color(0xFF4CAF50)
-
-    val TransparentGreenUser = Color(0x804CAF50)
-
-    val RedUser = Color(0xFFF44336)
-
-    val TransparentRedUser = Color(0x80F44336)
-
     val BlackText = Color(0xFF313333)
 
     val GreyText = Color(0xFF8F9090)

@@ -20,7 +20,7 @@ object AppTextStyle {
             fontWeight = FontWeight.W400,
             fontFamily = FontFamily.SansSerif,
             lineHeight = 42.sp,
-            color = AppColors.BlackText
+            color = AppColors.Primary
     )
 
     val Highlighted = TextStyle(
