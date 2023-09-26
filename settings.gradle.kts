@@ -26,5 +26,10 @@ pluginManagement {
 rootProject.name = "GlassOfWater"
 
 include(
-    ":app",
+    ":apps:standaloneApp",
+    ":apps:telegramApp",
+
+    ":features:waterCounter",
+
+    ":core:res"
 )
