@@ -1,5 +1,8 @@
 package nay.kirill.glassOfWater
 
+import androidx.compose.animation.core.FastOutSlowInEasing
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -22,10 +25,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.airbnb.lottie.compose.LottieAnimation
-import com.airbnb.lottie.compose.LottieCompositionSpec
-import com.airbnb.lottie.compose.animateLottieCompositionAsState
-import com.airbnb.lottie.compose.rememberLottieComposition
 import nay.kirill.glassOfWater.res.Res
 import nay.kirill.glassOfWater.res.appName
 import nay.kirill.glassOfWater.res.horizontalPadding
@@ -33,6 +32,7 @@ import nay.kirill.glassOfWater.res.minus
 import nay.kirill.glassOfWater.res.plus
 import nay.kirill.glassOfWater.res.stringResource
 import nay.kirill.glassOfWater.res.verticalPadding
+import nay.kirill.glassOfWater.ui.WaterAnimation
 import nay.kirill.glassOfWater.uiKit.AppColors
 import nay.kirill.glassOfWater.uiKit.AppTextStyle
 
@@ -53,15 +53,12 @@ fun GlassOfWaterScreen() {
             ) {
                 var count: Int by remember { mutableStateOf(0) }
                 var isPlaying: Boolean by remember { mutableStateOf(false) }
-
-                val composition by rememberLottieComposition(LottieCompositionSpec.Url("https://lottie.host/ac766dc0-a771-4ca1-b42f-5f415b6f25d7/Vikmy2i49g.json"))
-                val progress by animateLottieCompositionAsState(
-                    composition = composition,
-                    isPlaying = isPlaying
+                val progress by animateFloatAsState(
+                    targetValue = if (isPlaying) 0F else 1F,
+                    animationSpec = tween(durationMillis = 500, easing = FastOutSlowInEasing)
                 )
-
-                LaunchedEffect(key1 = progress) {
-                    if (progress == 1f) {
+                LaunchedEffect(progress) {
+                    if (isPlaying && progress == 0F) {
                         isPlaying = false
                     }
                 }
@@ -71,11 +68,9 @@ fun GlassOfWaterScreen() {
                     style = AppTextStyle.Header2
                 )
                 Spacer(modifier = Modifier.height(100.dp))
-                LottieAnimation(
-                    modifier = Modifier
-                        .height(100.dp),
-                    composition = composition,
-                    progress = { progress }
+                WaterAnimation(
+                    modifier = Modifier.height(100.dp),
+                    progress = progress
                 )
                 Spacer(modifier = Modifier.height(74.dp))
                 Text(

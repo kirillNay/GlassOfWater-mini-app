@@ -11,7 +11,7 @@ version = "1.0-SNAPSHOT"
 
 kotlin {
     setupPlatforms(
-        platforms = listOf(Platform.JS),
+        platforms = listOf(Platform.JS, Platform.ANDROID),
         commonDeps = {
             api(compose.runtime)
             api(compose.foundation)
@@ -22,8 +22,6 @@ kotlin {
             implementation(compose.material3)
             @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
             implementation(compose.components.resources)
-
-            implementation("com.airbnb.android:lottie-compose:6.1.0")
         },
         androidDeps = {
             implementation("androidx.appcompat:appcompat:1.5.1")
@@ -33,6 +31,8 @@ kotlin {
             implementation("androidx.compose.ui:ui-tooling")
             implementation("androidx.compose.ui:ui-tooling-preview")
             implementation("androidx.activity:activity-compose:1.6.1")
+
+            implementation("com.airbnb.android:lottie-compose:6.1.0")
         }
     )
 }
