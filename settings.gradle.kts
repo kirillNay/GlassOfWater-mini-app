@@ -31,5 +31,6 @@ include(
 
     ":features:waterCounter",
 
-    ":core:res"
+    ":core:res",
+    ":core:telegram-sdk",
 )
