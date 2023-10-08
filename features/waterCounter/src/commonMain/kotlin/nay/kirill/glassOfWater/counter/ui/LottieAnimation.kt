@@ -1,4 +1,4 @@
-package nay.kirill.glassOfWater.ui
+package nay.kirill.glassOfWater.counter.ui
 
 object LottieAnimation {
 

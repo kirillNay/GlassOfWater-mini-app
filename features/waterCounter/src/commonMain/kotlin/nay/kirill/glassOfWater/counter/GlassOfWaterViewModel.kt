@@ -1,4 +1,4 @@
-package nay.kirill.glassOfWater
+package nay.kirill.glassOfWater.counter
 
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

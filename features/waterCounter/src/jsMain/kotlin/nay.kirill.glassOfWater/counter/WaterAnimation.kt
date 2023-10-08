@@ -1,4 +1,4 @@
-package nay.kirill.glassOfWater
+package nay.kirill.glassOfWater.counter
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -8,7 +8,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.remember
 import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
 import androidx.compose.ui.graphics.nativeCanvas
-import nay.kirill.glassOfWater.ui.LottieAnimation
+import nay.kirill.glassOfWater.counter.ui.LottieAnimation
 import org.jetbrains.skia.Rect
 import org.jetbrains.skia.skottie.Animation
 import org.jetbrains.skia.sksg.InvalidationController

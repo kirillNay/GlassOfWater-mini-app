@@ -1,4 +1,4 @@
-package nay.kirill.glassOfWater
+package nay.kirill.glassOfWater.counter
 
 sealed interface GlassOfWaterState {
 

@@ -1,4 +1,4 @@
-package nay.kirill.glassOfWater
+package nay.kirill.glassOfWater.counter
 
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.animateFloatAsState
