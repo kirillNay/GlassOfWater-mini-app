@@ -18,8 +18,12 @@ class GlassOfWaterViewModel(
 
     init {
         viewModelScope.launch {
-            val params = getTodayParamsUseCase()
-            _state.value = GlassOfWaterState.Content(params.waterCount)
+            try {
+                val params = getTodayParamsUseCase()
+                _state.value = GlassOfWaterState.Content(params.waterCount)
+            } catch (e: Throwable) {
+                _state.value = GlassOfWaterState.Content(0)
+            }
         }
     }
 
