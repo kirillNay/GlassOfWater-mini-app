@@ -1,9 +1,6 @@
-import android.setupLibrary
-
 plugins {
     kotlin("multiplatform")
     id("org.jetbrains.compose")
-    id("com.android.library")
 }
 
 group = "nay.kirill"
@@ -23,13 +20,6 @@ kotlin {
             @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
             implementation(compose.components.resources)
         }
-    )
-}
-
-android {
-    setupLibrary(
-        target = project,
-        targetPackage = "nay.kirill.glassOfWater.res"
     )
 }
 

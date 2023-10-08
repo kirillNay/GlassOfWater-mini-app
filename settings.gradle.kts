@@ -31,4 +31,8 @@ include(
     ":features:waterCounter",
 
     ":core:res",
+    ":core:arch",
+
+    ":domain",
+    ":data"
 )

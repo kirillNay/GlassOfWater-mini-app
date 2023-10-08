@@ -18,9 +18,14 @@ kotlin {
             implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
 
             implementation(project(":features:waterCounter"))
+            implementation(project(":domain"))
+            implementation(project(":data"))
             implementation(project(":core:res"))
-            implementation("com.kirillNay.telegram:mini-app:0.0.1")
 
+            implementation("io.insert-koin:koin-core:3.2.0")
+        },
+        jsDeps = {
+            implementation("com.kirillNay.telegram:mini-app:0.0.1")
         }
     )
 }

@@ -1,0 +1,27 @@
+package nay.kirill.glassOfWater.data
+
+import com.kirillNay.telegram.miniapp.webApp.webApp
+import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
+import nay.kirill.healthcare.domain.HealthParams
+import nay.kirill.healthcare.domain.repositories.HealthParamsRepository
+
+actual class HealthParamsRepositoryImpl : HealthParamsRepository {
+
+    actual override suspend fun getParamByDate(date: String): Result<HealthParams> =
+        webApp.cloudStorage.getItem(date).map { Json.decodeFromString(it) }
+
+    actual override suspend fun setParam(date: String, params: HealthParams) {
+        webApp.cloudStorage.setItem(date, Json.encodeToString(params))
+    }
+
+    actual override suspend fun getAllParams(): List<HealthParams> = webApp.cloudStorage.getKeys()
+        .getOrNull()
+        .orEmpty()
+        .mapNotNull { key ->
+            webApp.cloudStorage.getItem(key).getOrNull()
+        }
+        .map { Json.decodeFromString(it) }
+
+}

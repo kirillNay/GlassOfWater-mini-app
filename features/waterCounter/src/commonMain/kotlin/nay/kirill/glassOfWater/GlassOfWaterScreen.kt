@@ -18,6 +18,7 @@ import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -34,7 +35,11 @@ import nay.kirill.glassOfWater.res.stringResource
 import nay.kirill.glassOfWater.res.verticalPadding
 
 @Composable
-fun GlassOfWaterScreen() {
+fun GlassOfWaterScreen(
+    viewModel: GlassOfWaterViewModel
+) {
+    val state by viewModel.state.collectAsState()
+
     MaterialTheme {
         Surface(
             modifier = Modifier.fillMaxSize()
@@ -48,8 +53,7 @@ fun GlassOfWaterScreen() {
                     ),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                var count: Int by remember { mutableStateOf(0) }
-                var isPlaying: Boolean by remember { mutableStateOf(false) }
+                var isPlaying: Boolean by remember { mutableStateOf(true) }
                 val progress by animateFloatAsState(
                     targetValue = if (isPlaying) 0F else 1F,
                     animationSpec = tween(durationMillis = 500, easing = FastOutSlowInEasing), label = ""
@@ -70,22 +74,33 @@ fun GlassOfWaterScreen() {
                     progress = progress
                 )
                 Spacer(modifier = Modifier.height(74.dp))
-                Text(
-                    text = count.toString(),
-                    style = MaterialTheme.typography.h6
-                )
-                Spacer(modifier = Modifier.height(24.dp))
-                Controllers(
-                    onDown = { count-- },
-                    onUp = {
-                        count++
-                        isPlaying = true
-                    },
-                    isDownEnabled = count > 0
-                )
+                if (state is GlassOfWaterState.Content) {
+                    Content(state as GlassOfWaterState.Content, viewModel) { isPlaying = true }
+                }
             }
         }
     }
+}
+
+@Composable
+private fun Content(
+    state: GlassOfWaterState.Content,
+    viewModel: GlassOfWaterViewModel,
+    onUp: () -> Unit
+) {
+    Text(
+        text = state.count.toString(),
+        style = MaterialTheme.typography.h6
+    )
+    Spacer(modifier = Modifier.height(24.dp))
+    Controllers(
+        onDown = { viewModel.decreaseCount() },
+        onUp = {
+            viewModel.increaseCount()
+            onUp()
+        },
+        isDownEnabled = state.isDecreaseEnabled
+    )
 }
 
 @Composable

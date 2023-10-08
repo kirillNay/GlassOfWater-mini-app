@@ -1,9 +1,6 @@
-import android.setupLibrary
-
 plugins {
     kotlin("multiplatform")
     id("org.jetbrains.compose")
-    id("com.android.library")
 }
 
 group = "nay.kirill"
@@ -19,14 +16,15 @@ kotlin {
             api(compose.ui)
 
             implementation(project(":core:res"))
-        }
-    )
-}
+            implementation(project(":core:arch"))
 
-android {
-    setupLibrary(
-        target = project,
-        targetPackage = "nay.kirill.glassOfWater.waterCounter"
+            implementation(project(":domain"))
+
+            implementation("io.insert-koin:koin-core:3.2.0")
+        },
+        jsDeps = {
+            implementation("com.kirillNay.telegram:mini-app:0.0.1")
+        }
     )
 }
 
