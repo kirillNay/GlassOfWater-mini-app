@@ -23,7 +23,7 @@ kotlin {
             implementation("io.insert-koin:koin-core:3.2.0")
         },
         jsDeps = {
-            implementation("com.kirillNay.telegram:mini-app:0.0.1")
+            implementation("com.kirillNay.telegram:mini-app:0.0.2")
         }
     )
 }

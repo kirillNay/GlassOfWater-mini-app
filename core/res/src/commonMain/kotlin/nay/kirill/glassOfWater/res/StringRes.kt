@@ -10,3 +10,5 @@ expect val Res.string.appName: Int
 expect val Res.string.minus: Int
 
 expect val Res.string.plus: Int
+
+expect val Res.string.noStats: Int

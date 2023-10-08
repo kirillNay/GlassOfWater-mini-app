@@ -21,3 +21,6 @@ actual val Res.string.minus: Int get() = _minus
 
 private val _plus = lastId++
 actual val Res.string.plus: Int get() = _plus
+
+private val _noStats = lastId++
+actual val Res.string.noStats: Int get() = _noStats

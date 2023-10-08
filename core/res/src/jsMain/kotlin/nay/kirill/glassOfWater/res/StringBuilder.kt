@@ -7,8 +7,12 @@ fun buildStingsResources(
     val rs = Res.string
 
     when (languageCode) {
-        "ru" -> {}
-        "en" -> {}
+        "ru" -> {
+            strs[rs.noStats] = "Статистика не доступна"
+        }
+        "en" -> {
+            strs[rs.noStats] = "Statistics is unavailable"
+        }
     }
     strs[rs.minus] = "-"
     strs[rs.plus] = "+"

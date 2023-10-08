@@ -10,7 +10,7 @@ import nay.kirill.healthcare.domain.repositories.HealthParamsRepository
 actual class HealthParamsRepositoryImpl : HealthParamsRepository {
 
     actual override suspend fun getParamByDate(date: String): Result<HealthParams> =
-        webApp.cloudStorage.getItem(date).map { result ->
+        webApp.cloudStorage.getItem(date).mapCatching { result ->
             if (result.isEmpty()) {
                 HealthParams(0, date)
             } else {
@@ -26,8 +26,8 @@ actual class HealthParamsRepositoryImpl : HealthParamsRepository {
         .getOrNull()
         .orEmpty()
         .mapNotNull { key ->
-            webApp.cloudStorage.getItem(key).getOrNull()
+            webApp.cloudStorage.getItem(key).mapCatching { Json.decodeFromString<HealthParams>(it) }.getOrNull()
         }
-        .map { Json.decodeFromString(it) }
+
 
 }

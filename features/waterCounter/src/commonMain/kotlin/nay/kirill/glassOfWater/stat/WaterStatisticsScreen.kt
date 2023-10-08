@@ -3,6 +3,7 @@ package nay.kirill.glassOfWater.stat
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -25,8 +26,12 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.ExperimentalTextApi
 import androidx.compose.ui.text.drawText
 import androidx.compose.ui.text.rememberTextMeasurer
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import nay.kirill.glassOfWater.res.Res
+import nay.kirill.glassOfWater.res.noStats
+import nay.kirill.glassOfWater.res.stringResource
 import nay.kirill.healthcare.domain.HealthParams
 import kotlin.math.max
 import kotlin.math.roundToInt
@@ -43,7 +48,17 @@ fun StatisticsScreen(
             modifier = Modifier.padding(horizontal = 20.dp)
         )
 
-        else -> Box {}
+        is WaterStatisticsState.Empty -> Box(
+            modifier = Modifier.fillMaxSize(),
+        ) {
+            Text(
+                text = stringResource(Res.string.noStats),
+                textAlign = TextAlign.Center,
+                style = MaterialTheme.typography.h6
+            )
+        }
+
+        else -> Unit
     }
 }
 
@@ -83,15 +98,15 @@ private fun BarChart(
         content = {
             Text(
                 text = counts.max().toString(),
-                style = MaterialTheme.typography.body2
+                style = MaterialTheme.typography.subtitle1
             )
             Text(
                 text = midValue.toString(),
-                style = MaterialTheme.typography.body2
+                style = MaterialTheme.typography.subtitle1
             )
             Text(
                 text = "0",
-                style = MaterialTheme.typography.body2
+                style = MaterialTheme.typography.subtitle1
             )
             StatBarChart(params, Modifier.height(300.dp))
         },
@@ -151,7 +166,7 @@ private fun StatBarChart(
                 maxWidth.toPx() / (counts.size + 1)
             }
             val xOffset = remember(density) { // center points in the graph
-                xPositionRatio / counts.size
+                xPositionRatio / (counts.size + 1)
             }
 
             // Calculate baselines
@@ -167,7 +182,7 @@ private fun StatBarChart(
 
             val chartColor = MaterialTheme.colors.primary
             val textMeasure = rememberTextMeasurer()
-            val textStyle = MaterialTheme.typography.caption
+            val textStyle = MaterialTheme.typography.subtitle2
 
             Layout(
                 content = {},
