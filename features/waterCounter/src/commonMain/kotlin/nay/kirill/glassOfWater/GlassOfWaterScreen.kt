@@ -32,8 +32,6 @@ import nay.kirill.glassOfWater.res.minus
 import nay.kirill.glassOfWater.res.plus
 import nay.kirill.glassOfWater.res.stringResource
 import nay.kirill.glassOfWater.res.verticalPadding
-import nay.kirill.glassOfWater.ui.AppColors
-import nay.kirill.glassOfWater.ui.AppTextStyle
 
 @Composable
 fun GlassOfWaterScreen() {
@@ -64,7 +62,7 @@ fun GlassOfWaterScreen() {
 
                 Text(
                     text = stringResource(Res.string.appName),
-                    style = AppTextStyle.Header2
+                    style = MaterialTheme.typography.h5
                 )
                 Spacer(modifier = Modifier.height(100.dp))
                 WaterAnimation(
@@ -74,7 +72,7 @@ fun GlassOfWaterScreen() {
                 Spacer(modifier = Modifier.height(74.dp))
                 Text(
                     text = count.toString(),
-                    style = AppTextStyle.Header
+                    style = MaterialTheme.typography.h6
                 )
                 Spacer(modifier = Modifier.height(24.dp))
                 Controllers(
@@ -121,14 +119,14 @@ private fun ControlButton(
             .height(44.dp),
         onClick = onClick,
         colors = ButtonDefaults.buttonColors(
-            backgroundColor = AppColors.Primary
+            backgroundColor = MaterialTheme.colors.primary
         ),
         shape = RoundedCornerShape(16.dp),
         enabled = isEnabled
     ) {
         Text(
             text = text,
-            style = AppTextStyle.ButtonStyle
+            style = MaterialTheme.typography.button
         )
     }
 }

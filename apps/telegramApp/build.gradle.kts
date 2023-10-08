@@ -1,5 +1,3 @@
-import android.androidApp
-
 plugins {
     kotlin("multiplatform")
     id("org.jetbrains.compose")
@@ -17,13 +15,12 @@ kotlin {
             api(compose.material)
             api(compose.ui)
 
-            @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
-            implementation(compose.material3)
-            @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
-            implementation(compose.components.resources)
+            implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
 
             implementation(project(":features:waterCounter"))
             implementation(project(":core:res"))
+            implementation("com.kirillNay.telegram:mini-app:0.0.1")
+
         }
     )
 }

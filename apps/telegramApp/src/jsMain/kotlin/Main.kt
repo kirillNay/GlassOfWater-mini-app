@@ -1,20 +1,20 @@
 import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.ui.ExperimentalComposeUiApi
-import androidx.compose.ui.window.CanvasBasedWindow
+import com.kirillNay.telegram.miniapp.compose.telegramWebApp
+import com.kirillNay.telegram.miniapp.webApp.webApp
 import nay.kirill.glassOfWater.GlassOfWaterScreen
 import nay.kirill.glassOfWater.res.buildStingsResources
 import nay.kirill.glassOfWater.res.strsLocal
-import org.jetbrains.skiko.wasm.onWasmReady
 
-@OptIn(ExperimentalComposeUiApi::class)
 fun main() {
-    onWasmReady {
-        CanvasBasedWindow("GlassOfWater") {
-            CompositionLocalProvider(
-                strsLocal provides buildStingsResources()
-            ) {
-                GlassOfWaterScreen()
-            }
+    telegramWebApp(
+        colorsConverter = GlassOfWaterConverter()
+    ) {
+        CompositionLocalProvider(
+            strsLocal provides buildStingsResources(
+                languageCode = webApp.initDataUnsafe.user?.languageCode
+            ),
+        ) {
+            GlassOfWaterScreen()
         }
     }
 }

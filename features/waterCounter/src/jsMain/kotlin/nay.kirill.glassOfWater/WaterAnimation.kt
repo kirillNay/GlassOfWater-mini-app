@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.remember
 import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
 import androidx.compose.ui.graphics.nativeCanvas
@@ -17,7 +18,12 @@ actual fun WaterAnimation(
     modifier: Modifier,
     progress: Float // 0 to 1
 ) {
-    val animation = Animation.makeFromString(LottieAnimation.JSON)
+    val json = LottieAnimation.createJson(
+        r = MaterialTheme.colors.primary.red.toString(),
+        g = MaterialTheme.colors.primary.green.toString(),
+        b = MaterialTheme.colors.primary.blue.toString()
+    )
+    val animation = Animation.makeFromString(json)
     val invalidationController = remember { InvalidationController() }
     val time = animation.duration * progress
 

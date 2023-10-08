@@ -18,23 +18,7 @@ kotlin {
             api(compose.material)
             api(compose.ui)
 
-            @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
-            implementation(compose.material3)
-            @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
-            implementation(compose.components.resources)
-
             implementation(project(":core:res"))
-        },
-        androidDeps = {
-            implementation("androidx.appcompat:appcompat:1.5.1")
-            implementation("androidx.core:core-ktx:1.7.0")
-
-            implementation(platform("androidx.compose:compose-bom:2022.10.00"))
-            implementation("androidx.compose.ui:ui-tooling")
-            implementation("androidx.compose.ui:ui-tooling-preview")
-            implementation("androidx.activity:activity-compose:1.6.1")
-
-            implementation("com.airbnb.android:lottie-compose:6.1.0")
         }
     )
 }
