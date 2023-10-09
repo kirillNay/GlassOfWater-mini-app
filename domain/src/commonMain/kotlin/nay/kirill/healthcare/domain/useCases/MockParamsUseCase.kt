@@ -17,7 +17,7 @@ class MockParamsUseCase(
         clearParamsUseCase()
         for (i in 0..5) {
             val date = Clock.System.now().minus(i, DateTimeUnit.DAY, TimeZone.UTC).toString().split("T")[0]
-            val count = Random(i).nextInt(0, 10)
+            val count = Random.nextInt(1, 12)
 
             repository.setParam(date, HealthParams(count, date))
         }

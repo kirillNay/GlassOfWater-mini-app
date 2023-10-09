@@ -72,9 +72,9 @@ fun GlassOfWaterScreen(
 
         Text(
             text = stringResource(Res.string.appName),
-            style = MaterialTheme.typography.h5
+            style = MaterialTheme.typography.h5,
+            modifier = Modifier.padding(bottom = 36.dp)
         )
-        Spacer(modifier = Modifier.height(20.dp))
 
         Box {
             Column {

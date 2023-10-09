@@ -48,7 +48,7 @@ fun SettingsScreen(
         Text(
             text = stringResource(Res.string.settings),
             style = MaterialTheme.typography.h5,
-            modifier = Modifier.padding(bottom = 28.dp)
+            modifier = Modifier.padding(bottom = 36.dp)
         )
 
         when (val currentState = state) {
