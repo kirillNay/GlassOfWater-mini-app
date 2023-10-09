@@ -10,6 +10,7 @@ import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Switch
+import androidx.compose.material.SwitchDefaults
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -74,7 +75,9 @@ private fun Content(
 ) {
     Column(modifier = modifier) {
         Row(
-            modifier = Modifier.padding(bottom = 12.dp)
+            modifier = Modifier
+                .padding(bottom = 12.dp),
+            verticalAlignment = Alignment.CenterVertically
         ) {
             Switch(
                 checked = state.isAdaptiveBoolean,
@@ -82,6 +85,7 @@ private fun Content(
                     viewModel.updateAdaptiveTheme()
                 },
                 modifier = Modifier.padding(end = 16.dp),
+                colors = SwitchDefaults.colors(checkedThumbColor = MaterialTheme.colors.primary)
             )
             Text(
                 text = stringResource(Res.string.adaptiveTheme),

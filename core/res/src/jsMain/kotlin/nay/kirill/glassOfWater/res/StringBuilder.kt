@@ -14,8 +14,8 @@ fun buildStingsResources(
             strs[rs.stats] = "Статистика"
             strs[rs.clearDataButton] = "Очистить данные"
             strs[rs.clearDataConfirmation] = "Вы уверены, что хотите очистить данные?"
-            strs[rs.mockDataButton] = "Имитация данных"
-            strs[rs.mockDataConfirmation] = "Вы уверены, что хотите симитировать данные? Текущие данные будут потеряны!"
+            strs[rs.mockDataButton] = "Тестовые данные"
+            strs[rs.mockDataConfirmation] = "Вы уверены, что хотите применить тестовые данные? Текущие данные будут потеряны!"
             strs[rs.adaptiveTheme] = "Адаптивный дизайн"
             strs[rs.commonError] = "Что-то пошло не так..."
         }

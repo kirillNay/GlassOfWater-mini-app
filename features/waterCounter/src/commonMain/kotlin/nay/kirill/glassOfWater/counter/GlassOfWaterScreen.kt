@@ -34,11 +34,9 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import nay.kirill.glassOfWater.res.Res
 import nay.kirill.glassOfWater.res.appName
-import nay.kirill.glassOfWater.res.commonError
 import nay.kirill.glassOfWater.res.dimenRes
 import nay.kirill.glassOfWater.res.horizontalPadding
 import nay.kirill.glassOfWater.res.minus

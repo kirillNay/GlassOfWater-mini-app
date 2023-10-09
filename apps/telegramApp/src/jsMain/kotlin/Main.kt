@@ -43,7 +43,8 @@ fun main() {
                 letterSpacing = 0.15.sp,
                 color = Color.Gray
             )
-        )
+        ),
+        animationDuration = 500
     ) {
         CompositionLocalProvider(
             strsLocal provides buildStingsResources(
@@ -52,9 +53,9 @@ fun main() {
             dimenLocal provides buildDimenResources()
         ) {
             val appState = rememberAppState()
-            Screen(appState.currentRoute == Screen.COUNTER.route) { GlassOfWaterScreen(get().get()) }
-            Screen(appState.currentRoute == Screen.STATS.route) { WaterStatisticsScreen(get().get()) }
-            Screen(appState.currentRoute == Screen.SETTINGS.route) { SettingsScreen(get().get()) }
+            Screen(appState.currentRoute == Screen.COUNTER.route) { GlassOfWaterScreen(remember { get().get() }) }
+            Screen(appState.currentRoute == Screen.STATS.route) { WaterStatisticsScreen(remember { get().get() }) }
+            Screen(appState.currentRoute == Screen.SETTINGS.route) { SettingsScreen(remember { get().get() }) }
         }
     }
 }
