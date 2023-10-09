@@ -23,8 +23,18 @@ pluginManagement {
     }
 }
 
-rootProject.name = "GlassOfWater"
+rootProject.name = "HealthCare"
 
 include(
-    ":app",
+    ":apps:telegramApp",
+
+    ":features:waterCounter",
+    ":features:settings",
+
+    ":core:res",
+    ":core:arch",
+    ":core:ui",
+
+    ":domain",
+    ":data"
 )
