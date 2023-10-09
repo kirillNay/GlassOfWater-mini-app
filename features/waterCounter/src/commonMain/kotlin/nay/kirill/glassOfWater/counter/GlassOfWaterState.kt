@@ -8,6 +8,8 @@ sealed interface GlassOfWaterState {
 
     data object Loading : GlassOfWaterState
 
+    data object Error : GlassOfWaterState
+
     fun copyContent(block: Content.() -> Content): GlassOfWaterState = when (this) {
         is Content -> block()
         else -> this

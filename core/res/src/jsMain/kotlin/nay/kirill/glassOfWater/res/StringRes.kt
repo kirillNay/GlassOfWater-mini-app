@@ -45,3 +45,6 @@ actual val Res.string.mockDataButton: Int get() = _mockDataButton
 
 private val _adaptiveTheme = lastId++
 actual val Res.string.adaptiveTheme: Int get() = _adaptiveTheme
+
+private val _commonError = lastId++
+actual val Res.string.commonError: Int get() = _commonError

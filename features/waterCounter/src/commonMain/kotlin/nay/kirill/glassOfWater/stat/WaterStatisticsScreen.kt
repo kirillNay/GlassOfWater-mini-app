@@ -43,6 +43,7 @@ import nay.kirill.glassOfWater.res.noStats
 import nay.kirill.glassOfWater.res.stats
 import nay.kirill.glassOfWater.res.stringResource
 import nay.kirill.glassOfWater.res.verticalPadding
+import nay.kirill.glassOfWater.ui.ErrorState
 import nay.kirill.healthcare.domain.HealthParams
 import kotlin.math.max
 import kotlin.math.roundToInt
@@ -82,10 +83,9 @@ fun WaterStatisticsScreen(
             }
 
             State(isVisible = state is WaterStatisticsState.Empty) {
-                Text(
+                ErrorState(
                     text = stringResource(Res.string.noStats),
-                    textAlign = TextAlign.Center,
-                    style = MaterialTheme.typography.body1
+                    modifier = Modifier.padding(top = 46.dp)
                 )
             }
 

@@ -26,3 +26,5 @@ expect val Res.string.clearDataButton: Int
 expect val Res.string.mockDataButton: Int
 
 expect val Res.string.adaptiveTheme: Int
+
+expect val Res.string.commonError: Int

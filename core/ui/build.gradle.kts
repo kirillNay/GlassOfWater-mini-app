@@ -13,15 +13,6 @@ kotlin {
             api(compose.ui)
 
             implementation(project(":core:res"))
-            implementation(project(":core:arch"))
-            implementation(project(":core:ui"))
-
-            implementation(project(":domain"))
-
-            implementation("io.insert-koin:koin-core:3.2.0")
-        },
-        jsDeps = {
-            implementation("com.kirillNay.telegram:mini-app:0.0.2")
         }
     )
 }

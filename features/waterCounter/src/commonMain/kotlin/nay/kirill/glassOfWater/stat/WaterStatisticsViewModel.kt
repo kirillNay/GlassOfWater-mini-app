@@ -7,6 +7,7 @@ import kotlinx.coroutines.launch
 import nay.kirill.healthcare.domain.useCases.GetAllParamsUseCase
 import nay.kirill.kmpArch.navigation.NavigationStack
 import nay.kirill.kmpArch.ViewModel
+import kotlin.coroutines.CoroutineContext
 
 class WaterStatisticsViewModel(
     private val getAllParamsUseCase: GetAllParamsUseCase,
@@ -26,7 +27,7 @@ class WaterStatisticsViewModel(
             .onClick(back)
             .show()
 
-        viewModelScope.launch {
+        launch {
             val params = getAllParamsUseCase()
                 .sortedBy { it.date }
                 .takeLast(5)
@@ -42,5 +43,9 @@ class WaterStatisticsViewModel(
     override fun onCleared() {
         super.onCleared()
         webApp.backButton.offClick(back).hide()
+    }
+
+    override fun onError(context: CoroutineContext, error: Throwable) {
+        _state.value = WaterStatisticsState.Empty
     }
 }

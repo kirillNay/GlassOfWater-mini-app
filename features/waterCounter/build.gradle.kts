@@ -14,6 +14,7 @@ kotlin {
 
             implementation(project(":core:res"))
             implementation(project(":core:arch"))
+            implementation(project(":core:ui"))
 
             implementation(project(":domain"))
 

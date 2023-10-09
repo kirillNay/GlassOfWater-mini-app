@@ -4,9 +4,6 @@ import com.kirillNay.telegram.miniapp.webApp.webApp
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import nay.kirill.glassOfWater.res.Res
-import nay.kirill.glassOfWater.res.clearDataConfirmation
-import nay.kirill.glassOfWater.res.stringResource
 import nay.kirill.healthcare.domain.AppConfig
 import nay.kirill.healthcare.domain.useCases.ClearParamsUseCase
 import nay.kirill.healthcare.domain.useCases.GetAppConfigUseCase
@@ -14,6 +11,7 @@ import nay.kirill.healthcare.domain.useCases.MockParamsUseCase
 import nay.kirill.healthcare.domain.useCases.SaveAppConfigUseCase
 import nay.kirill.kmpArch.ViewModel
 import nay.kirill.kmpArch.navigation.NavigationStack
+import kotlin.coroutines.CoroutineContext
 
 class SettingsViewModel(
     private val getAppConfigUseCase: GetAppConfigUseCase,
@@ -32,7 +30,7 @@ class SettingsViewModel(
     }
 
     init {
-        viewModelScope.launch {
+        launch {
             val config = getAppConfigUseCase()
             _state.value = SettingsState.Content(
                 isAdaptiveBoolean = config.isAdaptiveTheme
@@ -47,7 +45,7 @@ class SettingsViewModel(
     fun clearData(confirmationText: String) {
         webApp.showConfirm(confirmationText) { result ->
             if (result) {
-                viewModelScope.launch {
+                launch {
                     clearParamsUseCase()
                 }
             }
@@ -57,7 +55,7 @@ class SettingsViewModel(
     fun mockData(confirmationText: String) {
         webApp.showConfirm(confirmationText) { result ->
             if (result) {
-                viewModelScope.launch {
+                launch {
                     mockParamsUseCase()
                 }
             }
@@ -71,7 +69,7 @@ class SettingsViewModel(
 
     private fun updateConfig() {
         (_state.value as? SettingsState.Content)?.let {
-            viewModelScope.launch {
+            launch {
                 saveAppConfigUseCase(
                     AppConfig(
                         isAdaptiveTheme = it.isAdaptiveBoolean
@@ -84,6 +82,10 @@ class SettingsViewModel(
     override fun onCleared() {
         super.onCleared()
         webApp.backButton.offClick(back).hide()
+    }
+
+    override fun onError(context: CoroutineContext, error: Throwable) {
+        _state.value = SettingsState.Error
     }
 
 }

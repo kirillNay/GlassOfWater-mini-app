@@ -29,6 +29,7 @@ import nay.kirill.glassOfWater.res.mockDataConfirmation
 import nay.kirill.glassOfWater.res.settings
 import nay.kirill.glassOfWater.res.stringResource
 import nay.kirill.glassOfWater.res.verticalPadding
+import nay.kirill.glassOfWater.ui.ErrorState
 
 @Composable
 fun SettingsScreen(
@@ -56,6 +57,9 @@ fun SettingsScreen(
                 state = currentState,
                 viewModel = viewModel,
                 modifier = Modifier.align(Alignment.Start)
+            )
+            is SettingsState.Error -> ErrorState(
+                modifier = Modifier.padding(top = 46.dp)
             )
             else -> Unit
         }

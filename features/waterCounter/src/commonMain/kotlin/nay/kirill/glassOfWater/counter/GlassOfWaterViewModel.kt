@@ -9,6 +9,7 @@ import nay.kirill.healthcare.domain.useCases.UpdateTodayWaterUseCase
 import nay.kirill.kmpArch.navigation.NavigationStack
 import nay.kirill.kmpArch.ViewModel
 import nay.kirill.kmpArch.navigation.Screen
+import kotlin.coroutines.CoroutineContext
 
 class GlassOfWaterViewModel(
     private val getTodayParamsUseCase: GetTodayParamsUseCase,
@@ -20,14 +21,15 @@ class GlassOfWaterViewModel(
     val state: StateFlow<GlassOfWaterState> = _state.apply { onEach { console.log(it.toString()) } }
 
     init {
-        viewModelScope.launch {
-            try {
-                val params = getTodayParamsUseCase()
-                _state.value = GlassOfWaterState.Content(params.waterCount)
-            } catch (e: Throwable) {
-                _state.value = GlassOfWaterState.Content(0)
-            }
+        launch {
+            val params = getTodayParamsUseCase()
+            _state.value = GlassOfWaterState.Content(params.waterCount)
         }
+    }
+
+    override fun onError(context: CoroutineContext, error: Throwable) {
+        console.log("Error of Glass of water")
+        _state.value = GlassOfWaterState.Error
     }
 
     fun increaseCount() {
@@ -50,7 +52,7 @@ class GlassOfWaterViewModel(
 
     private fun updateCount() {
         (_state.value as? GlassOfWaterState.Content)?.count?.let {
-            viewModelScope.launch { updateTodayWaterUseCase(it) }
+            launch { updateTodayWaterUseCase(it) }
         }
     }
 

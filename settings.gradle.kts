@@ -33,6 +33,7 @@ include(
 
     ":core:res",
     ":core:arch",
+    ":core:ui",
 
     ":domain",
     ":data"

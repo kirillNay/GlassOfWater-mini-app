@@ -17,6 +17,7 @@ fun buildStingsResources(
             strs[rs.mockDataButton] = "Имитация данных"
             strs[rs.mockDataConfirmation] = "Вы уверены, что хотите симитировать данные? Текущие данные будут потеряны!"
             strs[rs.adaptiveTheme] = "Адаптивный дизайн"
+            strs[rs.commonError] = "Что-то пошло не так..."
         }
         else -> {
             strs[rs.appName] = "Glasses Of Water"
@@ -28,6 +29,7 @@ fun buildStingsResources(
             strs[rs.mockDataButton] = "Mock data"
             strs[rs.mockDataConfirmation] = "Are you sure you want to mock data? All saved data will be lost!"
             strs[rs.adaptiveTheme] = "Adaptive design"
+            strs[rs.commonError] = "Something went wrong..."
         }
     }
     strs[rs.minus] = "-"
