@@ -10,7 +10,6 @@ import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Switch
-import androidx.compose.material.SwitchDefaults
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -84,8 +83,7 @@ private fun Content(
                 onCheckedChange = {
                     viewModel.updateAdaptiveTheme()
                 },
-                modifier = Modifier.padding(end = 16.dp),
-                colors = SwitchDefaults.colors(checkedThumbColor = MaterialTheme.colors.primary)
+                modifier = Modifier.padding(end = 16.dp)
             )
             Text(
                 text = stringResource(Res.string.adaptiveTheme),

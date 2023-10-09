@@ -28,7 +28,6 @@ class GlassOfWaterViewModel(
     }
 
     override fun onError(context: CoroutineContext, error: Throwable) {
-        console.log("Error of Glass of water")
         _state.value = GlassOfWaterState.Error
     }
 

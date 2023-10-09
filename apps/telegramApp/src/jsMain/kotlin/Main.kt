@@ -3,6 +3,7 @@ import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
+import androidx.compose.material.Scaffold
 import androidx.compose.material.Typography
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
@@ -52,10 +53,12 @@ fun main() {
             ),
             dimenLocal provides buildDimenResources()
         ) {
-            val appState = rememberAppState()
-            Screen(appState.currentRoute == Screen.COUNTER.route) { GlassOfWaterScreen(remember { get().get() }) }
-            Screen(appState.currentRoute == Screen.STATS.route) { WaterStatisticsScreen(remember { get().get() }) }
-            Screen(appState.currentRoute == Screen.SETTINGS.route) { SettingsScreen(remember { get().get() }) }
+            Scaffold {
+                val appState = rememberAppState()
+                Screen(appState.currentRoute == Screen.COUNTER.route) { GlassOfWaterScreen(remember { get().get() }) }
+                Screen(appState.currentRoute == Screen.STATS.route) { WaterStatisticsScreen(remember { get().get() }) }
+                Screen(appState.currentRoute == Screen.SETTINGS.route) { SettingsScreen(remember { get().get() }) }
+            }
         }
     }
 }
