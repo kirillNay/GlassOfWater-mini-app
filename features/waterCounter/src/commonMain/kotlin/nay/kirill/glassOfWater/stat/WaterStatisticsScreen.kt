@@ -1,5 +1,10 @@
 package nay.kirill.glassOfWater.stat
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.LinearEasing
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
@@ -7,6 +12,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -62,18 +68,20 @@ fun WaterStatisticsScreen(
             modifier = Modifier.padding(bottom = 36.dp)
         )
 
-        when (val currentState = state) {
-            is WaterStatisticsState.Content -> Content(
-                currentState,
-                modifier = Modifier
-                    .width(300.dp)
-                    .height(200.dp)
-            )
+        Box(
+            modifier = Modifier.fillMaxSize().padding(top = 46.dp),
+            contentAlignment = Alignment.TopCenter
+        ) {
+            State(isVisible = state is WaterStatisticsState.Content) {
+                Content(
+                    state as WaterStatisticsState.Content,
+                    modifier = Modifier
+                        .width(300.dp)
+                        .height(200.dp)
+                )
+            }
 
-            is WaterStatisticsState.Empty -> Box(
-                modifier = Modifier.fillMaxSize().padding(top = 46.dp),
-                contentAlignment = Alignment.TopCenter
-            ) {
+            State(isVisible = state is WaterStatisticsState.Empty) {
                 Text(
                     text = stringResource(Res.string.noStats),
                     textAlign = TextAlign.Center,
@@ -81,8 +89,26 @@ fun WaterStatisticsScreen(
                 )
             }
 
-            else -> Unit
+            State(isVisible = state is WaterStatisticsState.Loading) {
+                CircularProgressIndicator(
+                    modifier = Modifier.padding(top = 50.dp)
+                )
+            }
         }
+    }
+}
+
+@Composable
+private fun State(
+    isVisible: Boolean,
+    content: @Composable () -> Unit
+) {
+    AnimatedVisibility(
+        visible = isVisible,
+        enter = fadeIn(animationSpec = tween(durationMillis = 300, easing = LinearEasing)),
+        exit = fadeOut(animationSpec = tween(durationMillis = 150)),
+    ) {
+        content()
     }
 }
 
