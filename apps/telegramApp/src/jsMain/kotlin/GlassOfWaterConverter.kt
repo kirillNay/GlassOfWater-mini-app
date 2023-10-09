@@ -8,18 +8,27 @@ import com.kirillNay.telegram.miniapp.compose.theme.TelegramColors
 import com.kirillNay.telegram.miniapp.webApp.ColorScheme
 
 @Stable
-class GlassOfWaterConverter : ColorsConverter {
+class GlassOfWaterConverter {
 
-    override fun convert(themeParams: TelegramColors, colorScheme: ColorScheme): Colors {
-        return when (colorScheme) {
-            ColorScheme.LIGHT -> lightColors(
+    fun convert(
+        themeParams: TelegramColors,
+        colorScheme: ColorScheme,
+        isAdaptive: Boolean
+    ): Colors {
+        return when {
+            isAdaptive -> lightColors(
+                primary = themeParams.buttonColor,
+                onPrimary = themeParams.buttonTextColor,
+            )
+            colorScheme == ColorScheme.LIGHT -> lightColors(
                 primary = Color(0xFF005FB0),
                 onPrimary = Color(0xFFFFFFFF),
             )
-            ColorScheme.DARK -> darkColors(
+            colorScheme == ColorScheme.DARK -> darkColors(
                 primary = Color(0xFFA6C8FF),
                 onPrimary = Color(0xFF00305F)
             )
+            else -> ColorsConverter.Default().convert(themeParams, colorScheme)
         }
     }
 

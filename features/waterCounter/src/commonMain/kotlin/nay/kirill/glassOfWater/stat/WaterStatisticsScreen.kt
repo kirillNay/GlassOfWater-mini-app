@@ -8,6 +8,10 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -60,11 +64,16 @@ fun WaterStatisticsScreen(
         Text(
             text = stringResource(Res.string.stats),
             style = MaterialTheme.typography.h5,
-            modifier = Modifier.padding(bottom = 18.dp)
+            modifier = Modifier.padding(bottom = 36.dp)
         )
 
         when (val currentState = state) {
-            is WaterStatisticsState.Content -> Content(currentState)
+            is WaterStatisticsState.Content -> Content(
+                currentState,
+                modifier = Modifier
+                    .width(300.dp)
+                    .height(200.dp)
+            )
 
             is WaterStatisticsState.Empty -> Box(
                 modifier = Modifier.fillMaxSize().padding(top = 46.dp),
@@ -87,14 +96,10 @@ private fun Content(
     state: WaterStatisticsState.Content,
     modifier: Modifier = Modifier
 ) {
-    Row(
-        modifier = modifier.fillMaxWidth()
-    ) {
-        BarChart(
-            state.paramsList,
-            modifier = Modifier.height(300.dp),
-        )
-    }
+    BarChart(
+        state.paramsList,
+        modifier = modifier,
+    )
 }
 
 private val maxChartValue = FirstBaseline
@@ -214,7 +219,7 @@ private fun StatBarChart(
                             x = xPositionRatio * (index + 1) - xOffset,
                             y = (maxValue - dataPoint) * yPositionRatio
                         )
-                        drawRoundRect(chartColor, topLeftOffset, rectSize, CornerRadius(5F))
+                        drawRoundRect(chartColor, topLeftOffset, rectSize, CornerRadius(10F))
                         drawText(
                             textMeasurer = textMeasure,
                             text = param.date,

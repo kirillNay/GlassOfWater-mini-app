@@ -160,7 +160,7 @@ private fun Content(
             viewModel.increaseCount()
             onUp()
         },
-        isDownEnabled = state.isDecreaseEnabled
+        isDownEnabled = state.count > 0
     )
 }
 

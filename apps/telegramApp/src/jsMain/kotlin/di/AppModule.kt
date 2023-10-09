@@ -1,5 +1,6 @@
 package di
 
+import GlassOfWaterThemeHandler
 import nay.kirill.glassOfWater.counter.GlassOfWaterViewModel
 import nay.kirill.glassOfWater.data.ConfigRepositoryImpl
 import nay.kirill.glassOfWater.data.HealthParamsRepositoryImpl
@@ -11,6 +12,7 @@ import nay.kirill.healthcare.domain.useCases.GetAllParamsUseCase
 import nay.kirill.healthcare.domain.useCases.GetAppConfigUseCase
 import nay.kirill.healthcare.domain.useCases.GetTodayParamsUseCase
 import nay.kirill.healthcare.domain.useCases.MockParamsUseCase
+import nay.kirill.healthcare.domain.useCases.ObserveAppConfigUseCase
 import nay.kirill.healthcare.domain.useCases.SaveAppConfigUseCase
 import nay.kirill.healthcare.domain.useCases.UpdateTodayWaterUseCase
 import nay.kirill.kmpArch.navigation.NavigationStack
@@ -30,6 +32,7 @@ val appModule = module {
 
     singleOf(::GetAppConfigUseCase)
     singleOf(::SaveAppConfigUseCase)
+    singleOf(::ObserveAppConfigUseCase)
 
     singleOf(::HealthParamsRepositoryImpl).bind<HealthParamsRepository>()
     singleOf(::ConfigRepositoryImpl).bind<ConfigRepository>()
@@ -40,4 +43,5 @@ val appModule = module {
 
     // App state
     single { NavigationStack(Screen.COUNTER.route) }
+    singleOf(::GlassOfWaterThemeHandler)
 }

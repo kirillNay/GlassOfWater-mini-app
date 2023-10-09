@@ -24,7 +24,7 @@ fun main() {
     startDi()
 
     telegramWebApp(
-        colorsConverter = GlassOfWaterConverter(),
+        themeHandler = get().get<GlassOfWaterThemeHandler>(),
         typography = Typography(
             subtitle1 = TextStyle(
                 fontWeight = FontWeight.Light,
