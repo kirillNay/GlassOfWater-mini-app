@@ -16,6 +16,7 @@ import nay.kirill.glassOfWater.res.strsLocal
 import nay.kirill.glassOfWater.stat.WaterStatisticsScreen
 import nay.kirill.glassOfWater.stat.WaterStatisticsViewModel
 import nay.kirill.kmpArch.navigation.Screen
+import nay.kirill.settings.SettingsScreen
 import org.koin.core.context.GlobalContext.get
 import org.koin.core.context.startKoin
 
@@ -48,6 +49,7 @@ fun main() {
             when (appState.currentRoute) {
                 Screen.COUNTER.route -> GlassOfWaterScreen(get().get())
                 Screen.STATS.route -> WaterStatisticsScreen(get().get())
+                Screen.SETTINGS.route -> SettingsScreen(get().get())
             }
         }
     }

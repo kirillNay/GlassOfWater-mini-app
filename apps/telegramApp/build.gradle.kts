@@ -18,6 +18,7 @@ kotlin {
             implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
 
             implementation(project(":features:waterCounter"))
+            implementation(project(":features:settings"))
             implementation(project(":domain"))
             implementation(project(":data"))
             implementation(project(":core:res"))

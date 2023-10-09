@@ -29,6 +29,7 @@ include(
     ":apps:telegramApp",
 
     ":features:waterCounter",
+    ":features:settings",
 
     ":core:res",
     ":core:arch",

@@ -2,6 +2,7 @@ package nay.kirill.glassOfWater.stat
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -13,6 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.CornerRadius
@@ -30,8 +32,12 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import nay.kirill.glassOfWater.res.Res
+import nay.kirill.glassOfWater.res.appName
+import nay.kirill.glassOfWater.res.horizontalPadding
 import nay.kirill.glassOfWater.res.noStats
+import nay.kirill.glassOfWater.res.stats
 import nay.kirill.glassOfWater.res.stringResource
+import nay.kirill.glassOfWater.res.verticalPadding
 import nay.kirill.healthcare.domain.HealthParams
 import kotlin.math.max
 import kotlin.math.roundToInt
@@ -42,23 +48,37 @@ fun WaterStatisticsScreen(
 ) {
     val state by viewModel.state.collectAsState()
 
-    when (val currentState = state) {
-        is WaterStatisticsState.Content -> Content(
-            currentState,
-            modifier = Modifier.padding(horizontal = 20.dp)
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(
+                horizontal = Res.dimens.horizontalPadding.dp,
+                vertical = Res.dimens.verticalPadding.dp
+            ),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text(
+            text = stringResource(Res.string.stats),
+            style = MaterialTheme.typography.h5,
+            modifier = Modifier.padding(bottom = 18.dp)
         )
 
-        is WaterStatisticsState.Empty -> Box(
-            modifier = Modifier.fillMaxSize(),
-        ) {
-            Text(
-                text = stringResource(Res.string.noStats),
-                textAlign = TextAlign.Center,
-                style = MaterialTheme.typography.h6
-            )
-        }
+        when (val currentState = state) {
+            is WaterStatisticsState.Content -> Content(currentState)
 
-        else -> Unit
+            is WaterStatisticsState.Empty -> Box(
+                modifier = Modifier.fillMaxSize().padding(top = 46.dp),
+                contentAlignment = Alignment.TopCenter
+            ) {
+                Text(
+                    text = stringResource(Res.string.noStats),
+                    textAlign = TextAlign.Center,
+                    style = MaterialTheme.typography.body1
+                )
+            }
+
+            else -> Unit
+        }
     }
 }
 

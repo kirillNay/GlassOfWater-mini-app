@@ -18,6 +18,7 @@ class WaterStatisticsViewModel(
 
     private val back = {
         navigationStack.back()
+        onCleared()
     }
 
     init {
