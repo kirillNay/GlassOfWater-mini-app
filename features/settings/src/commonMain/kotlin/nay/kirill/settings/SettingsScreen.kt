@@ -10,23 +10,19 @@ import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Switch
-import androidx.compose.material.SwitchColors
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import nay.kirill.glassOfWater.res.Res
 import nay.kirill.glassOfWater.res.adaptiveTheme
 import nay.kirill.glassOfWater.res.clearDataButton
 import nay.kirill.glassOfWater.res.clearDataConfirmation
+import nay.kirill.glassOfWater.res.dimenRes
 import nay.kirill.glassOfWater.res.horizontalPadding
 import nay.kirill.glassOfWater.res.mockDataButton
 import nay.kirill.glassOfWater.res.mockDataConfirmation
@@ -44,8 +40,8 @@ fun SettingsScreen(
         modifier = Modifier
             .fillMaxSize()
             .padding(
-                horizontal = Res.dimens.horizontalPadding.dp,
-                vertical = Res.dimens.verticalPadding.dp
+                horizontal = dimenRes(Res.dimens.horizontalPadding),
+                vertical = dimenRes(Res.dimens.verticalPadding)
             ),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {

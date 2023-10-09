@@ -3,15 +3,10 @@ package nay.kirill.glassOfWater.stat
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.items
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -36,7 +31,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import nay.kirill.glassOfWater.res.Res
-import nay.kirill.glassOfWater.res.appName
+import nay.kirill.glassOfWater.res.dimenRes
 import nay.kirill.glassOfWater.res.horizontalPadding
 import nay.kirill.glassOfWater.res.noStats
 import nay.kirill.glassOfWater.res.stats
@@ -56,8 +51,8 @@ fun WaterStatisticsScreen(
         modifier = Modifier
             .fillMaxSize()
             .padding(
-                horizontal = Res.dimens.horizontalPadding.dp,
-                vertical = Res.dimens.verticalPadding.dp
+                horizontal = dimenRes(Res.dimens.horizontalPadding),
+                vertical = dimenRes(Res.dimens.verticalPadding)
             ),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {

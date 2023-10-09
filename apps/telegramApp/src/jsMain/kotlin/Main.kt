@@ -1,19 +1,13 @@
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.LinearEasing
-import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
-import androidx.compose.foundation.layout.Box
 import androidx.compose.material.Typography
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
@@ -21,12 +15,13 @@ import com.kirillNay.telegram.miniapp.compose.telegramWebApp
 import com.kirillNay.telegram.miniapp.webApp.webApp
 import di.appModule
 import nay.kirill.glassOfWater.counter.GlassOfWaterScreen
+import nay.kirill.glassOfWater.res.buildDimenResources
 import nay.kirill.glassOfWater.res.buildStingsResources
+import nay.kirill.glassOfWater.res.dimenLocal
 import nay.kirill.glassOfWater.res.strsLocal
 import nay.kirill.glassOfWater.stat.WaterStatisticsScreen
 import nay.kirill.kmpArch.navigation.Screen
 import nay.kirill.settings.SettingsScreen
-import nay.kirill.settings.SettingsState
 import org.koin.core.context.GlobalContext.get
 import org.koin.core.context.startKoin
 
@@ -54,6 +49,7 @@ fun main() {
             strsLocal provides buildStingsResources(
                 languageCode = webApp.initDataUnsafe.user?.languageCode
             ),
+            dimenLocal provides buildDimenResources()
         ) {
             val appState = rememberAppState()
             Screen(appState.currentRoute == Screen.COUNTER.route) { GlassOfWaterScreen(get().get()) }

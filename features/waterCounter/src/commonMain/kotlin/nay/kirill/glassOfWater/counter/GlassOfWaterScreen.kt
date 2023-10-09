@@ -20,7 +20,6 @@ import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Settings
@@ -37,6 +36,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import nay.kirill.glassOfWater.res.Res
 import nay.kirill.glassOfWater.res.appName
+import nay.kirill.glassOfWater.res.dimenRes
 import nay.kirill.glassOfWater.res.horizontalPadding
 import nay.kirill.glassOfWater.res.minus
 import nay.kirill.glassOfWater.res.plus
@@ -50,95 +50,87 @@ fun GlassOfWaterScreen(
 ) {
     val state by viewModel.state.collectAsState()
 
-    MaterialTheme {
-        Surface(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(20.dp)
-        ) {
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(
-                        horizontal = Res.dimens.horizontalPadding.dp,
-                        vertical = Res.dimens.verticalPadding.dp
-                    ),
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                var isPlaying: Boolean by remember { mutableStateOf(true) }
-                val progress by animateFloatAsState(
-                    targetValue = if (isPlaying) 0F else 1F,
-                    animationSpec = tween(durationMillis = 500, easing = FastOutSlowInEasing), label = ""
-                )
-                LaunchedEffect(progress) {
-                    if (isPlaying && progress == 0F) {
-                        isPlaying = false
-                    }
-                }
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(
+                horizontal = dimenRes(Res.dimens.horizontalPadding),
+                vertical = dimenRes(Res.dimens.verticalPadding)
+            ),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        var isPlaying: Boolean by remember { mutableStateOf(true) }
+        val progress by animateFloatAsState(
+            targetValue = if (isPlaying) 0F else 1F,
+            animationSpec = tween(durationMillis = 500, easing = FastOutSlowInEasing), label = ""
+        )
+        LaunchedEffect(progress) {
+            if (isPlaying && progress == 0F) {
+                isPlaying = false
+            }
+        }
 
-                Text(
-                    text = stringResource(Res.string.appName),
-                    style = MaterialTheme.typography.h5
-                )
+        Text(
+            text = stringResource(Res.string.appName),
+            style = MaterialTheme.typography.h5
+        )
+        Spacer(modifier = Modifier.height(20.dp))
+
+        Box {
+            Column {
                 Spacer(modifier = Modifier.height(20.dp))
-
-                Box {
-                    Column {
-                        Spacer(modifier = Modifier.height(20.dp))
-                        WaterAnimation(
-                            modifier = Modifier.height(100.dp),
-                            progress = progress
-                        )
-                        Spacer(modifier = Modifier.height(74.dp))
-                    }
-                    Column(
-                        modifier = Modifier.align(Alignment.TopEnd)
+                WaterAnimation(
+                    modifier = Modifier.height(100.dp),
+                    progress = progress
+                )
+                Spacer(modifier = Modifier.height(74.dp))
+            }
+            Column(
+                modifier = Modifier.align(Alignment.TopEnd)
+            ) {
+                IconButton(
+                    onClick = { viewModel.navigateToStats() },
+                    modifier = Modifier.align(Alignment.End)
+                ) {
+                    Box(
+                        modifier = Modifier
+                            .size(36.dp)
+                            .clip(CircleShape)
+                            .background(MaterialTheme.colors.primary),
+                        contentAlignment = Alignment.Center
                     ) {
-                        IconButton(
-                            onClick = { viewModel.navigateToStats() },
-                            modifier = Modifier.align(Alignment.End)
-                        ) {
-                            Box(
-                                modifier = Modifier
-                                    .size(36.dp)
-                                    .clip(CircleShape)
-                                    .background(MaterialTheme.colors.primary),
-                                contentAlignment = Alignment.Center
-                            ) {
-                                Icon(
-                                    imageVector = StatsIconLight,
-                                    contentDescription = "Statistics",
-                                    modifier = Modifier.size(18.dp),
-                                    tint = MaterialTheme.colors.onPrimary
-                                )
-                            }
-                        }
-                        IconButton(
-                            onClick = { viewModel.navigateToSettings() },
-                            modifier = Modifier.align(Alignment.End)
-                        ) {
-                            Box(
-                                modifier = Modifier
-                                    .size(36.dp)
-                                    .clip(CircleShape)
-                                    .background(MaterialTheme.colors.primary),
-                                contentAlignment = Alignment.Center
-                            ) {
-                                Icon(
-                                    imageVector = Icons.Default.Settings,
-                                    contentDescription = "Settings",
-                                    modifier = Modifier.size(18.dp),
-                                    tint = MaterialTheme.colors.onPrimary
-                                )
-                            }
-                        }
+                        Icon(
+                            imageVector = StatsIconLight,
+                            contentDescription = "Statistics",
+                            modifier = Modifier.size(18.dp),
+                            tint = MaterialTheme.colors.onPrimary
+                        )
                     }
                 }
-
-                if (state is GlassOfWaterState.Content) {
-                    Content(state as GlassOfWaterState.Content, viewModel) { isPlaying = true }
+                IconButton(
+                    onClick = { viewModel.navigateToSettings() },
+                    modifier = Modifier.align(Alignment.End)
+                ) {
+                    Box(
+                        modifier = Modifier
+                            .size(36.dp)
+                            .clip(CircleShape)
+                            .background(MaterialTheme.colors.primary),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.Settings,
+                            contentDescription = "Settings",
+                            modifier = Modifier.size(18.dp),
+                            tint = MaterialTheme.colors.onPrimary
+                        )
+                    }
                 }
             }
+        }
+
+        if (state is GlassOfWaterState.Content) {
+            Content(state as GlassOfWaterState.Content, viewModel) { isPlaying = true }
         }
     }
 }

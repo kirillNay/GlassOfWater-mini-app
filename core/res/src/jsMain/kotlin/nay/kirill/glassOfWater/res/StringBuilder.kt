@@ -8,6 +8,7 @@ fun buildStingsResources(
 
     when (languageCode) {
         "ru" -> {
+            strs[rs.appName] = "Стаканы воды"
             strs[rs.noStats] = "Статистика не доступна"
             strs[rs.settings] = "Настройки"
             strs[rs.stats] = "Статистика"
@@ -18,6 +19,7 @@ fun buildStingsResources(
             strs[rs.adaptiveTheme] = "Адаптивный дизайн"
         }
         else -> {
+            strs[rs.appName] = "Glasses Of Water"
             strs[rs.noStats] = "Statistics is unavailable"
             strs[rs.settings] = "Settings"
             strs[rs.stats] = "Statistics"
@@ -30,7 +32,6 @@ fun buildStingsResources(
     }
     strs[rs.minus] = "-"
     strs[rs.plus] = "+"
-    strs[rs.appName] = "Glass Of Water"
 
     return strs
 }
