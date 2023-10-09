@@ -3,19 +3,27 @@ package nay.kirill.glassOfWater.counter
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -25,6 +33,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import nay.kirill.glassOfWater.res.Res
 import nay.kirill.glassOfWater.res.appName
@@ -32,6 +41,7 @@ import nay.kirill.glassOfWater.res.horizontalPadding
 import nay.kirill.glassOfWater.res.minus
 import nay.kirill.glassOfWater.res.plus
 import nay.kirill.glassOfWater.res.stringResource
+import nay.kirill.glassOfWater.res.ui.myiconpack.StatsIconLight
 import nay.kirill.glassOfWater.res.verticalPadding
 
 @Composable
@@ -42,7 +52,9 @@ fun GlassOfWaterScreen(
 
     MaterialTheme {
         Surface(
-            modifier = Modifier.fillMaxSize()
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(20.dp)
         ) {
             Column(
                 modifier = Modifier
@@ -68,12 +80,61 @@ fun GlassOfWaterScreen(
                     text = stringResource(Res.string.appName),
                     style = MaterialTheme.typography.h5
                 )
-                Spacer(modifier = Modifier.height(100.dp))
-                WaterAnimation(
-                    modifier = Modifier.height(100.dp),
-                    progress = progress
-                )
-                Spacer(modifier = Modifier.height(74.dp))
+                Spacer(modifier = Modifier.height(20.dp))
+
+                Box {
+                    Column {
+                        Spacer(modifier = Modifier.height(20.dp))
+                        WaterAnimation(
+                            modifier = Modifier.height(100.dp),
+                            progress = progress
+                        )
+                        Spacer(modifier = Modifier.height(74.dp))
+                    }
+                    Column(
+                        modifier = Modifier.align(Alignment.TopEnd)
+                    ) {
+                        IconButton(
+                            onClick = { viewModel.navigateToStats() },
+                            modifier = Modifier.align(Alignment.End)
+                        ) {
+                            Box(
+                                modifier = Modifier
+                                    .size(36.dp)
+                                    .clip(CircleShape)
+                                    .background(MaterialTheme.colors.primary),
+                                contentAlignment = Alignment.Center
+                            ) {
+                                Icon(
+                                    imageVector = StatsIconLight,
+                                    contentDescription = "Statistics",
+                                    modifier = Modifier.size(18.dp),
+                                    tint = MaterialTheme.colors.onPrimary
+                                )
+                            }
+                        }
+                        IconButton(
+                            onClick = { viewModel.navigateToSettings() },
+                            modifier = Modifier.align(Alignment.End)
+                        ) {
+                            Box(
+                                modifier = Modifier
+                                    .size(36.dp)
+                                    .clip(CircleShape)
+                                    .background(MaterialTheme.colors.primary),
+                                contentAlignment = Alignment.Center
+                            ) {
+                                Icon(
+                                    imageVector = Icons.Default.Settings,
+                                    contentDescription = "Settings",
+                                    modifier = Modifier.size(18.dp),
+                                    tint = MaterialTheme.colors.onPrimary
+                                )
+                            }
+                        }
+                    }
+                }
+
                 if (state is GlassOfWaterState.Content) {
                     Content(state as GlassOfWaterState.Content, viewModel) { isPlaying = true }
                 }

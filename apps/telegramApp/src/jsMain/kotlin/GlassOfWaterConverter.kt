@@ -15,7 +15,6 @@ class GlassOfWaterConverter : ColorsConverter {
             ColorScheme.LIGHT -> lightColors(
                 primary = Color(0xFF005FB0),
                 onPrimary = Color(0xFFFFFFFF),
-
             )
             ColorScheme.DARK -> darkColors(
                 primary = Color(0xFFA6C8FF),

@@ -7,6 +7,8 @@ import nay.kirill.healthcare.domain.repositories.HealthParamsRepository
 import nay.kirill.healthcare.domain.useCases.GetAllParamsUseCase
 import nay.kirill.healthcare.domain.useCases.GetTodayParamsUseCase
 import nay.kirill.healthcare.domain.useCases.UpdateTodayWaterUseCase
+import nay.kirill.kmpArch.navigation.NavigationStack
+import nay.kirill.kmpArch.navigation.Screen
 import org.koin.core.module.dsl.factoryOf
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.bind
@@ -21,4 +23,7 @@ val appModule = module {
 
     factoryOf(::GlassOfWaterViewModel)
     factoryOf(::WaterStatisticsViewModel)
+
+    // App state
+    single { NavigationStack(Screen.COUNTER.route) }
 }

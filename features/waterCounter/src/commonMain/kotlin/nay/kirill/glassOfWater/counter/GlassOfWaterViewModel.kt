@@ -6,11 +6,14 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import nay.kirill.healthcare.domain.useCases.GetTodayParamsUseCase
 import nay.kirill.healthcare.domain.useCases.UpdateTodayWaterUseCase
+import nay.kirill.kmpArch.navigation.NavigationStack
 import nay.kirill.kmpArch.ViewModel
+import nay.kirill.kmpArch.navigation.Screen
 
 class GlassOfWaterViewModel(
     private val getTodayParamsUseCase: GetTodayParamsUseCase,
-    private val updateTodayWaterUseCase: UpdateTodayWaterUseCase
+    private val updateTodayWaterUseCase: UpdateTodayWaterUseCase,
+    private val navigationStack: NavigationStack
 ): ViewModel() {
 
     private val _state = MutableStateFlow<GlassOfWaterState>(GlassOfWaterState.Loading)
@@ -35,6 +38,14 @@ class GlassOfWaterViewModel(
     fun decreaseCount() {
         _state.value = state.value.copyContent { copy(count = count - 1) }
         updateCount()
+    }
+
+    fun navigateToStats() {
+        navigationStack.push(Screen.STATS.route)
+    }
+
+    fun navigateToSettings() {
+        navigationStack.push(Screen.SETTINGS.route)
     }
 
     private fun updateCount() {

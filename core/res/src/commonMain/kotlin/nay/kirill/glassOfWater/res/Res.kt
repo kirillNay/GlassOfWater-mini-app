@@ -8,4 +8,6 @@ object Res {
 
     object raw
 
+    object drawable
+
 }

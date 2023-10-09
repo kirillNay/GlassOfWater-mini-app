@@ -21,6 +21,7 @@ kotlin {
             implementation(project(":domain"))
             implementation(project(":data"))
             implementation(project(":core:res"))
+            implementation(project(":core:arch"))
 
             implementation("io.insert-koin:koin-core:3.2.0")
         },

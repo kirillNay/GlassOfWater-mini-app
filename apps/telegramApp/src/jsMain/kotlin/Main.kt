@@ -1,6 +1,7 @@
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Typography
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.remember
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -9,9 +10,12 @@ import com.kirillNay.telegram.miniapp.compose.telegramWebApp
 import com.kirillNay.telegram.miniapp.webApp.webApp
 import di.appModule
 import nay.kirill.glassOfWater.counter.GlassOfWaterScreen
+import nay.kirill.glassOfWater.counter.GlassOfWaterViewModel
 import nay.kirill.glassOfWater.res.buildStingsResources
 import nay.kirill.glassOfWater.res.strsLocal
-import nay.kirill.glassOfWater.stat.StatisticsScreen
+import nay.kirill.glassOfWater.stat.WaterStatisticsScreen
+import nay.kirill.glassOfWater.stat.WaterStatisticsViewModel
+import nay.kirill.kmpArch.navigation.Screen
 import org.koin.core.context.GlobalContext.get
 import org.koin.core.context.startKoin
 
@@ -40,9 +44,11 @@ fun main() {
                 languageCode = webApp.initDataUnsafe.user?.languageCode
             ),
         ) {
-            StatisticsScreen(
-                viewModel = get().get()
-            )
+            val appState = rememberAppState()
+            when (appState.currentRoute) {
+                Screen.COUNTER.route -> GlassOfWaterScreen(get().get())
+                Screen.STATS.route -> WaterStatisticsScreen(get().get())
+            }
         }
     }
 }
@@ -51,4 +57,9 @@ private fun startDi() {
     startKoin {
         modules(appModule)
     }
+}
+
+@Composable
+private fun rememberAppState(): AppState = remember {
+    AppState(navigationStack = get().get())
 }

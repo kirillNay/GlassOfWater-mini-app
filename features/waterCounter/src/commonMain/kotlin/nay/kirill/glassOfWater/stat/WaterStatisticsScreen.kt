@@ -37,7 +37,7 @@ import kotlin.math.max
 import kotlin.math.roundToInt
 
 @Composable
-fun StatisticsScreen(
+fun WaterStatisticsScreen(
     viewModel: WaterStatisticsViewModel
 ) {
     val state by viewModel.state.collectAsState()
