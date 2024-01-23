@@ -29,7 +29,7 @@ fun main() {
     setupNavigation()
 
     telegramWebApp(
-        themeHandler = get().get<GlassOfWaterThemeHandler>(),
+        telegramThemeHandler = get().get<GlassOfWaterThemeHandler>(),
         typography = Typography(
             subtitle1 = TextStyle(
                 fontWeight = FontWeight.Light,
