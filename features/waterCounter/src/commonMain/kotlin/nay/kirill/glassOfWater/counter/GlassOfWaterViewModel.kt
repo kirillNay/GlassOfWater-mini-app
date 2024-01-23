@@ -1,21 +1,22 @@
 package nay.kirill.glassOfWater.counter
 
+import cafe.adriel.voyager.core.model.ScreenModel
+import cafe.adriel.voyager.core.model.screenModelScope
+import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
+import nay.kirill.glassOfWater.navigation.Navigation
+import nay.kirill.glassOfWater.navigation.SharedScreens
 import nay.kirill.healthcare.domain.useCases.GetTodayParamsUseCase
 import nay.kirill.healthcare.domain.useCases.UpdateTodayWaterUseCase
-import nay.kirill.kmpArch.navigation.NavigationStack
-import nay.kirill.kmpArch.ViewModel
-import nay.kirill.kmpArch.navigation.Screen
-import kotlin.coroutines.CoroutineContext
 
 class GlassOfWaterViewModel(
     private val getTodayParamsUseCase: GetTodayParamsUseCase,
     private val updateTodayWaterUseCase: UpdateTodayWaterUseCase,
-    private val navigationStack: NavigationStack
-): ViewModel() {
+    private val navigation: Navigation
+) : ScreenModel {
 
     private val _state = MutableStateFlow<GlassOfWaterState>(GlassOfWaterState.Loading)
     val state: StateFlow<GlassOfWaterState> = _state.apply { onEach { console.log(it.toString()) } }
@@ -27,7 +28,7 @@ class GlassOfWaterViewModel(
         }
     }
 
-    override fun onError(context: CoroutineContext, error: Throwable) {
+    private fun onError() {
         _state.value = GlassOfWaterState.Error
     }
 
@@ -42,17 +43,25 @@ class GlassOfWaterViewModel(
     }
 
     fun navigateToStats() {
-        navigationStack.push(Screen.STATS.route)
+        screenModelScope.launch {
+            navigation.navigateTo(SharedScreens.StatsScreen)
+        }
     }
 
     fun navigateToSettings() {
-        navigationStack.push(Screen.SETTINGS.route)
+        screenModelScope.launch {
+            navigation.navigateTo(SharedScreens.SettingsScreen)
+        }
     }
 
     private fun updateCount() {
         (_state.value as? GlassOfWaterState.Content)?.count?.let {
             launch { updateTodayWaterUseCase(it) }
         }
+    }
+
+    private fun launch(block: suspend () -> Unit) {
+        screenModelScope.launch(context = CoroutineExceptionHandler {_, _ -> onError() }) { block() }
     }
 
 }

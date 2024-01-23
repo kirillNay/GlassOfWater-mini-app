@@ -11,9 +11,10 @@ kotlin {
         platforms = listOf(Platform.JS),
         commonDeps = {
             implementation(project(":domain"))
-            implementation("io.github.kirillNay:tg-mini-app:1.0.0")
-            implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
-            implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.1")
+
+            implementation(libs.tg.miniApp)
+            implementation(libs.kotlinx.coroutines.core)
+            implementation(libs.kotlinx.serialization.json)
         }
     )
 }

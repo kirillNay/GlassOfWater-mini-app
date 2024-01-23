@@ -15,30 +15,26 @@ kotlin {
             api(compose.material)
             api(compose.ui)
 
-            implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
+            implementation(libs.kotlinx.coroutines.core)
 
             implementation(project(":features:waterCounter"))
             implementation(project(":features:settings"))
             implementation(project(":domain"))
             implementation(project(":data"))
             implementation(project(":core:res"))
-            implementation(project(":core:arch"))
+            implementation(project(":core:navigation"))
 
-            implementation("io.insert-koin:koin-core:3.2.0")
+            implementation(libs.koin.core)
+
+            implementation(libs.voyager.core)
+            implementation(libs.voyager.navigator)
         },
         jsDeps = {
-            implementation("io.github.kirillNay:tg-mini-app:1.0.0")
+            implementation(libs.tg.miniApp)
         }
     )
 }
 
 compose.experimental {
     web.application {}
-}
-
-compose {
-    val composeVersion = project.property("compose.wasm.version") as String
-    kotlinCompilerPlugin.set(composeVersion)
-    val kotlinVersion = project.property("kotlin.version") as String
-    kotlinCompilerPluginArgs.add("suppressKotlinVersionCompatibilityCheck=$kotlinVersion")
 }

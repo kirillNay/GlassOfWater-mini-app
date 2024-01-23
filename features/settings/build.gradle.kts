@@ -13,26 +13,23 @@ kotlin {
             api(compose.ui)
 
             implementation(project(":core:res"))
-            implementation(project(":core:arch"))
             implementation(project(":core:ui"))
+            implementation(project(":core:navigation"))
 
             implementation(project(":domain"))
 
-            implementation("io.insert-koin:koin-core:3.2.0")
+            implementation(libs.koin.core)
+            implementation(libs.koin.compose)
+
+            implementation(libs.voyager.core)
+            implementation(libs.voyager.koin)
         },
         jsDeps = {
-            implementation("io.github.kirillNay:tg-mini-app:1.0.0")
+            implementation(libs.tg.miniApp)
         }
     )
 }
 
 compose.experimental {
     web.application {}
-}
-
-compose {
-    val composeVersion = project.property("compose.wasm.version") as String
-    kotlinCompilerPlugin.set(composeVersion)
-    val kotlinVersion = project.property("kotlin.version") as String
-    kotlinCompilerPluginArgs.add("suppressKotlinVersionCompatibilityCheck=$kotlinVersion")
 }

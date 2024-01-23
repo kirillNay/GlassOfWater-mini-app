@@ -35,6 +35,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
+import cafe.adriel.voyager.core.registry.screenModule
+import cafe.adriel.voyager.core.screen.Screen
+import cafe.adriel.voyager.koin.getScreenModel
+import nay.kirill.glassOfWater.navigation.SharedScreens
 import nay.kirill.glassOfWater.res.Res
 import nay.kirill.glassOfWater.res.appName
 import nay.kirill.glassOfWater.res.dimenRes
@@ -46,169 +50,173 @@ import nay.kirill.glassOfWater.res.ui.myiconpack.StatsIconLight
 import nay.kirill.glassOfWater.res.verticalPadding
 import nay.kirill.glassOfWater.ui.ErrorState
 
-@Composable
-fun GlassOfWaterScreen(
-    viewModel: GlassOfWaterViewModel
-) {
-    val state by viewModel.state.collectAsState()
-
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(
-                horizontal = dimenRes(Res.dimens.horizontalPadding),
-                vertical = dimenRes(Res.dimens.verticalPadding)
-            ),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Text(
-            text = stringResource(Res.string.appName),
-            style = MaterialTheme.typography.h5,
-            modifier = Modifier.padding(bottom = 36.dp)
-        )
-
-        when (val currentState = state) {
-            is GlassOfWaterState.Content -> Content(currentState, viewModel)
-            is GlassOfWaterState.Error -> ErrorState(
-                modifier = Modifier.padding(top = 46.dp)
-            )
-            else -> Unit
-        }
+val counterScreenModule = screenModule {
+    register<SharedScreens.CounterScreen> {
+        GlassOfWaterScreen()
     }
 }
 
-@Composable
-private fun Content(
-    state: GlassOfWaterState.Content,
-    viewModel: GlassOfWaterViewModel,
-) {
-    var isPlaying: Boolean by remember { mutableStateOf(true) }
-    val progress by animateFloatAsState(
-        targetValue = if (isPlaying) 0F else 1F,
-        animationSpec = tween(durationMillis = 500, easing = FastOutSlowInEasing), label = ""
-    )
-    LaunchedEffect(progress) {
-        if (isPlaying && progress == 0F) {
-            isPlaying = false
-        }
-    }
+class GlassOfWaterScreen : Screen {
 
-    Box {
+    @Composable
+    override fun Content() {
+        val viewModel: GlassOfWaterViewModel = getScreenModel()
+        val state by viewModel.state.collectAsState()
+
         Column(
             modifier = Modifier
-                .fillMaxWidth(),
+                .fillMaxSize()
+                .padding(
+                    horizontal = dimenRes(Res.dimens.horizontalPadding),
+                    vertical = dimenRes(Res.dimens.verticalPadding)
+                ),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Spacer(modifier = Modifier.height(20.dp))
-            WaterAnimation(
-                modifier = Modifier.height(100.dp),
-                progress = progress
-            )
-            Spacer(modifier = Modifier.height(74.dp))
             Text(
-                text = state.count.toString(),
-                style = MaterialTheme.typography.h6
+                text = stringResource(Res.string.appName),
+                style = MaterialTheme.typography.h5,
+                modifier = Modifier.padding(bottom = 36.dp)
             )
-            Spacer(modifier = Modifier.height(24.dp))
-            Controllers(
-                onDown = { viewModel.decreaseCount() },
-                onUp = {
-                    viewModel.increaseCount()
-                    isPlaying = true
-                },
-                isDownEnabled = state.count > 0
-            )
-        }
-        Column(
-            modifier = Modifier.align(Alignment.TopEnd)
-        ) {
-            IconButton(
-                onClick = { viewModel.navigateToStats() },
-                modifier = Modifier.align(Alignment.End)
-            ) {
-                Box(
-                    modifier = Modifier
-                        .size(36.dp)
-                        .clip(CircleShape)
-                        .background(MaterialTheme.colors.primary),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Icon(
-                        imageVector = StatsIconLight,
-                        contentDescription = "Statistics",
-                        modifier = Modifier.size(18.dp),
-                        tint = MaterialTheme.colors.onPrimary
-                    )
-                }
-            }
-            IconButton(
-                onClick = { viewModel.navigateToSettings() },
-                modifier = Modifier.align(Alignment.End)
-            ) {
-                Box(
-                    modifier = Modifier
-                        .size(36.dp)
-                        .clip(CircleShape)
-                        .background(MaterialTheme.colors.primary),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Icon(
-                        imageVector = Icons.Default.Settings,
-                        contentDescription = "Settings",
-                        modifier = Modifier.size(18.dp),
-                        tint = MaterialTheme.colors.onPrimary
-                    )
-                }
+
+            when (val currentState = state) {
+                is GlassOfWaterState.Content -> Content(currentState, viewModel)
+                is GlassOfWaterState.Error -> ErrorState(
+                    modifier = Modifier.padding(top = 46.dp)
+                )
+
+                else -> Unit
             }
         }
     }
-}
 
-@Composable
-private fun Controllers(
-    onDown: () -> Unit,
-    onUp: () -> Unit,
-    isDownEnabled: Boolean
-) {
-    Row {
-        ControlButton(
-            onDown,
-            stringResource(Res.string.minus),
-            isEnabled = isDownEnabled
-        )
-        Spacer(modifier = Modifier.width(48.dp))
-        ControlButton(
-            onUp,
-            stringResource(Res.string.plus)
-        )
-    }
-}
-
-@Composable
-private fun ControlButton(
-    onClick: () -> Unit,
-    text: String,
-    isEnabled: Boolean = true
-) {
-    Button(
-        modifier = Modifier
-            .height(44.dp),
-        onClick = onClick,
-        colors = ButtonDefaults.buttonColors(
-            backgroundColor = MaterialTheme.colors.primary
-        ),
-        shape = RoundedCornerShape(16.dp),
-        enabled = isEnabled
+    @Composable
+    private fun Content(
+        state: GlassOfWaterState.Content,
+        viewModel: GlassOfWaterViewModel,
     ) {
-        Text(
-            text = text,
-            style = MaterialTheme.typography.button
+        var isPlaying: Boolean by remember { mutableStateOf(true) }
+        val progress by animateFloatAsState(
+            targetValue = if (isPlaying) 0F else 1F,
+            animationSpec = tween(durationMillis = 500, easing = FastOutSlowInEasing), label = ""
         )
-    }
-}
+        LaunchedEffect(progress) {
+            if (isPlaying && progress == 0F) {
+                isPlaying = false
+            }
+        }
 
-@Composable
-expect fun WaterAnimation(
-    modifier: Modifier = Modifier,
-    progress: Float
-)
+        Box {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth(),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Spacer(modifier = Modifier.height(20.dp))
+                WaterAnimation(
+                    modifier = Modifier.height(100.dp),
+                    progress = progress
+                )
+                Spacer(modifier = Modifier.height(74.dp))
+                Text(
+                    text = state.count.toString(),
+                    style = MaterialTheme.typography.h6
+                )
+                Spacer(modifier = Modifier.height(24.dp))
+                Controllers(
+                    onDown = { viewModel.decreaseCount() },
+                    onUp = {
+                        viewModel.increaseCount()
+                        isPlaying = true
+                    },
+                    isDownEnabled = state.count > 0
+                )
+            }
+            Column(
+                modifier = Modifier.align(Alignment.TopEnd)
+            ) {
+                IconButton(
+                    onClick = { viewModel.navigateToStats() },
+                    modifier = Modifier.align(Alignment.End)
+                ) {
+                    Box(
+                        modifier = Modifier
+                            .size(36.dp)
+                            .clip(CircleShape)
+                            .background(MaterialTheme.colors.primary),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Icon(
+                            imageVector = StatsIconLight,
+                            contentDescription = "Statistics",
+                            modifier = Modifier.size(18.dp),
+                            tint = MaterialTheme.colors.onPrimary
+                        )
+                    }
+                }
+                IconButton(
+                    onClick = { viewModel.navigateToSettings() },
+                    modifier = Modifier.align(Alignment.End)
+                ) {
+                    Box(
+                        modifier = Modifier
+                            .size(36.dp)
+                            .clip(CircleShape)
+                            .background(MaterialTheme.colors.primary),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.Settings,
+                            contentDescription = "Settings",
+                            modifier = Modifier.size(18.dp),
+                            tint = MaterialTheme.colors.onPrimary
+                        )
+                    }
+                }
+            }
+        }
+    }
+
+    @Composable
+    private fun Controllers(
+        onDown: () -> Unit,
+        onUp: () -> Unit,
+        isDownEnabled: Boolean
+    ) {
+        Row {
+            ControlButton(
+                onDown,
+                stringResource(Res.string.minus),
+                isEnabled = isDownEnabled
+            )
+            Spacer(modifier = Modifier.width(48.dp))
+            ControlButton(
+                onUp,
+                stringResource(Res.string.plus)
+            )
+        }
+    }
+
+    @Composable
+    private fun ControlButton(
+        onClick: () -> Unit,
+        text: String,
+        isEnabled: Boolean = true
+    ) {
+        Button(
+            modifier = Modifier
+                .height(44.dp),
+            onClick = onClick,
+            colors = ButtonDefaults.buttonColors(
+                backgroundColor = MaterialTheme.colors.primary
+            ),
+            shape = RoundedCornerShape(16.dp),
+            enabled = isEnabled
+        ) {
+            Text(
+                text = text,
+                style = MaterialTheme.typography.button
+            )
+        }
+    }
+
+}

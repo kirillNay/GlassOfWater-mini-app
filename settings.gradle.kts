@@ -10,7 +10,7 @@ pluginManagement {
     plugins {
         val kotlinVersion = extra["kotlin.version"] as String
         val agpVersion = extra["agp.version"] as String
-        val composeVersion = extra["compose.wasm.version"] as String
+        val composeVersion = extra["compose.version"] as String
 
         kotlin("jvm").version(kotlinVersion)
         kotlin("multiplatform").version(kotlinVersion)
@@ -32,8 +32,8 @@ include(
     ":features:settings",
 
     ":core:res",
-    ":core:arch",
     ":core:ui",
+    ":core:navigation",
 
     ":domain",
     ":data"

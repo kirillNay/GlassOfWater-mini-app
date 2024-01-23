@@ -1,3 +1,5 @@
+@file:Suppress("OPT_IN_IS_NOT_ENABLED")
+
 plugins {
     kotlin("multiplatform")
     id("org.jetbrains.compose")
@@ -15,7 +17,6 @@ kotlin {
             api(compose.material)
             api(compose.ui)
 
-            @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
             implementation(compose.material3)
             @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
             implementation(compose.components.resources)
@@ -25,11 +26,4 @@ kotlin {
 
 compose.experimental {
     web.application {}
-}
-
-compose {
-    val composeVersion = project.property("compose.wasm.version") as String
-    kotlinCompilerPlugin.set(composeVersion)
-    val kotlinVersion = project.property("kotlin.version") as String
-    kotlinCompilerPluginArgs.add("suppressKotlinVersionCompatibilityCheck=$kotlinVersion")
 }

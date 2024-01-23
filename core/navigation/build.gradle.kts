@@ -3,20 +3,20 @@ plugins {
     id("org.jetbrains.compose")
 }
 
+group = "nay.kirill"
+version = "1.0-SNAPSHOT"
+
 kotlin {
     setupPlatforms(
         platforms = listOf(Platform.JS),
         commonDeps = {
             api(compose.runtime)
-            api(compose.foundation)
-            api(compose.material)
-            api(compose.ui)
 
-            implementation(project(":core:res"))
+            implementation(libs.voyager.core)
+            implementation(libs.voyager.navigator)
+
+            implementation(libs.kotlinx.coroutines.core)
         }
     )
 }
 
-compose.experimental {
-    web.application {}
-}

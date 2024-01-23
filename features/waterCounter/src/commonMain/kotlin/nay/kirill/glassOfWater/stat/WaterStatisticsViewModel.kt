@@ -1,30 +1,29 @@
 package nay.kirill.glassOfWater.stat
 
+import cafe.adriel.voyager.core.model.ScreenModel
+import cafe.adriel.voyager.core.model.screenModelScope
 import com.kirillNay.telegram.miniapp.webApp.webApp
+import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import nay.kirill.glassOfWater.navigation.Navigation
 import nay.kirill.healthcare.domain.useCases.GetAllParamsUseCase
-import nay.kirill.kmpArch.navigation.NavigationStack
-import nay.kirill.kmpArch.ViewModel
 import kotlin.coroutines.CoroutineContext
 
 class WaterStatisticsViewModel(
     private val getAllParamsUseCase: GetAllParamsUseCase,
-    private val navigationStack: NavigationStack
-) : ViewModel() {
+    private val navigation: Navigation
+) : ScreenModel {
 
     private val _state = MutableStateFlow<WaterStatisticsState>(WaterStatisticsState.Loading)
     val state: StateFlow<WaterStatisticsState> = _state
 
-    private val back = {
-        navigationStack.back()
-        onCleared()
-    }
-
     init {
         webApp.backButton
-            .onClick(back)
+            .onClick {
+                screenModelScope.launch { navigation.back() }
+            }
             .show()
 
         launch {
@@ -40,12 +39,22 @@ class WaterStatisticsViewModel(
         }
     }
 
-    override fun onCleared() {
-        super.onCleared()
-        webApp.backButton.offClick(back).hide()
+    override fun onDispose() {
+        super.onDispose()
+        webApp.backButton
+            .offClick {
+                screenModelScope.launch { navigation.back() }
+            }
+            .hide()
     }
 
-    override fun onError(context: CoroutineContext, error: Throwable) {
+    private fun launch(block: suspend () -> Unit) {
+        screenModelScope.launch(context = CoroutineExceptionHandler(::onError)) {
+            block()
+        }
+    }
+
+    private fun onError(context: CoroutineContext, error: Throwable) {
         _state.value = WaterStatisticsState.Empty
     }
 }
