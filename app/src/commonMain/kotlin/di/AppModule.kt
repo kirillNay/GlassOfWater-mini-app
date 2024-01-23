@@ -1,6 +1,5 @@
 package di
 
-import GlassOfWaterThemeHandler
 import nay.kirill.glassOfWater.counter.GlassOfWaterViewModel
 import nay.kirill.glassOfWater.data.ConfigRepositoryImpl
 import nay.kirill.glassOfWater.data.HealthParamsRepositoryImpl
@@ -17,6 +16,8 @@ import nay.kirill.healthcare.domain.useCases.ObserveAppConfigUseCase
 import nay.kirill.healthcare.domain.useCases.SaveAppConfigUseCase
 import nay.kirill.healthcare.domain.useCases.UpdateTodayWaterUseCase
 import nay.kirill.settings.SettingsViewModel
+import org.koin.core.context.startKoin
+import org.koin.core.module.Module
 import org.koin.core.module.dsl.factoryOf
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.bind
@@ -41,5 +42,15 @@ val appModule = module {
     factoryOf(::SettingsViewModel)
 
     singleOf(::Navigation)
-    singleOf(::GlassOfWaterThemeHandler)
 }
+
+internal fun startDi() {
+    startKoin {
+        modules(
+            appModule,
+            platformModule
+        )
+    }
+}
+
+expect val platformModule: Module

@@ -26,7 +26,7 @@ pluginManagement {
 rootProject.name = "HealthCare"
 
 include(
-    ":apps:telegramApp",
+    ":app",
 
     ":features:waterCounter",
     ":features:settings",
