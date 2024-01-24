@@ -21,6 +21,7 @@ setupMuliplatformProject(
         implementation(project(":data"))
         implementation(project(":core:res"))
         implementation(project(":core:navigation"))
+        implementation(project(":core:ui"))
 
         implementation(libs.koin.core)
 

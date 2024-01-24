@@ -3,13 +3,13 @@ package nay.kirill.glassOfWater.counter.preview
 import android.annotation.SuppressLint
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
-import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import nay.kirill.glassOfWater.counter.GlassOfWater
 import nay.kirill.glassOfWater.counter.GlassOfWaterState
+import nay.kirill.glassOfWater.ui.theme.appLightColors
 
 internal class GlassOfWaterStateProvider : PreviewParameterProvider<GlassOfWaterState> {
 
@@ -28,7 +28,7 @@ private fun GlassOfWaterPreview(
         @PreviewParameter(GlassOfWaterStateProvider::class) state: GlassOfWaterState
 ) {
     MaterialTheme (
-        colors = lightColors()
+        colors = appLightColors()
     ){
         Scaffold {
             GlassOfWater(
