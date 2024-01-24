@@ -19,7 +19,7 @@ fun ErrorState(
 ) {
     Box(
         modifier = modifier.fillMaxSize(),
-        contentAlignment = Alignment.TopCenter
+        contentAlignment = Alignment.Center
     ) {
         Text(
             text = text,

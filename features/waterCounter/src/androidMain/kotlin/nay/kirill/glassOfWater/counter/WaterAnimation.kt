@@ -21,6 +21,7 @@ actual fun WaterAnimation(modifier: Modifier, progress: Float) {
         )
     )
     LottieAnimation(
+        modifier = modifier,
         composition = composition,
         progress = { progress },
     )

@@ -27,27 +27,36 @@ class GlassOfWaterViewModel(
         }
     }
 
+    fun accept(event: CounterEvent) {
+        when(event) {
+            is CounterEvent.DecreaseCount -> decreaseCount()
+            is CounterEvent.IncreaseCount -> increaseCount()
+            is CounterEvent.OpenSettings -> navigateToSettings()
+            is CounterEvent.OpenStats -> navigateToStats()
+        }
+    }
+
     private fun onError(error: Throwable) {
         _state.value = GlassOfWaterState.Error
     }
 
-    fun increaseCount() {
+    private fun increaseCount() {
         _state.value = state.value.copyContent { copy(count = count + 1) }
         updateCount()
     }
 
-    fun decreaseCount() {
+    private fun decreaseCount() {
         _state.value = state.value.copyContent { copy(count = count - 1) }
         updateCount()
     }
 
-    fun navigateToStats() {
+    private fun navigateToStats() {
         screenModelScope.launch {
             navigation.navigateTo(SharedScreens.StatsScreen)
         }
     }
 
-    fun navigateToSettings() {
+    private fun navigateToSettings() {
         screenModelScope.launch {
             navigation.navigateTo(SharedScreens.SettingsScreen)
         }

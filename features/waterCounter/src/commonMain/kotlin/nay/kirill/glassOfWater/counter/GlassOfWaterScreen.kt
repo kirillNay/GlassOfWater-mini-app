@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -34,6 +35,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.registry.screenModule
 import cafe.adriel.voyager.core.screen.Screen
@@ -63,23 +65,41 @@ class GlassOfWaterScreen : Screen {
         val viewModel: GlassOfWaterViewModel = getScreenModel()
         val state by viewModel.state.collectAsState()
 
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(
-                    horizontal = dimenRes(Res.dimens.horizontalPadding),
-                    vertical = dimenRes(Res.dimens.verticalPadding)
-                ),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Text(
-                text = stringResource(Res.string.appName),
-                style = MaterialTheme.typography.h5,
-                modifier = Modifier.padding(bottom = 36.dp)
-            )
+        GlassOfWater(state, viewModel::accept)
+    }
 
-            when (val currentState = state) {
-                is GlassOfWaterState.Content -> Content(currentState, viewModel)
+}
+
+@Composable
+internal fun GlassOfWater(
+    state: GlassOfWaterState,
+    accept: (CounterEvent) -> Unit
+) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(
+                horizontal = dimenRes(Res.dimens.horizontalPadding),
+                vertical = dimenRes(Res.dimens.verticalPadding)
+            ),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text(
+            text = stringResource(Res.string.appName),
+            style = MaterialTheme.typography.h4,
+            modifier = Modifier
+                .padding(bottom = 64.dp)
+                .align(Alignment.CenterHorizontally),
+            textAlign = TextAlign.Center
+        )
+
+        Box(
+            modifier = Modifier
+                .fillMaxHeight(),
+            contentAlignment = Alignment.Center
+        ) {
+            when (state) {
+                is GlassOfWaterState.Content -> Content(state, accept)
                 is GlassOfWaterState.Error -> ErrorState(
                     modifier = Modifier.padding(top = 46.dp)
                 )
@@ -88,135 +108,136 @@ class GlassOfWaterScreen : Screen {
             }
         }
     }
+}
 
-    @Composable
-    private fun Content(
-        state: GlassOfWaterState.Content,
-        viewModel: GlassOfWaterViewModel,
-    ) {
-        var isPlaying: Boolean by remember { mutableStateOf(true) }
-        val progress by animateFloatAsState(
-            targetValue = if (isPlaying) 0F else 1F,
-            animationSpec = tween(durationMillis = 500, easing = FastOutSlowInEasing), label = ""
-        )
-        LaunchedEffect(progress) {
-            if (isPlaying && progress == 0F) {
-                isPlaying = false
-            }
-        }
-
-        Box {
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth(),
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                Spacer(modifier = Modifier.height(20.dp))
-                WaterAnimation(
-                    modifier = Modifier.height(100.dp),
-                    progress = progress
-                )
-                Spacer(modifier = Modifier.height(74.dp))
-                Text(
-                    text = state.count.toString(),
-                    style = MaterialTheme.typography.h6
-                )
-                Spacer(modifier = Modifier.height(24.dp))
-                Controllers(
-                    onDown = { viewModel.decreaseCount() },
-                    onUp = {
-                        viewModel.increaseCount()
-                        isPlaying = true
-                    },
-                    isDownEnabled = state.count > 0
-                )
-            }
-            Column(
-                modifier = Modifier.align(Alignment.TopEnd)
-            ) {
-                IconButton(
-                    onClick = { viewModel.navigateToStats() },
-                    modifier = Modifier.align(Alignment.End)
-                ) {
-                    Box(
-                        modifier = Modifier
-                            .size(36.dp)
-                            .clip(CircleShape)
-                            .background(MaterialTheme.colors.primary),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        Icon(
-                            imageVector = StatsIconLight,
-                            contentDescription = "Statistics",
-                            modifier = Modifier.size(18.dp),
-                            tint = MaterialTheme.colors.onPrimary
-                        )
-                    }
-                }
-                IconButton(
-                    onClick = { viewModel.navigateToSettings() },
-                    modifier = Modifier.align(Alignment.End)
-                ) {
-                    Box(
-                        modifier = Modifier
-                            .size(36.dp)
-                            .clip(CircleShape)
-                            .background(MaterialTheme.colors.primary),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        Icon(
-                            imageVector = Icons.Default.Settings,
-                            contentDescription = "Settings",
-                            modifier = Modifier.size(18.dp),
-                            tint = MaterialTheme.colors.onPrimary
-                        )
-                    }
-                }
-            }
+@Composable
+private fun Content(
+    state: GlassOfWaterState.Content,
+    accept: (CounterEvent) -> Unit
+) {
+    var isPlaying: Boolean by remember { mutableStateOf(true) }
+    val progress by animateFloatAsState(
+        targetValue = if (isPlaying) 0F else 1F,
+        animationSpec = tween(durationMillis = 500, easing = FastOutSlowInEasing), label = ""
+    )
+    LaunchedEffect(progress) {
+        if (isPlaying && progress == 0F) {
+            isPlaying = false
         }
     }
 
-    @Composable
-    private fun Controllers(
-        onDown: () -> Unit,
-        onUp: () -> Unit,
-        isDownEnabled: Boolean
-    ) {
-        Row {
-            ControlButton(
-                onDown,
-                stringResource(Res.string.minus),
-                isEnabled = isDownEnabled
-            )
-            Spacer(modifier = Modifier.width(48.dp))
-            ControlButton(
-                onUp,
-                stringResource(Res.string.plus)
-            )
-        }
-    }
-
-    @Composable
-    private fun ControlButton(
-        onClick: () -> Unit,
-        text: String,
-        isEnabled: Boolean = true
-    ) {
-        Button(
+    Box {
+        Column(
             modifier = Modifier
-                .height(44.dp),
-            onClick = onClick,
-            colors = ButtonDefaults.buttonColors(
-                backgroundColor = MaterialTheme.colors.primary
-            ),
-            shape = RoundedCornerShape(16.dp),
-            enabled = isEnabled
+                .fillMaxWidth(),
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            Spacer(modifier = Modifier.height(20.dp))
+            WaterAnimation(
+                modifier = Modifier.height(170.dp),
+                progress = progress
+            )
+            Spacer(modifier = Modifier.height(74.dp))
             Text(
-                text = text,
-                style = MaterialTheme.typography.button
+                text = state.count.toString(),
+                style = MaterialTheme.typography.h6
+            )
+            Spacer(modifier = Modifier.height(24.dp))
+            Controllers(
+                onDown = { accept(CounterEvent.DecreaseCount) },
+                onUp = {
+                    accept(CounterEvent.IncreaseCount)
+                    isPlaying = true
+                },
+                isDownEnabled = state.count > 0
             )
         }
+        Column(
+            modifier = Modifier
+                .align(Alignment.TopEnd)
+                .padding(top = 56.dp)
+        ) {
+            IconButton(
+                onClick = { accept(CounterEvent.OpenStats) },
+                modifier = Modifier.align(Alignment.End)
+            ) {
+                Box(
+                    modifier = Modifier
+                        .size(36.dp)
+                        .clip(CircleShape)
+                        .background(MaterialTheme.colors.primary),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Icon(
+                        imageVector = StatsIconLight,
+                        contentDescription = "Statistics",
+                        modifier = Modifier.size(18.dp),
+                        tint = MaterialTheme.colors.onPrimary
+                    )
+                }
+            }
+            IconButton(
+                onClick = { accept(CounterEvent.OpenSettings) },
+                modifier = Modifier.align(Alignment.End)
+            ) {
+                Box(
+                    modifier = Modifier
+                        .size(36.dp)
+                        .clip(CircleShape)
+                        .background(MaterialTheme.colors.primary),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Settings,
+                        contentDescription = "Settings",
+                        modifier = Modifier.size(18.dp),
+                        tint = MaterialTheme.colors.onPrimary
+                    )
+                }
+            }
+        }
     }
+}
 
+@Composable
+private fun Controllers(
+    onDown: () -> Unit,
+    onUp: () -> Unit,
+    isDownEnabled: Boolean
+) {
+    Row {
+        ControlButton(
+            onDown,
+            stringResource(Res.string.minus),
+            isEnabled = isDownEnabled
+        )
+        Spacer(modifier = Modifier.width(48.dp))
+        ControlButton(
+            onUp,
+            stringResource(Res.string.plus)
+        )
+    }
+}
+
+@Composable
+private fun ControlButton(
+    onClick: () -> Unit,
+    text: String,
+    isEnabled: Boolean = true
+) {
+    Button(
+        modifier = Modifier
+            .height(44.dp),
+        onClick = onClick,
+        colors = ButtonDefaults.buttonColors(
+            backgroundColor = MaterialTheme.colors.primary
+        ),
+        shape = RoundedCornerShape(16.dp),
+        enabled = isEnabled
+    ) {
+        Text(
+            text = text,
+            style = MaterialTheme.typography.button
+        )
+    }
 }

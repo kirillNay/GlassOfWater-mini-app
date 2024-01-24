@@ -25,6 +25,8 @@ plugin-kotlinx-serialization = { module = "org.jetbrains.kotlin:kotlin-serializa
 appCompat = { module = "androidx.appcompat:appcompat", version.ref = "appCompat" }
 compose-activity = { module = "androidx.activity:activity-compose", version.ref = "composeActivity" }
 lottie = { module = "com.airbnb.android:lottie-compose", version.ref = "lottie" }
+compose-preview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "compose" }
+compose-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "compose" }
 
 compose-runtime = { module = "androidx.compose.runtime:runtime", version.ref = "compose" }
 compose-ui = { module = "androidx.compose.ui:ui", version.ref = "compose" }

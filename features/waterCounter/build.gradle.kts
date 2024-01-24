@@ -28,6 +28,9 @@ setupMuliplatformProject(
     },
     androidDeps = {
         implementation(libs.lottie)
+
+        implementation(libs.compose.preview)
+        implementation(libs.compose.tooling)
     },
     androidNamespace = "nay.kirill.glassOfWater.features.counter"
 )

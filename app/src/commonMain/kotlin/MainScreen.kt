@@ -10,18 +10,18 @@ import org.koin.core.context.GlobalContext.get
 
 @Composable
 internal fun MainScreen() {
-    Scaffold {
-        Navigator(GlassOfWaterScreen()) { navigator ->
-            LaunchedEffect(true) {
-                get().get<Navigation>().eventsStack.collect { event ->
-                    when (event) {
-                        is Navigation.Event.Forward -> navigator.push(ScreenRegistry.get(event.screen))
-                        is Navigation.Event.Back -> navigator.pop()
-                        else -> Unit
-                    }
+    Navigator(GlassOfWaterScreen()) { navigator ->
+        LaunchedEffect(true) {
+            get().get<Navigation>().eventsStack.collect { event ->
+                when (event) {
+                    is Navigation.Event.Forward -> navigator.push(ScreenRegistry.get(event.screen))
+                    is Navigation.Event.Back -> navigator.pop()
+                    else -> Unit
                 }
             }
+        }
 
+        Scaffold {
             CurrentScreen()
         }
     }
