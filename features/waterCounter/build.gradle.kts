@@ -26,6 +26,9 @@ setupMuliplatformProject(
     jsDeps = {
         implementation(libs.tg.miniApp)
     },
+    androidDeps = {
+        implementation(libs.lottie)
+    },
     androidNamespace = "nay.kirill.glassOfWater.features.counter"
 )
 

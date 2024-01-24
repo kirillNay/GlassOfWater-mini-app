@@ -8,7 +8,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.remember
 import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
 import androidx.compose.ui.graphics.nativeCanvas
-import nay.kirill.glassOfWater.counter.ui.LottieAnimation
+import nay.kirill.glassOfWater.counter.ui.LottieAnimationSource
 import org.jetbrains.skia.Rect
 import org.jetbrains.skia.skottie.Animation
 import org.jetbrains.skia.sksg.InvalidationController
@@ -18,7 +18,7 @@ actual fun WaterAnimation(
     modifier: Modifier,
     progress: Float // 0 to 1
 ) {
-    val json = LottieAnimation.createJson(
+    val json = LottieAnimationSource.createJson(
         r = MaterialTheme.colors.primary.red.toString(),
         g = MaterialTheme.colors.primary.green.toString(),
         b = MaterialTheme.colors.primary.blue.toString()
