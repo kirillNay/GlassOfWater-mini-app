@@ -6,11 +6,28 @@ voyager = "1.0.0"
 mini-app = "1.0.2"
 serialization-json = "1.4.1"
 datetime = "0.4.1"
+appCompat = "1.6.1"
+composeActivity = "1.7.2"
+compose = "1.5.0"
+composeMaterial3 = "1.1.2"
+plugin-multiplatform-compose = "1.5.11"
+kotlin = "1.9.0"
 
 [libraries]
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "serialization-json" }
 kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "datetime" }
+
+plugin-multiplatform-compose = { module = "org.jetbrains.compose:compose-gradle-plugin", version.ref = "plugin-multiplatform-compose" }
+plugin-kotlinx-serialization = { module = "org.jetbrains.kotlin:kotlin-serialization", version.ref = "kotlin" }
+
+appCompat = { module = "androidx.appcompat:appcompat", version.ref = "appCompat" }
+compose-activity = { module = "androidx.activity:activity-compose", version.ref = "composeActivity" }
+
+compose-runtime = { module = "androidx.compose.runtime:runtime", version.ref = "compose" }
+compose-ui = { module = "androidx.compose.ui:ui", version.ref = "compose" }
+compose-material = { module = "androidx.compose.material:material", version.ref = "compose" }
+compose-material3 = { module = "androidx.compose.material3:material3", version.ref = "composeMaterial3" }
 
 koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
 koin-compose = { module = "io.insert-koin:koin-compose", version.ref = "koin-compose" }

@@ -46,9 +46,9 @@ import nay.kirill.glassOfWater.res.horizontalPadding
 import nay.kirill.glassOfWater.res.minus
 import nay.kirill.glassOfWater.res.plus
 import nay.kirill.glassOfWater.res.stringResource
-import nay.kirill.glassOfWater.res.ui.myiconpack.StatsIconLight
 import nay.kirill.glassOfWater.res.verticalPadding
 import nay.kirill.glassOfWater.ui.ErrorState
+import nay.kirill.glassOfWater.ui.StatsIconLight
 
 val counterScreenModule = screenModule {
     register<SharedScreens.CounterScreen> {

@@ -1,22 +1,18 @@
 plugins {
     kotlin("multiplatform")
     id("org.jetbrains.compose")
+    id("com.android.library")
 }
 
-group = "nay.kirill"
-version = "1.0-SNAPSHOT"
+setupMuliplatformProject(
+    platforms = listOf(Platform.JS, Platform.ANDROID),
+    commonDeps = {
+        api(compose.dependencies.runtime)
 
-kotlin {
-    setupPlatforms(
-        platforms = listOf(Platform.JS),
-        commonDeps = {
-            api(compose.runtime)
+        implementation(libs.voyager.core)
+        implementation(libs.voyager.navigator)
 
-            implementation(libs.voyager.core)
-            implementation(libs.voyager.navigator)
-
-            implementation(libs.kotlinx.coroutines.core)
-        }
-    )
-}
-
+        implementation(libs.kotlinx.coroutines.core)
+    },
+    androidNamespace = "nay.kirill.glassOfWater.navigation"
+)

@@ -1,28 +1,23 @@
-@file:Suppress("OPT_IN_IS_NOT_ENABLED")
-
 plugins {
     kotlin("multiplatform")
     id("org.jetbrains.compose")
+    id("com.android.library")
 }
 
 group = "nay.kirill"
 version = "1.0-SNAPSHOT"
 
-kotlin {
-    setupPlatforms(
-        platforms = listOf(Platform.JS),
-        commonDeps = {
-            api(compose.runtime)
-            api(compose.foundation)
-            api(compose.material)
-            api(compose.ui)
+setupMuliplatformProject(
+    platforms = listOf(Platform.JS, Platform.ANDROID),
+    commonDeps = {
+        api(compose.dependencies.runtime)
+        api(compose.dependencies.material)
+        api(compose.dependencies.ui)
 
-            implementation(compose.material3)
-            @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
-            implementation(compose.components.resources)
-        }
-    )
-}
+        api(compose.dependencies.material3)
+    },
+    androidNamespace = "nay.kirill.glassOfWater.res"
+)
 
 compose.experimental {
     web.application {}

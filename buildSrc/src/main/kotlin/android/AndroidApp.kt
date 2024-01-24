@@ -6,10 +6,12 @@ import org.gradle.api.JavaVersion
 import org.gradle.api.Project
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
-fun BaseAppModuleExtension.androidApp(
+fun BaseExtension.androidApp(
     target: Project,
-    targetPackage: String
+    targetNamespace: String?
 ) {
+    compileSdkVersion(AppConfig.compileSdk)
+
     defaultConfig.apply {
         applicationId = AppConfig.applicationId
         versionCode = AppConfig.versionCode
@@ -17,8 +19,7 @@ fun BaseAppModuleExtension.androidApp(
 
         minSdk = AppConfig.minSdk
         targetSdk = AppConfig.targetSdk
-
-        namespace = targetPackage
+        if (targetNamespace != null) namespace = targetNamespace
     }
 
     buildTypes.apply {
@@ -32,11 +33,13 @@ fun BaseAppModuleExtension.androidApp(
         }
     }
 
-    compileSdk = AppConfig.compileSdk
-
     compileOptions.apply {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
+    }
+
+    buildFeatures.apply {
+        compose = true
     }
 
     target.tasks.withType(KotlinCompile::class.java).configureEach {

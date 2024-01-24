@@ -1,4 +1,4 @@
-package nay.kirill.glassOfWater.res.ui.myiconpack
+package nay.kirill.glassOfWater.ui
 
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.PathFillType.Companion.NonZero

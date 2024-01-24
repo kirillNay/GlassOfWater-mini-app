@@ -2,7 +2,6 @@ package nay.kirill.settings
 
 import cafe.adriel.voyager.core.model.ScreenModel
 import cafe.adriel.voyager.core.model.screenModelScope
-import com.kirillNay.telegram.miniapp.webApp.webApp
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -33,31 +32,31 @@ class SettingsViewModel(
             )
         }
 
-        webApp.backButton
-            .onClick {
-                screenModelScope.launch { navigation.back() }
-            }
-            .show()
+//        webApp.backButton
+//            .onClick {
+//                screenModelScope.launch { navigation.back() }
+//            }
+//            .show()
     }
 
     fun clearData(confirmationText: String) {
-        webApp.showConfirm(confirmationText) { result ->
-            if (result) {
-                launch {
-                    clearParamsUseCase()
-                }
-            }
-        }
+//        webApp.showConfirm(confirmationText) { result ->
+//            if (result) {
+//                launch {
+//                    clearParamsUseCase()
+//                }
+//            }
+//        }
     }
 
     fun mockData(confirmationText: String) {
-        webApp.showConfirm(confirmationText) { result ->
-            if (result) {
-                launch {
-                    mockParamsUseCase()
-                }
-            }
-        }
+//        webApp.showConfirm(confirmationText) { result ->
+//            if (result) {
+//                launch {
+//                    mockParamsUseCase()
+//                }
+//            }
+//        }
     }
 
     fun updateAdaptiveTheme() {
@@ -79,11 +78,11 @@ class SettingsViewModel(
 
     override fun onDispose() {
         super.onDispose()
-        webApp.backButton
-            .offClick {
-                screenModelScope.launch { navigation.back() }
-            }
-            .hide()
+//        webApp.backButton
+//            .offClick {
+//                screenModelScope.launch { navigation.back() }
+//            }
+//            .hide()
     }
 
     private fun onError() {

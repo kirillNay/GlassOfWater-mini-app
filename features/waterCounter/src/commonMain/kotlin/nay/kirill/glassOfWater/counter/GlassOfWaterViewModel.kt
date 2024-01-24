@@ -5,7 +5,6 @@ import cafe.adriel.voyager.core.model.screenModelScope
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import nay.kirill.glassOfWater.navigation.Navigation
 import nay.kirill.glassOfWater.navigation.SharedScreens
@@ -19,7 +18,7 @@ class GlassOfWaterViewModel(
 ) : ScreenModel {
 
     private val _state = MutableStateFlow<GlassOfWaterState>(GlassOfWaterState.Loading)
-    val state: StateFlow<GlassOfWaterState> = _state.apply { onEach { console.log(it.toString()) } }
+    val state: StateFlow<GlassOfWaterState> = _state
 
     init {
         launch {

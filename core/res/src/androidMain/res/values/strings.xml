@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Glasses Of Water</string>
+    <string name="settings">Settings</string>
+    <string name="stats">Statistics</string>
+    <string name="minus" translatable="false">-</string>
+    <string name="plus" translatable="false">+</string>
+    <string name="noStats">Statistics is unavailable</string>
+    <string name="clearDataConfirmation">Are you sure you want to clear data?</string>
+    <string name="mockDataConfirmation">Are you sure you want to mock data? All saved data will be lost!</string>
+    <string name="clearDataButton">Clear data</string>
+    <string name="mockDataButton">Mock data</string>
+    <string name="adaptiveTheme">Adaptive design</string>
+    <string name="commonError">Something went wrong…</string>
+</resources>

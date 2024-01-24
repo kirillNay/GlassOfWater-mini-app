@@ -1,10 +1,16 @@
 import androidx.compose.material.Typography
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import com.kirillNay.telegram.miniapp.compose.telegramWebApp
+import com.kirillNay.telegram.miniapp.webApp.webApp
 import di.startDi
+import nay.kirill.glassOfWater.res.buildDimenResources
+import nay.kirill.glassOfWater.res.buildStingsResources
+import nay.kirill.glassOfWater.res.dimenLocal
+import nay.kirill.glassOfWater.res.strsLocal
 import org.koin.core.context.GlobalContext.get
 
 fun main() {
@@ -29,6 +35,13 @@ fun main() {
         ),
         animationDuration = 500
     ) {
-        MainScreen()
+        CompositionLocalProvider(
+            strsLocal provides buildStingsResources(
+                languageCode = webApp.initDataUnsafe.user?.languageCode
+            ),
+            dimenLocal provides buildDimenResources()
+        ) {
+            MainScreen()
+        }
     }
 }

@@ -2,7 +2,6 @@ package nay.kirill.glassOfWater.stat
 
 import cafe.adriel.voyager.core.model.ScreenModel
 import cafe.adriel.voyager.core.model.screenModelScope
-import com.kirillNay.telegram.miniapp.webApp.webApp
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -20,11 +19,11 @@ class WaterStatisticsViewModel(
     val state: StateFlow<WaterStatisticsState> = _state
 
     init {
-        webApp.backButton
-            .onClick {
-                screenModelScope.launch { navigation.back() }
-            }
-            .show()
+//        webApp.backButton
+//            .onClick {
+//                screenModelScope.launch { navigation.back() }
+//            }
+//            .show()
 
         launch {
             val params = getAllParamsUseCase()
@@ -41,11 +40,11 @@ class WaterStatisticsViewModel(
 
     override fun onDispose() {
         super.onDispose()
-        webApp.backButton
-            .offClick {
-                screenModelScope.launch { navigation.back() }
-            }
-            .hide()
+//        webApp.backButton
+//            .offClick {
+//                screenModelScope.launch { navigation.back() }
+//            }
+//            .hide()
     }
 
     private fun launch(block: suspend () -> Unit) {

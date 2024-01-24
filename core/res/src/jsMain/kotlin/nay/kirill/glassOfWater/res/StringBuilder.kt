@@ -9,7 +9,7 @@ fun buildStingsResources(
     when (languageCode) {
         "ru" -> {
             strs[rs.appName] = "Стаканы воды"
-            strs[rs.noStats] = "Статистика не доступна"
+            strs[rs.noStats] = "Статистика недоступна"
             strs[rs.settings] = "Настройки"
             strs[rs.stats] = "Статистика"
             strs[rs.clearDataButton] = "Очистить данные"
