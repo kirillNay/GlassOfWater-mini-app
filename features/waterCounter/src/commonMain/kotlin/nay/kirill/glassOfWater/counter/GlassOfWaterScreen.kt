@@ -115,10 +115,11 @@ private fun Content(
     state: GlassOfWaterState.Content,
     accept: (CounterEvent) -> Unit
 ) {
-    var isPlaying: Boolean by remember { mutableStateOf(true) }
+    var isPlaying: Boolean by remember { mutableStateOf(false) }
     val progress by animateFloatAsState(
         targetValue = if (isPlaying) 0F else 1F,
-        animationSpec = tween(durationMillis = 500, easing = FastOutSlowInEasing), label = ""
+        animationSpec = tween(durationMillis = 500, easing = FastOutSlowInEasing),
+        label = ""
     )
     LaunchedEffect(progress) {
         if (isPlaying && progress == 0F) {
