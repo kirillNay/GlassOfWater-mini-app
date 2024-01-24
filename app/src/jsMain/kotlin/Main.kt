@@ -6,15 +6,22 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import com.kirillNay.telegram.miniapp.compose.telegramWebApp
 import com.kirillNay.telegram.miniapp.webApp.webApp
-import di.startDi
+import di.appModule
+import di.platformModule
 import nay.kirill.glassOfWater.res.buildDimenResources
 import nay.kirill.glassOfWater.res.buildStingsResources
 import nay.kirill.glassOfWater.res.dimenLocal
 import nay.kirill.glassOfWater.res.strsLocal
 import org.koin.core.context.GlobalContext.get
+import org.koin.core.context.startKoin
 
 fun main() {
-    startDi()
+    startKoin {
+        modules(
+            appModule,
+            platformModule
+        )
+    }
     setupNavigation()
 
     telegramWebApp(

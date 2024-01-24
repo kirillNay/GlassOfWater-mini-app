@@ -27,7 +27,7 @@ class GlassOfWaterViewModel(
         }
     }
 
-    private fun onError() {
+    private fun onError(error: Throwable) {
         _state.value = GlassOfWaterState.Error
     }
 
@@ -60,7 +60,7 @@ class GlassOfWaterViewModel(
     }
 
     private fun launch(block: suspend () -> Unit) {
-        screenModelScope.launch(context = CoroutineExceptionHandler {_, _ -> onError() }) { block() }
+        screenModelScope.launch(context = CoroutineExceptionHandler {_, error -> onError(error) }) { block() }
     }
 
 }

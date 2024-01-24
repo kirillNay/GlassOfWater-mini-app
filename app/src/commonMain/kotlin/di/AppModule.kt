@@ -16,7 +16,6 @@ import nay.kirill.healthcare.domain.useCases.ObserveAppConfigUseCase
 import nay.kirill.healthcare.domain.useCases.SaveAppConfigUseCase
 import nay.kirill.healthcare.domain.useCases.UpdateTodayWaterUseCase
 import nay.kirill.settings.SettingsViewModel
-import org.koin.core.context.startKoin
 import org.koin.core.module.Module
 import org.koin.core.module.dsl.factoryOf
 import org.koin.core.module.dsl.singleOf
@@ -42,15 +41,6 @@ val appModule = module {
     factoryOf(::SettingsViewModel)
 
     singleOf(::Navigation)
-}
-
-internal fun startDi() {
-    startKoin {
-        modules(
-            appModule,
-            platformModule
-        )
-    }
 }
 
 expect val platformModule: Module

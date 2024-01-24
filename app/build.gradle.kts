@@ -31,6 +31,8 @@ setupMuliplatformProject(
         implementation(libs.tg.miniApp)
     },
     androidDeps = {
+        implementation(libs.koin.android)
+
         implementation(libs.appCompat)
         implementation(libs.compose.activity)
     }
