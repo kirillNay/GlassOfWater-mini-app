@@ -3,6 +3,8 @@ package nay.kirill.glassOfWater.data
 import android.content.SharedPreferences
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.merge
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
@@ -29,7 +31,10 @@ actual class ConfigRepositoryImpl(
             ?: AppConfig.default
     }
 
-    actual override fun observeConfig(): Flow<AppConfig> = cachedConfig
+    actual override fun observeConfig(): Flow<AppConfig> = merge(
+        flow { emit(getConfig().getOrDefault(AppConfig.default)) },
+        cachedConfig
+    )
 
     companion object {
 
