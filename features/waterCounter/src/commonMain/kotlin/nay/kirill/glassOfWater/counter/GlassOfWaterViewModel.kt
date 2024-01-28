@@ -52,13 +52,13 @@ class GlassOfWaterViewModel(
 
     private fun navigateToStats() {
         screenModelScope.launch {
-            navigation.navigateTo(SharedScreens.StatsScreen)
+            navigation.navigateTo(SharedScreens.Stats)
         }
     }
 
     private fun navigateToSettings() {
         screenModelScope.launch {
-            navigation.navigateTo(SharedScreens.SettingsScreen)
+            navigation.navigateTo(SharedScreens.Settings)
         }
     }
 

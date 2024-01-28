@@ -17,14 +17,6 @@ actual val Res.string.plus: Int get() = R.string.plus
 
 actual val Res.string.noStats: Int get() = R.string.noStats
 
-actual val Res.string.clearDataConfirmation: Int get() = R.string.clearDataConfirmation
-
-actual val Res.string.mockDataConfirmation: Int get() = R.string.mockDataConfirmation
-
-actual val Res.string.clearDataButton: Int get() = R.string.clearDataButton
-
-actual val Res.string.mockDataButton: Int get() = R.string.mockDataButton
-
 actual val Res.string.adaptiveTheme: Int get() = R.string.adaptiveTheme
 
 actual val Res.string.commonError: Int get() = R.string.commonError

@@ -1,5 +1,7 @@
+import androidx.compose.foundation.layout.height
 import androidx.compose.material.Typography
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -41,14 +43,16 @@ fun main() {
             )
         ),
         animationDuration = 500
-    ) {
+    ) { paddings ->
         CompositionLocalProvider(
             strsLocal provides buildStingsResources(
                 languageCode = webApp.initDataUnsafe.user?.languageCode
             ),
             dimenLocal provides buildDimenResources()
         ) {
-            MainScreen()
+            MainScreen(
+                modifier = Modifier.height(paddings.viewPortHeight)
+            )
         }
     }
 }

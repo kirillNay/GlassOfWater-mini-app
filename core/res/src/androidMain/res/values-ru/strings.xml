@@ -4,10 +4,6 @@
     <string name="settings">Настройки</string>
     <string name="stats">Статистика</string>
     <string name="noStats">Статистика недоступна</string>
-    <string name="clearDataConfirmation">Вы уверены, что хотите очистить данные?</string>
-    <string name="mockDataConfirmation">Вы уверены, что хотите применить тестовые данные? Текущие данные будут потеряны!</string>
-    <string name="clearDataButton">Очистить данные</string>
-    <string name="mockDataButton">Тестовые данные</string>
     <string name="adaptiveTheme">Адаптивный дизайн</string>
     <string name="commonError">Что-то пошло не так…</string>
 </resources>

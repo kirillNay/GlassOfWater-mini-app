@@ -53,7 +53,7 @@ import nay.kirill.glassOfWater.ui.ErrorState
 import nay.kirill.glassOfWater.ui.StatsIconLight
 
 val counterScreenModule = screenModule {
-    register<SharedScreens.CounterScreen> {
+    register<SharedScreens.Counter> {
         GlassOfWaterScreen()
     }
 }

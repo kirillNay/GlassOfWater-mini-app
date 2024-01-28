@@ -17,14 +17,6 @@ expect val Res.string.plus: Int
 
 expect val Res.string.noStats: Int
 
-expect val Res.string.clearDataConfirmation: Int
-
-expect val Res.string.mockDataConfirmation: Int
-
-expect val Res.string.clearDataButton: Int
-
-expect val Res.string.mockDataButton: Int
-
 expect val Res.string.adaptiveTheme: Int
 
 expect val Res.string.commonError: Int

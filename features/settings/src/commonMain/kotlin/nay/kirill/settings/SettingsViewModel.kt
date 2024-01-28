@@ -24,6 +24,12 @@ class SettingsViewModel(
     private val _state = MutableStateFlow<SettingsState>(SettingsState.Loading)
     val state: StateFlow<SettingsState> = _state
 
+    fun accept(event: SettingsEvent) {
+        when (event) {
+            is SettingsEvent.UpdateAdaptiveTheme -> updateAdaptiveTheme()
+        }
+    }
+
     init {
         launch {
             val config = getAppConfigUseCase()
@@ -39,27 +45,7 @@ class SettingsViewModel(
 //            .show()
     }
 
-    fun clearData(confirmationText: String) {
-//        webApp.showConfirm(confirmationText) { result ->
-//            if (result) {
-//                launch {
-//                    clearParamsUseCase()
-//                }
-//            }
-//        }
-    }
-
-    fun mockData(confirmationText: String) {
-//        webApp.showConfirm(confirmationText) { result ->
-//            if (result) {
-//                launch {
-//                    mockParamsUseCase()
-//                }
-//            }
-//        }
-    }
-
-    fun updateAdaptiveTheme() {
+    private fun updateAdaptiveTheme() {
         _state.value = _state.value.copyContent { copy(isAdaptiveBoolean = !isAdaptiveBoolean) }
         updateConfig()
     }

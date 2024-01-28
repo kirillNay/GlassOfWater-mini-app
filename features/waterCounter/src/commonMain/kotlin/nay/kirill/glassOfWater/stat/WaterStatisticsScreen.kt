@@ -52,7 +52,7 @@ import kotlin.math.max
 import kotlin.math.roundToInt
 
 val statsScreenModule = screenModule {
-    register<SharedScreens.StatsScreen> {
+    register<SharedScreens.Stats> {
         WaterStatisticsScreen()
     }
 }

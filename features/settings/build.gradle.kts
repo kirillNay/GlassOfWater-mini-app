@@ -26,6 +26,10 @@ setupMuliplatformProject(
     jsDeps = {
         implementation(libs.tg.miniApp)
     },
+    androidDeps = {
+        implementation(libs.compose.preview)
+        implementation(libs.compose.tooling)
+    },
     androidNamespace = "nay.kirill.glassOfWater.features.settings"
 )
 
