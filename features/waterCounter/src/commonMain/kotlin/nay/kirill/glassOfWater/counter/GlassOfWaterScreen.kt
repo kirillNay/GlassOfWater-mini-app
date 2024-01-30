@@ -50,7 +50,7 @@ import nay.kirill.glassOfWater.res.plus
 import nay.kirill.glassOfWater.res.stringResource
 import nay.kirill.glassOfWater.res.verticalPadding
 import nay.kirill.glassOfWater.ui.ErrorState
-import nay.kirill.glassOfWater.ui.StatsIconLight
+import nay.kirill.glassOfWater.ui.icons.IconStats
 
 val counterScreenModule = screenModule {
     register<SharedScreens.Counter> {
@@ -170,7 +170,7 @@ private fun Content(
                     contentAlignment = Alignment.Center
                 ) {
                     Icon(
-                        imageVector = StatsIconLight,
+                        imageVector = IconStats,
                         contentDescription = "Statistics",
                         modifier = Modifier.size(18.dp),
                         tint = MaterialTheme.colors.onPrimary

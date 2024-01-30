@@ -1,4 +1,4 @@
-package nay.kirill.glassOfWater.ui
+package nay.kirill.glassOfWater.ui.icons
 
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.PathFillType.Companion.NonZero
@@ -10,12 +10,12 @@ import androidx.compose.ui.graphics.vector.ImageVector.Builder
 import androidx.compose.ui.graphics.vector.path
 import androidx.compose.ui.unit.dp
 
-val StatsIconLight: ImageVector
+val IconStats: ImageVector
     get() {
         if (statsIconLight != null) {
             return statsIconLight!!
         }
-        statsIconLight = Builder(name = "Statistics-svgrepo-com", defaultWidth =
+        statsIconLight = Builder(name = "Statistics", defaultWidth =
                 800.0.dp, defaultHeight = 800.0.dp, viewportWidth = 465.797f, viewportHeight =
                 465.797f).apply {
             path(fill = SolidColor(Color(0xFF005FB0)), stroke = SolidColor(Color(0xFF005FB0)),

@@ -27,6 +27,7 @@ import nay.kirill.glassOfWater.res.settings
 import nay.kirill.glassOfWater.res.stringResource
 import nay.kirill.glassOfWater.res.verticalPadding
 import nay.kirill.glassOfWater.ui.ErrorState
+import nay.kirill.glassOfWater.ui.StatusBar
 
 val settingsScreenModule = screenModule {
     register<SharedScreens.Settings> {
@@ -63,10 +64,10 @@ internal fun Settings(
             ),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(
+        StatusBar(
             text = stringResource(Res.string.settings),
-            style = MaterialTheme.typography.h5,
-            modifier = Modifier.padding(bottom = 36.dp)
+            modifier = Modifier.padding(bottom = 36.dp),
+            backAction = { accept(SettingsEvent.Back) }
         )
 
         when (state) {

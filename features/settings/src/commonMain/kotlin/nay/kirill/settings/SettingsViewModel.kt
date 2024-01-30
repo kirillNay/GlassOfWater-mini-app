@@ -27,6 +27,7 @@ class SettingsViewModel(
     fun accept(event: SettingsEvent) {
         when (event) {
             is SettingsEvent.UpdateAdaptiveTheme -> updateAdaptiveTheme()
+            is SettingsEvent.Back -> launch {  navigation.back() }
         }
     }
 
