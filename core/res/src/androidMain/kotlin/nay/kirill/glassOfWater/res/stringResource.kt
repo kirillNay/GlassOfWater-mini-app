@@ -17,6 +17,14 @@ actual val Res.string.plus: Int get() = R.string.plus
 
 actual val Res.string.noStats: Int get() = R.string.noStats
 
-actual val Res.string.adaptiveTheme: Int get() = R.string.adaptiveTheme
-
 actual val Res.string.commonError: Int get() = R.string.commonError
+
+actual val Res.string.interfaceSettings: Int get() = R.string.interfaceSettings
+
+actual val Res.string.themeLight: Int get() = R.string.themeLight
+
+actual val Res.string.themeDark: Int get() = R.string.themeDark
+
+actual val Res.string.themeSystem: Int get() = R.string.themeSystem
+
+actual val Res.string.themeAdaptive: Int get() = R.string.themeAdaptive

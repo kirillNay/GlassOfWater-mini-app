@@ -12,16 +12,24 @@ fun buildStingsResources(
             strs[rs.noStats] = "Статистика недоступна"
             strs[rs.settings] = "Настройки"
             strs[rs.stats] = "Статистика"
-            strs[rs.adaptiveTheme] = "Адаптивный дизайн"
             strs[rs.commonError] = "Что-то пошло не так..."
+            strs[rs.interfaceSettings] = "Интерфейс"
+            strs[rs.themeLight] = "Светлая тема"
+            strs[rs.themeDark] = "Темная тема"
+            strs[rs.themeSystem] = "Системная тема"
+            strs[rs.themeAdaptive] = "Адаптивная тема"
         }
         else -> {
             strs[rs.appName] = "Glasses Of Water"
             strs[rs.noStats] = "Statistics is unavailable"
             strs[rs.settings] = "Settings"
             strs[rs.stats] = "Statistics"
-            strs[rs.adaptiveTheme] = "Adaptive design"
             strs[rs.commonError] = "Something went wrong..."
+            strs[rs.interfaceSettings] = "Interface"
+            strs[rs.themeLight] = "Light theme"
+            strs[rs.themeDark] = "Dark theme"
+            strs[rs.themeSystem] = "System theme"
+            strs[rs.themeAdaptive] = "Adaptive theme"
         }
     }
     strs[rs.minus] = "-"

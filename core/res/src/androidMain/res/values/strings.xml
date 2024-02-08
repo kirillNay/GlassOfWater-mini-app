@@ -6,6 +6,10 @@
     <string name="minus" translatable="false">-</string>
     <string name="plus" translatable="false">+</string>
     <string name="noStats">Statistics is unavailable</string>
-    <string name="adaptiveTheme">Adaptive design</string>
     <string name="commonError">Something went wrong…</string>
+    <string name="interfaceSettings">Interface</string>
+    <string name="themeLight">Light theme</string>
+    <string name="themeDark">Dark theme</string>
+    <string name="themeSystem">System theme</string>
+    <string name="themeAdaptive">Adaptive design</string>
 </resources>

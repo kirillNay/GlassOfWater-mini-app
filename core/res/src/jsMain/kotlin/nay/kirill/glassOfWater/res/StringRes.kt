@@ -31,20 +31,20 @@ actual val Res.string.plus: Int get() = _plus
 private val _noStats = lastId++
 actual val Res.string.noStats: Int get() = _noStats
 
-private val _clearDataConfirmation = lastId++
-actual val Res.string.clearDataConfirmation: Int get() = _clearDataConfirmation
-
-private val _mockDataConfirmation = lastId++
-actual val Res.string.mockDataConfirmation: Int get() = _mockDataConfirmation
-
-private val _clearDataButton = lastId++
-actual val Res.string.clearDataButton: Int get() = _clearDataButton
-
-private val _mockDataButton = lastId++
-actual val Res.string.mockDataButton: Int get() = _mockDataButton
-
-private val _adaptiveTheme = lastId++
-actual val Res.string.adaptiveTheme: Int get() = _adaptiveTheme
-
 private val _commonError = lastId++
 actual val Res.string.commonError: Int get() = _commonError
+
+private val _interfaceSettings = lastId++
+actual val Res.string.interfaceSettings: Int get() = _interfaceSettings
+
+private val _themeDark = lastId++
+actual val Res.string.themeDark: Int get() = _themeDark
+
+private val _themeLight = lastId++
+actual val Res.string.themeLight: Int get() = _themeLight
+
+private val _adaptiveTheme = lastId++
+actual val Res.string.themeAdaptive: Int get() = _adaptiveTheme
+
+private val _systemTheme = lastId++
+actual val Res.string.themeSystem: Int get() = _systemTheme

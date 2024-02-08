@@ -31,6 +31,16 @@ fun GlassOfWaterTheme(
                 color = Color.Black,
                 fontSize = 18.sp,
                 fontWeight = FontWeight.SemiBold
+            ),
+            body1 = TextStyle(
+                color = Color.Black,
+                fontSize = 17.sp,
+                fontWeight = FontWeight.SemiBold
+            ),
+            body2 = TextStyle(
+                color = Color.Black,
+                fontSize = 15.sp,
+                fontWeight = FontWeight.Normal
             )
         )
     ) {

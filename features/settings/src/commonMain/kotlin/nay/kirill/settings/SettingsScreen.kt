@@ -2,29 +2,38 @@ package nay.kirill.settings
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Card
+import androidx.compose.material.Divider
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Switch
-import androidx.compose.material.SwitchDefaults
+import androidx.compose.material.RadioButton
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.registry.screenModule
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.koin.getScreenModel
 import nay.kirill.glassOfWater.navigation.SharedScreens
 import nay.kirill.glassOfWater.res.Res
-import nay.kirill.glassOfWater.res.adaptiveTheme
 import nay.kirill.glassOfWater.res.dimenRes
 import nay.kirill.glassOfWater.res.horizontalPadding
+import nay.kirill.glassOfWater.res.interfaceSettings
 import nay.kirill.glassOfWater.res.settings
 import nay.kirill.glassOfWater.res.stringResource
+import nay.kirill.glassOfWater.res.themeDark
+import nay.kirill.glassOfWater.res.themeLight
+import nay.kirill.glassOfWater.res.themeSystem
 import nay.kirill.glassOfWater.res.verticalPadding
 import nay.kirill.glassOfWater.ui.ErrorState
 import nay.kirill.glassOfWater.ui.StatusBar
@@ -74,7 +83,9 @@ internal fun Settings(
             is SettingsState.Content -> Content(
                 state = state,
                 accept = accept,
-                modifier = Modifier.align(Alignment.Start)
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 48.dp)
             )
 
             is SettingsState.Error -> ErrorState(
@@ -93,26 +104,87 @@ private fun Content(
     modifier: Modifier = Modifier
 ) {
     Column(modifier = modifier) {
-        Row(
+        Text(
+            text = stringResource(Res.string.interfaceSettings),
+            style = MaterialTheme.typography.body1
+        )
+        Spacer(modifier = Modifier.height(24.dp))
+        Card(
             modifier = Modifier
-                .padding(bottom = 12.dp),
-            verticalAlignment = Alignment.CenterVertically
+                .fillMaxWidth(),
+            shape = RoundedCornerShape(30.dp),
+            elevation = 4.dp
         ) {
-            Switch(
-                checked = state.isAdaptiveBoolean,
-                onCheckedChange = {
-                    accept(SettingsEvent.UpdateAdaptiveTheme)
-                },
-                modifier = Modifier.padding(end = 16.dp),
-                colors = SwitchDefaults.colors(
-                    checkedThumbColor = MaterialTheme.colors.primary
+            Column(
+                modifier = Modifier
+                    .padding(horizontal = 32.dp, vertical = 16.dp)
+            ) {
+                RadioButtonIcon(
+                    stringResource(Res.string.themeLight),
+                    false,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = 20.dp)
+                ) {
+
+                }
+                Divider(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(1.dp)
+                        .padding(start = 36.dp, end = 36.dp)
                 )
-            )
-            Text(
-                text = stringResource(Res.string.adaptiveTheme),
-                style = MaterialTheme.typography.body2,
-                textAlign = TextAlign.Center
-            )
+                RadioButtonIcon(
+                    stringResource(Res.string.themeDark),
+                    false,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = 20.dp)
+                ) {
+
+                }
+                Divider(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(1.dp)
+                        .padding(start = 36.dp, end = 36.dp)
+                )
+                RadioButtonIcon(
+                    stringResource(Res.string.themeSystem),
+                    true,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = 20.dp)
+                ) {
+
+                }
+            }
         }
+    }
+}
+
+@Composable
+private fun RadioButtonIcon(
+    text: String,
+    selected: Boolean,
+    modifier: Modifier = Modifier,
+    onClick: () -> Unit
+) {
+    Row(
+        modifier = modifier
+    ) {
+        RadioButton(
+            selected = selected,
+            onClick = onClick,
+            modifier = Modifier
+                .size(16.dp)
+                .align(Alignment.CenterVertically)
+        )
+        Spacer(modifier = Modifier.width(16.dp))
+        Text(
+            text = text,
+            style = MaterialTheme.typography.body2,
+            modifier = Modifier.align(Alignment.CenterVertically)
+        )
     }
 }

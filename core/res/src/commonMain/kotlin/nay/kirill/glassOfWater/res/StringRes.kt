@@ -17,6 +17,14 @@ expect val Res.string.plus: Int
 
 expect val Res.string.noStats: Int
 
-expect val Res.string.adaptiveTheme: Int
-
 expect val Res.string.commonError: Int
+
+expect val Res.string.interfaceSettings: Int
+
+expect val Res.string.themeDark: Int
+
+expect val Res.string.themeLight: Int
+
+expect val Res.string.themeSystem: Int
+
+expect val Res.string.themeAdaptive: Int
