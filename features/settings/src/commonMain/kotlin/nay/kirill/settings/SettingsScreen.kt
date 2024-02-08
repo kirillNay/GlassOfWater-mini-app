@@ -38,6 +38,7 @@ import nay.kirill.glassOfWater.res.themeSystem
 import nay.kirill.glassOfWater.res.verticalPadding
 import nay.kirill.glassOfWater.ui.ErrorState
 import nay.kirill.glassOfWater.ui.StatusBar
+import nay.kirill.healthcare.domain.Theme
 
 val settingsScreenModule = screenModule {
     register<SharedScreens.Settings> {
@@ -122,12 +123,12 @@ private fun Content(
             ) {
                 RadioButtonIcon(
                     stringResource(Res.string.themeLight),
-                    false,
+                    state.selectedTheme == Theme.LIGHT,
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(vertical = 20.dp)
                 ) {
-
+                    accept(SettingsEvent.SetTheme(Theme.LIGHT))
                 }
                 Divider(
                     modifier = Modifier
@@ -137,12 +138,12 @@ private fun Content(
                 )
                 RadioButtonIcon(
                     stringResource(Res.string.themeDark),
-                    false,
+                    state.selectedTheme == Theme.DARK,
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(vertical = 20.dp)
                 ) {
-
+                    accept(SettingsEvent.SetTheme(Theme.DARK))
                 }
                 Divider(
                     modifier = Modifier
@@ -152,12 +153,12 @@ private fun Content(
                 )
                 RadioButtonIcon(
                     stringResource(Res.string.themeSystem),
-                    true,
+                    state.selectedTheme == Theme.SYSTEM,
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(vertical = 20.dp)
                 ) {
-
+                    accept(SettingsEvent.SetTheme(Theme.SYSTEM))
                 }
             }
         }

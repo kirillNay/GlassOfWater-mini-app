@@ -4,13 +4,13 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class AppConfig(
-    val isAdaptiveTheme: Boolean,
+    val selectedTheme: Theme,
 ) {
 
     companion object {
 
         val default = AppConfig(
-            isAdaptiveTheme = false
+            selectedTheme = Theme.SYSTEM
         )
 
     }

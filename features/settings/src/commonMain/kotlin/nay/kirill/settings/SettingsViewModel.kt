@@ -26,7 +26,7 @@ class SettingsViewModel(
 
     fun accept(event: SettingsEvent) {
         when (event) {
-            is SettingsEvent.UpdateAdaptiveTheme -> updateAdaptiveTheme()
+            is SettingsEvent.SetTheme -> updateAdaptiveTheme(event)
             is SettingsEvent.Back -> launch {  navigation.back() }
         }
     }
@@ -35,7 +35,7 @@ class SettingsViewModel(
         launch {
             val config = getAppConfigUseCase()
             _state.value = SettingsState.Content(
-                isAdaptiveBoolean = config.isAdaptiveTheme
+                selectedTheme = config.selectedTheme
             )
         }
 
@@ -46,19 +46,15 @@ class SettingsViewModel(
 //            .show()
     }
 
-    private fun updateAdaptiveTheme() {
-        _state.value = _state.value.copyContent { copy(isAdaptiveBoolean = !isAdaptiveBoolean) }
+    private fun updateAdaptiveTheme(event: SettingsEvent.SetTheme) {
+        _state.value = _state.value.copyContent { copy(selectedTheme = event.theme) }
         updateConfig()
     }
 
     private fun updateConfig() {
         (_state.value as? SettingsState.Content)?.let {
             launch {
-                saveAppConfigUseCase(
-                    AppConfig(
-                        isAdaptiveTheme = it.isAdaptiveBoolean
-                    )
-                )
+                saveAppConfigUseCase(AppConfig(selectedTheme = it.selectedTheme))
             }
         }
     }
