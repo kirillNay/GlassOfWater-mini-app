@@ -14,6 +14,7 @@ import androidx.compose.material.Card
 import androidx.compose.material.Divider
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.RadioButton
+import androidx.compose.material.RadioButtonDefaults
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -178,7 +179,8 @@ private fun RadioButtonIcon(
             onClick = onClick,
             modifier = Modifier
                 .size(16.dp)
-                .align(Alignment.CenterVertically)
+                .align(Alignment.CenterVertically),
+            colors = RadioButtonDefaults.colors(selectedColor = MaterialTheme.colors.primary)
         )
         Spacer(modifier = Modifier.width(16.dp))
         Text(
