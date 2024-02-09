@@ -7,7 +7,14 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import nay.kirill.glassOfWater.navigation.Navigation
+import nay.kirill.glassOfWater.res.Res
+import nay.kirill.glassOfWater.res.themeAdaptive
+import nay.kirill.glassOfWater.res.themeDark
+import nay.kirill.glassOfWater.res.themeLight
+import nay.kirill.glassOfWater.res.themeSystem
+import nay.kirill.glassOfWater.ui.theme.isAdaptiveThemeAvailable
 import nay.kirill.healthcare.domain.AppConfig
+import nay.kirill.healthcare.domain.Theme
 import nay.kirill.healthcare.domain.useCases.GetAppConfigUseCase
 import nay.kirill.healthcare.domain.useCases.SaveAppConfigUseCase
 
@@ -31,7 +38,31 @@ class SettingsViewModel(
         launch {
             val config = getAppConfigUseCase()
             _state.value = SettingsState.Content(
-                selectedTheme = config.selectedTheme
+                selectedTheme = config.selectedTheme,
+                listOfThemes = mutableListOf(
+                    ThemeItem(
+                        theme = Theme.LIGHT,
+                        titleId = Res.string.themeLight
+                    ),
+                    ThemeItem(
+                        theme = Theme.DARK,
+                        titleId = Res.string.themeDark
+                    ),
+                    ThemeItem(
+                        theme = Theme.SYSTEM,
+                        titleId = Res.string.themeSystem
+                    ),
+                )
+                    .apply {
+                        if (isAdaptiveThemeAvailable) {
+                            add(
+                                ThemeItem(
+                                    theme = Theme.ADAPTIVE,
+                                    titleId = Res.string.themeAdaptive
+                                )
+                            )
+                        }
+                    }
             )
         }
 
@@ -44,13 +75,13 @@ class SettingsViewModel(
 
     private fun updateAdaptiveTheme(event: SettingsEvent.SetTheme) {
         _state.value = _state.value.copyContent { copy(selectedTheme = event.theme) }
-        updateConfig()
+        updateConfig(theme = event.theme)
     }
 
-    private fun updateConfig() {
+    private fun updateConfig(theme: Theme) {
         (_state.value as? SettingsState.Content)?.let {
             launch {
-                saveAppConfigUseCase(AppConfig(selectedTheme = it.selectedTheme))
+                saveAppConfigUseCase(AppConfig(selectedTheme = theme))
             }
         }
     }

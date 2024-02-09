@@ -7,11 +7,13 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.graphics.toArgb
 import com.kirillNay.telegram.miniapp.compose.TelegramColors
 import com.kirillNay.telegram.miniapp.webApp.ColorScheme
 import com.kirillNay.telegram.miniapp.webApp.EventType
 import com.kirillNay.telegram.miniapp.webApp.webApp
 
+@OptIn(ExperimentalStdlibApi::class)
 @Composable
 actual fun GlassOfWaterTheme(
     theme: UiTheme,
@@ -44,6 +46,10 @@ actual fun GlassOfWaterTheme(
             theme == UiTheme.SYSTEM && webApp.colorScheme == ColorScheme.DARK -> appDarkColors()
             else -> appLightColors()
         }
+    }
+
+    LaunchedEffect(colors.background) {
+        webApp.setHeaderColor("#" + (colors.background.toArgb().toHexString(HexFormat.UpperCase)).drop(2))
     }
 
     MaterialTheme(

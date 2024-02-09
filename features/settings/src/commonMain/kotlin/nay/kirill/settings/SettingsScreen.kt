@@ -121,44 +121,24 @@ private fun Content(
                 modifier = Modifier
                     .padding(horizontal = 32.dp, vertical = 16.dp)
             ) {
-                RadioButtonIcon(
-                    stringResource(Res.string.themeLight),
-                    state.selectedTheme == Theme.LIGHT,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(vertical = 20.dp)
-                ) {
-                    accept(SettingsEvent.SetTheme(Theme.LIGHT))
-                }
-                Divider(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(1.dp)
-                        .padding(start = 36.dp, end = 36.dp)
-                )
-                RadioButtonIcon(
-                    stringResource(Res.string.themeDark),
-                    state.selectedTheme == Theme.DARK,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(vertical = 20.dp)
-                ) {
-                    accept(SettingsEvent.SetTheme(Theme.DARK))
-                }
-                Divider(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(1.dp)
-                        .padding(start = 36.dp, end = 36.dp)
-                )
-                RadioButtonIcon(
-                    stringResource(Res.string.themeSystem),
-                    state.selectedTheme == Theme.SYSTEM,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(vertical = 20.dp)
-                ) {
-                    accept(SettingsEvent.SetTheme(Theme.SYSTEM))
+                state.listOfThemes.forEachIndexed { index, themeItem ->
+                    if (index != 0) {
+                        Divider(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .height(1.dp)
+                                .padding(start = 36.dp, end = 36.dp)
+                        )
+                    }
+                    RadioButtonIcon(
+                        text = stringResource(themeItem.titleId),
+                        selected = themeItem.theme == state.selectedTheme,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(vertical = 20.dp)
+                    ) {
+                        accept(SettingsEvent.SetTheme(themeItem.theme))
+                    }
                 }
             }
         }

@@ -7,4 +7,5 @@ fun Theme.toUi(): UiTheme = when(this) {
     Theme.SYSTEM -> UiTheme.SYSTEM
     Theme.DARK -> UiTheme.DARK
     Theme.LIGHT -> UiTheme.LIGHT
+    Theme.ADAPTIVE -> UiTheme.ADAPTIVE
 }

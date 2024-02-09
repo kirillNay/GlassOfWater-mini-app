@@ -7,7 +7,8 @@ sealed interface SettingsState {
     data object Loading : SettingsState
 
     data class Content(
-        val selectedTheme: Theme
+        val selectedTheme: Theme,
+        val listOfThemes: List<ThemeItem>
     ) : SettingsState
 
     data object Error : SettingsState
@@ -18,3 +19,8 @@ sealed interface SettingsState {
     }
 
 }
+
+data class ThemeItem(
+    val theme: Theme,
+    val titleId: Int
+)
