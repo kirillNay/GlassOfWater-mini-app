@@ -32,13 +32,9 @@ import nay.kirill.glassOfWater.res.horizontalPadding
 import nay.kirill.glassOfWater.res.interfaceSettings
 import nay.kirill.glassOfWater.res.settings
 import nay.kirill.glassOfWater.res.stringResource
-import nay.kirill.glassOfWater.res.themeDark
-import nay.kirill.glassOfWater.res.themeLight
-import nay.kirill.glassOfWater.res.themeSystem
 import nay.kirill.glassOfWater.res.verticalPadding
 import nay.kirill.glassOfWater.ui.ErrorState
 import nay.kirill.glassOfWater.ui.StatusBar
-import nay.kirill.healthcare.domain.Theme
 
 val settingsScreenModule = screenModule {
     register<SharedScreens.Settings> {
