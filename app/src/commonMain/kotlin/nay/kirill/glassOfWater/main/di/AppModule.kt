@@ -1,4 +1,4 @@
-package di
+package nay.kirill.glassOfWater.main.di
 
 import nay.kirill.glassOfWater.counter.GlassOfWaterViewModel
 import nay.kirill.glassOfWater.data.ConfigRepositoryImpl
@@ -7,11 +7,9 @@ import nay.kirill.glassOfWater.navigation.Navigation
 import nay.kirill.glassOfWater.stat.WaterStatisticsViewModel
 import nay.kirill.healthcare.domain.repositories.ConfigRepository
 import nay.kirill.healthcare.domain.repositories.HealthParamsRepository
-import nay.kirill.healthcare.domain.useCases.ClearParamsUseCase
 import nay.kirill.healthcare.domain.useCases.GetAllParamsUseCase
 import nay.kirill.healthcare.domain.useCases.GetAppConfigUseCase
 import nay.kirill.healthcare.domain.useCases.GetTodayParamsUseCase
-import nay.kirill.healthcare.domain.useCases.MockParamsUseCase
 import nay.kirill.healthcare.domain.useCases.ObserveAppConfigUseCase
 import nay.kirill.healthcare.domain.useCases.SaveAppConfigUseCase
 import nay.kirill.healthcare.domain.useCases.UpdateTodayWaterUseCase
@@ -26,8 +24,6 @@ val appModule = module {
     singleOf(::GetTodayParamsUseCase)
     singleOf(::UpdateTodayWaterUseCase)
     singleOf(::GetAllParamsUseCase)
-    singleOf(::ClearParamsUseCase)
-    singleOf(::MockParamsUseCase)
 
     singleOf(::GetAppConfigUseCase)
     singleOf(::SaveAppConfigUseCase)

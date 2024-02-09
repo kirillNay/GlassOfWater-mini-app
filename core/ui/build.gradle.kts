@@ -13,6 +13,9 @@ setupMuliplatformProject(
 
         implementation(project(":core:res"))
     },
+    jsDeps = {
+        implementation(libs.tg.miniApp)
+    },
     androidNamespace = "nay.kirill.glassOfWater.ui"
 )
 

@@ -11,6 +11,4 @@ expect class HealthParamsRepositoryImpl : HealthParamsRepository {
 
     override suspend fun getAllParams(): List<HealthParams>
 
-    override suspend fun clearParams()
-
 }

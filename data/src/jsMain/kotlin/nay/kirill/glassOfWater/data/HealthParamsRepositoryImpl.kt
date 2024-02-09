@@ -2,7 +2,6 @@ package nay.kirill.glassOfWater.data
 
 import com.kirillNay.telegram.miniapp.webApp.webApp
 import kotlinx.serialization.json.Json
-import nay.kirill.glassOfWater.data.ConfigRepositoryImpl.Companion.CONFIG_KEY
 import nay.kirill.healthcare.domain.HealthParams
 import nay.kirill.healthcare.domain.repositories.HealthParamsRepository
 
@@ -27,10 +26,5 @@ actual class HealthParamsRepositoryImpl : HealthParamsRepository {
         .mapNotNull { key ->
             webApp.cloudStorage.getItem(key).mapCatching { Json.decodeFromString(HealthParams.serializer(), it) }.getOrNull()
         }
-
-    actual override suspend fun clearParams() {
-        val keys = webApp.cloudStorage.getKeys().getOrNull().orEmpty().filter { it != CONFIG_KEY }
-        webApp.cloudStorage.removeItems(*keys.toTypedArray())
-    }
 
 }

@@ -1,3 +1,5 @@
+package nay.kirill.glassOfWater.main
+
 import cafe.adriel.voyager.core.registry.ScreenRegistry
 import nay.kirill.glassOfWater.counter.counterScreenModule
 import nay.kirill.glassOfWater.stat.statsScreenModule

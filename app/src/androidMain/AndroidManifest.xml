@@ -3,7 +3,7 @@
     package="nay.kirill.glassOfWater">
 
     <application
-        android:name=".GlassOfWaterApp"
+        android:name=".main.GlassOfWaterApp"
         android:label="@string/app_name"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         android:icon="@mipmap/ic_launcher"
@@ -11,7 +11,7 @@
         android:allowBackup="true">
 
         <activity
-            android:name=".GlassOfWaterActivity"
+            android:name="nay.kirill.glassOfWater.main.GlassOfWaterActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -8,16 +8,12 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import nay.kirill.glassOfWater.navigation.Navigation
 import nay.kirill.healthcare.domain.AppConfig
-import nay.kirill.healthcare.domain.useCases.ClearParamsUseCase
 import nay.kirill.healthcare.domain.useCases.GetAppConfigUseCase
-import nay.kirill.healthcare.domain.useCases.MockParamsUseCase
 import nay.kirill.healthcare.domain.useCases.SaveAppConfigUseCase
 
 class SettingsViewModel(
     private val getAppConfigUseCase: GetAppConfigUseCase,
     private val saveAppConfigUseCase: SaveAppConfigUseCase,
-    private val clearParamsUseCase: ClearParamsUseCase,
-    private val mockParamsUseCase: MockParamsUseCase,
     private val navigation: Navigation
 ) : ScreenModel {
 

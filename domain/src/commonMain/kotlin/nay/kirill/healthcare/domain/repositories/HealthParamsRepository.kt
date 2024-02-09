@@ -10,6 +10,4 @@ interface HealthParamsRepository {
 
     suspend fun getAllParams(): List<HealthParams>
 
-    suspend fun clearParams()
-
 }

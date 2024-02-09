@@ -1,7 +1,6 @@
 package nay.kirill.glassOfWater.data
 
 import android.content.SharedPreferences
-import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import nay.kirill.healthcare.domain.HealthParams
@@ -33,14 +32,6 @@ actual class HealthParamsRepositoryImpl(
                 null
             }
         }
-
-    actual override suspend fun clearParams() {
-        sharedPreferences.all
-            .filter { it.key.contains(HEALTH_PARAMS_KEY) }
-            .onEach {
-                sharedPreferences.edit().remove(it.key).apply()
-            }
-    }
 
     companion object {
 

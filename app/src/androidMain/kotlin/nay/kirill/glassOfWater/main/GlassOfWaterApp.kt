@@ -1,11 +1,11 @@
-package nay.kirill.glassOfWater
+package nay.kirill.glassOfWater.main
 
 import android.app.Application
-import di.appModule
-import di.platformModule
+import nay.kirill.glassOfWater.main.di.appModule
+import nay.kirill.glassOfWater.main.di.platformModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
-import setupNavigation
+import nay.kirill.glassOfWater.main.setupNavigation
 
 class GlassOfWaterApp : Application() {
 
