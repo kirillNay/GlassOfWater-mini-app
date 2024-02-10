@@ -3,6 +3,7 @@ package nay.kirill.glassOfWater.ui
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Icon
@@ -28,10 +29,11 @@ fun StatusBar(
             imageVector = BackIcon,
             contentDescription = "Back",
             modifier = Modifier
-                .size(24.dp)
+                .size(48.dp)
                 .align(Alignment.CenterStart)
                 .clip(RoundedCornerShape(30.dp))
                 .clickable { backAction() }
+                .padding(12.dp)
         )
         Text(
             modifier = Modifier
