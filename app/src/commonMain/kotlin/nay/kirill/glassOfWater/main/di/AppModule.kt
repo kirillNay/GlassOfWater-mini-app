@@ -1,6 +1,6 @@
 package nay.kirill.glassOfWater.main.di
 
-import nay.kirill.glassOfWater.counter.GlassOfWaterViewModel
+import nay.kirill.glassOfWater.counter.WaterCounterViewModel
 import nay.kirill.glassOfWater.data.ConfigRepositoryImpl
 import nay.kirill.glassOfWater.data.HealthParamsRepositoryImpl
 import nay.kirill.glassOfWater.navigation.Navigation
@@ -32,7 +32,7 @@ val appModule = module {
     singleOf(::HealthParamsRepositoryImpl).bind<HealthParamsRepository>()
     singleOf(::ConfigRepositoryImpl).bind<ConfigRepository>()
 
-    factoryOf(::GlassOfWaterViewModel)
+    factoryOf(::WaterCounterViewModel)
     factoryOf(::WaterStatisticsViewModel)
     factoryOf(::SettingsViewModel)
 

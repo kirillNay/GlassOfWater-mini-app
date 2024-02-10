@@ -11,7 +11,7 @@ import androidx.compose.ui.Modifier
 import cafe.adriel.voyager.core.registry.ScreenRegistry
 import cafe.adriel.voyager.navigator.CurrentScreen
 import cafe.adriel.voyager.navigator.Navigator
-import nay.kirill.glassOfWater.counter.GlassOfWaterScreen
+import nay.kirill.glassOfWater.counter.WaterCounterScreen
 import nay.kirill.glassOfWater.navigation.Navigation
 import nay.kirill.glassOfWater.ui.theme.GlassOfWaterTheme
 import nay.kirill.glassOfWater.ui.theme.UiTheme
@@ -32,7 +32,7 @@ internal fun MainScreen(
     }
 
     GlassOfWaterTheme(theme = theme) {
-        Navigator(GlassOfWaterScreen()) { navigator ->
+        Navigator(WaterCounterScreen()) { navigator ->
             LaunchedEffect(true) {
                 get().get<Navigation>().eventsStack.collect { event ->
                     when (event) {

@@ -11,33 +11,33 @@ import nay.kirill.glassOfWater.navigation.SharedScreens
 import nay.kirill.healthcare.domain.useCases.GetTodayParamsUseCase
 import nay.kirill.healthcare.domain.useCases.UpdateTodayWaterUseCase
 
-class GlassOfWaterViewModel(
+class WaterCounterViewModel(
     private val getTodayParamsUseCase: GetTodayParamsUseCase,
     private val updateTodayWaterUseCase: UpdateTodayWaterUseCase,
     private val navigation: Navigation
 ) : ScreenModel {
 
-    private val _state = MutableStateFlow<GlassOfWaterState>(GlassOfWaterState.Loading)
-    val state: StateFlow<GlassOfWaterState> = _state
+    private val _state = MutableStateFlow<WaterCounterState>(WaterCounterState.Loading)
+    val state: StateFlow<WaterCounterState> = _state
 
     init {
         launch {
             val params = getTodayParamsUseCase()
-            _state.value = GlassOfWaterState.Content(params.waterCount)
+            _state.value = WaterCounterState.Content(params.waterCount)
         }
     }
 
-    fun accept(event: CounterEvent) {
+    fun accept(event: WaterCounterEvent) {
         when(event) {
-            is CounterEvent.DecreaseCount -> decreaseCount()
-            is CounterEvent.IncreaseCount -> increaseCount()
-            is CounterEvent.OpenSettings -> navigateToSettings()
-            is CounterEvent.OpenStats -> navigateToStats()
+            is WaterCounterEvent.DecreaseCount -> decreaseCount()
+            is WaterCounterEvent.IncreaseCount -> increaseCount()
+            is WaterCounterEvent.OpenSettings -> navigateToSettings()
+            is WaterCounterEvent.OpenStats -> navigateToStats()
         }
     }
 
     private fun onError(error: Throwable) {
-        _state.value = GlassOfWaterState.Error
+        _state.value = WaterCounterState.Error
     }
 
     private fun increaseCount() {
@@ -63,7 +63,7 @@ class GlassOfWaterViewModel(
     }
 
     private fun updateCount() {
-        (_state.value as? GlassOfWaterState.Content)?.count?.let {
+        (_state.value as? WaterCounterState.Content)?.count?.let {
             launch { updateTodayWaterUseCase(it) }
         }
     }

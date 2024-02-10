@@ -54,26 +54,26 @@ import nay.kirill.glassOfWater.ui.icons.IconStats
 
 val counterScreenModule = screenModule {
     register<SharedScreens.Counter> {
-        GlassOfWaterScreen()
+        WaterCounterScreen()
     }
 }
 
-class GlassOfWaterScreen : Screen {
+class WaterCounterScreen : Screen {
 
     @Composable
     override fun Content() {
-        val viewModel: GlassOfWaterViewModel = getScreenModel()
+        val viewModel: WaterCounterViewModel = getScreenModel()
         val state by viewModel.state.collectAsState()
 
-        GlassOfWater(state, viewModel::accept)
+        WaterCounter(state, viewModel::accept)
     }
 
 }
 
 @Composable
-internal fun GlassOfWater(
-    state: GlassOfWaterState,
-    accept: (CounterEvent) -> Unit
+internal fun WaterCounter(
+    state: WaterCounterState,
+    accept: (WaterCounterEvent) -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -99,8 +99,8 @@ internal fun GlassOfWater(
             contentAlignment = Alignment.Center
         ) {
             when (state) {
-                is GlassOfWaterState.Content -> Content(state, accept)
-                is GlassOfWaterState.Error -> ErrorState(
+                is WaterCounterState.Content -> Content(state, accept)
+                is WaterCounterState.Error -> ErrorState(
                     modifier = Modifier.padding(top = 46.dp)
                 )
 
@@ -112,8 +112,8 @@ internal fun GlassOfWater(
 
 @Composable
 private fun Content(
-    state: GlassOfWaterState.Content,
-    accept: (CounterEvent) -> Unit
+    state: WaterCounterState.Content,
+    accept: (WaterCounterEvent) -> Unit
 ) {
     var isPlaying: Boolean by remember { mutableStateOf(false) }
     val progress by animateFloatAsState(
@@ -145,9 +145,9 @@ private fun Content(
             )
             Spacer(modifier = Modifier.height(24.dp))
             Controllers(
-                onDown = { accept(CounterEvent.DecreaseCount) },
+                onDown = { accept(WaterCounterEvent.DecreaseCount) },
                 onUp = {
-                    accept(CounterEvent.IncreaseCount)
+                    accept(WaterCounterEvent.IncreaseCount)
                     isPlaying = true
                 },
                 isDownEnabled = state.count > 0
@@ -159,7 +159,7 @@ private fun Content(
                 .padding(top = 56.dp)
         ) {
             IconButton(
-                onClick = { accept(CounterEvent.OpenStats) },
+                onClick = { accept(WaterCounterEvent.OpenStats) },
                 modifier = Modifier.align(Alignment.End)
             ) {
                 Box(
@@ -178,7 +178,7 @@ private fun Content(
                 }
             }
             IconButton(
-                onClick = { accept(CounterEvent.OpenSettings) },
+                onClick = { accept(WaterCounterEvent.OpenSettings) },
                 modifier = Modifier.align(Alignment.End)
             ) {
                 Box(

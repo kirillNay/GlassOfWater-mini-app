@@ -7,16 +7,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
-import nay.kirill.glassOfWater.counter.GlassOfWater
-import nay.kirill.glassOfWater.counter.GlassOfWaterState
+import nay.kirill.glassOfWater.counter.WaterCounter
+import nay.kirill.glassOfWater.counter.WaterCounterState
 import nay.kirill.glassOfWater.ui.theme.appLightColors
 
-internal class GlassOfWaterStateProvider : PreviewParameterProvider<GlassOfWaterState> {
+internal class GlassOfWaterStateProvider : PreviewParameterProvider<WaterCounterState> {
 
-    override val values: Sequence<GlassOfWaterState> = sequenceOf(
-        GlassOfWaterState.Loading,
-        GlassOfWaterState.Error,
-        GlassOfWaterState.Content(4)
+    override val values: Sequence<WaterCounterState> = sequenceOf(
+        WaterCounterState.Loading,
+        WaterCounterState.Error,
+        WaterCounterState.Content(4)
     )
 
 }
@@ -25,13 +25,13 @@ internal class GlassOfWaterStateProvider : PreviewParameterProvider<GlassOfWater
 @Composable
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 private fun GlassOfWaterPreview(
-        @PreviewParameter(GlassOfWaterStateProvider::class) state: GlassOfWaterState
+        @PreviewParameter(GlassOfWaterStateProvider::class) state: WaterCounterState
 ) {
     MaterialTheme (
         colors = appLightColors()
     ){
         Scaffold {
-            GlassOfWater(
+            WaterCounter(
                 state = state,
                 accept = {}
             )
