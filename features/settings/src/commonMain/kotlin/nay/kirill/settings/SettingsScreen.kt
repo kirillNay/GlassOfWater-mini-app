@@ -86,9 +86,7 @@ internal fun Settings(
             is SettingsState.Content -> Content(
                 state = state,
                 accept = accept,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 48.dp)
+                modifier = Modifier.fillMaxWidth()
             )
 
             is SettingsState.Error -> ErrorState(
