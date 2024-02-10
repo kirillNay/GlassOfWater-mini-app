@@ -21,6 +21,8 @@ expect val Res.string.commonError: Int
 
 expect val Res.string.interfaceSettings: Int
 
+expect val Res.string.applicationSettings: Int
+
 expect val Res.string.themeDark: Int
 
 expect val Res.string.themeLight: Int

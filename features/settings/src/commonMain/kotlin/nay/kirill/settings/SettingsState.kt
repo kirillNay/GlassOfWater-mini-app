@@ -8,6 +8,7 @@ sealed interface SettingsState {
 
     data class Content(
         val selectedTheme: Theme,
+        val dailyGoal: Int,
         val listOfThemes: List<ThemeItem>
     ) : SettingsState
 

@@ -12,4 +12,5 @@
     <string name="themeDark">Dark theme</string>
     <string name="themeSystem">System theme</string>
     <string name="themeAdaptive">Adaptive design</string>
+    <string name="applicationSettings">Daily goal of glasses</string>
 </resources>

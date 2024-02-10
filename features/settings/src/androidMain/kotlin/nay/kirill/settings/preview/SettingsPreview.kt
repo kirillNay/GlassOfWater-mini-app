@@ -23,6 +23,7 @@ internal class SettingsStateProvider : PreviewParameterProvider<SettingsState> {
         SettingsState.Loading,
         SettingsState.Content(
             selectedTheme = Theme.SYSTEM,
+            dailyGoal = 4,
             listOf(
                 ThemeItem(
                     theme = Theme.LIGHT,

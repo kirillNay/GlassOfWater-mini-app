@@ -8,4 +8,12 @@ sealed interface SettingsEvent {
 
     data object Back : SettingsEvent
 
+    sealed interface DailyGoal : SettingsEvent {
+
+        data object Up : DailyGoal
+
+        data object Down : DailyGoal
+
+    }
+
 }

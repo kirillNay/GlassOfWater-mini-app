@@ -10,6 +10,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Card
 import androidx.compose.material.Divider
 import androidx.compose.material.MaterialTheme
@@ -27,9 +29,12 @@ import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.koin.getScreenModel
 import nay.kirill.glassOfWater.navigation.SharedScreens
 import nay.kirill.glassOfWater.res.Res
+import nay.kirill.glassOfWater.res.applicationSettings
 import nay.kirill.glassOfWater.res.dimenRes
 import nay.kirill.glassOfWater.res.horizontalPadding
 import nay.kirill.glassOfWater.res.interfaceSettings
+import nay.kirill.glassOfWater.res.minus
+import nay.kirill.glassOfWater.res.plus
 import nay.kirill.glassOfWater.res.settings
 import nay.kirill.glassOfWater.res.stringResource
 import nay.kirill.glassOfWater.res.verticalPadding
@@ -102,16 +107,8 @@ private fun Content(
     modifier: Modifier = Modifier
 ) {
     Column(modifier = modifier) {
-        Text(
-            text = stringResource(Res.string.interfaceSettings),
-            style = MaterialTheme.typography.body1
-        )
-        Spacer(modifier = Modifier.height(24.dp))
-        Card(
-            modifier = Modifier
-                .fillMaxWidth(),
-            shape = RoundedCornerShape(30.dp),
-            elevation = 4.dp
+        SettingsItem(
+            title = stringResource(Res.string.interfaceSettings)
         ) {
             Column(
                 modifier = Modifier
@@ -138,6 +135,83 @@ private fun Content(
                 }
             }
         }
+        Spacer(modifier = Modifier.height(36.dp))
+        SettingsItem(
+            title = stringResource(Res.string.applicationSettings)
+        ) {
+            Row(
+                modifier = Modifier.padding(vertical = 16.dp, horizontal = 32.dp)
+            ) {
+                Text(
+                    text = state.dailyGoal.toString(),
+                    style = MaterialTheme.typography.body2,
+                    modifier = Modifier.align(Alignment.CenterVertically)
+                )
+                Column(
+                    modifier = Modifier.padding(start = 24.dp)
+                ) {
+                    ControlButton(
+                        isEnabled = true,
+                        text = stringResource(Res.string.plus),
+                    ) {
+                        accept(SettingsEvent.DailyGoal.Up)
+                    }
+                    Spacer(modifier = Modifier.height(12.dp))
+                    ControlButton(
+                        isEnabled = state.dailyGoal > 0,
+                        text = stringResource(Res.string.minus),
+                    ) {
+                        accept(SettingsEvent.DailyGoal.Down)
+                    }
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun SettingsItem(
+    title: String,
+    content: @Composable () -> Unit
+) {
+    Text(
+        text = title,
+        style = MaterialTheme.typography.body1
+    )
+    Spacer(modifier = Modifier.height(24.dp))
+    Card(
+        modifier = Modifier
+            .fillMaxWidth(),
+        shape = RoundedCornerShape(30.dp),
+        elevation = 4.dp
+    ) {
+        content()
+    }
+}
+
+@Composable
+private fun ControlButton(
+    modifier: Modifier = Modifier,
+    isEnabled: Boolean,
+    text: String,
+    onClick: () -> Unit
+) {
+    Button(
+        modifier = modifier
+            .height(38.dp)
+            .width(38.dp),
+        onClick = onClick,
+        colors = ButtonDefaults.buttonColors(
+            backgroundColor = MaterialTheme.colors.primary
+        ),
+        shape = RoundedCornerShape(16.dp),
+        enabled = isEnabled
+    ) {
+        Text(
+            modifier = Modifier.align(Alignment.CenterVertically),
+            text = text,
+            style = MaterialTheme.typography.button
+        )
     }
 }
 

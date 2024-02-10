@@ -28,3 +28,5 @@ actual val Res.string.themeDark: Int get() = R.string.themeDark
 actual val Res.string.themeSystem: Int get() = R.string.themeSystem
 
 actual val Res.string.themeAdaptive: Int get() = R.string.themeAdaptive
+
+actual val Res.string.applicationSettings: Int get() = R.string.applicationSettings

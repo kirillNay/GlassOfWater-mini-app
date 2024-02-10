@@ -31,6 +31,8 @@ class SettingsViewModel(
         when (event) {
             is SettingsEvent.SetTheme -> updateAdaptiveTheme(event)
             is SettingsEvent.Back -> launch {  navigation.back() }
+            is SettingsEvent.DailyGoal.Up -> increaseDailyGoal()
+            is SettingsEvent.DailyGoal.Down -> decreaseDailyGoal()
         }
     }
 
@@ -39,6 +41,7 @@ class SettingsViewModel(
             val config = getAppConfigUseCase()
             _state.value = SettingsState.Content(
                 selectedTheme = config.selectedTheme,
+                dailyGoal = config.dailyGoal,
                 listOfThemes = mutableListOf(
                     ThemeItem(
                         theme = Theme.LIGHT,
@@ -75,13 +78,28 @@ class SettingsViewModel(
 
     private fun updateAdaptiveTheme(event: SettingsEvent.SetTheme) {
         _state.value = _state.value.copyContent { copy(selectedTheme = event.theme) }
-        updateConfig(theme = event.theme)
+        updateConfig()
     }
 
-    private fun updateConfig(theme: Theme) {
+    private fun increaseDailyGoal() {
+        _state.value = _state.value.copyContent { copy(dailyGoal = dailyGoal + 1) }
+        updateConfig()
+    }
+
+    private fun decreaseDailyGoal() {
+        _state.value = _state.value.copyContent { copy(dailyGoal = dailyGoal - 1) }
+        updateConfig()
+    }
+
+    private fun updateConfig() {
         (_state.value as? SettingsState.Content)?.let {
             launch {
-                saveAppConfigUseCase(AppConfig(selectedTheme = theme))
+                saveAppConfigUseCase(
+                    AppConfig(
+                        selectedTheme = it.selectedTheme,
+                        dailyGoal = it.dailyGoal
+                    )
+                )
             }
         }
     }

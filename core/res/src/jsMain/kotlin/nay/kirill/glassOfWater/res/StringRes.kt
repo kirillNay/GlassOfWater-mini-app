@@ -37,6 +37,9 @@ actual val Res.string.commonError: Int get() = _commonError
 private val _interfaceSettings = lastId++
 actual val Res.string.interfaceSettings: Int get() = _interfaceSettings
 
+private val _applicationSettings = lastId++
+actual val Res.string.applicationSettings: Int get() = _applicationSettings
+
 private val _themeDark = lastId++
 actual val Res.string.themeDark: Int get() = _themeDark
 

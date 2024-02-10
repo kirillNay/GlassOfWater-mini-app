@@ -10,4 +10,5 @@
     <string name="themeDark">Темная тема</string>
     <string name="themeSystem">Системная тема</string>
     <string name="themeAdaptive">Адаптиваная тема</string>
+    <string name="applicationSettings">Цель стаканов на день</string>
 </resources>
