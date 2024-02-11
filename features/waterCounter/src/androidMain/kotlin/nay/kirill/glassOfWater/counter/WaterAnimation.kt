@@ -10,13 +10,22 @@ import com.airbnb.lottie.compose.rememberLottieComposition
 import nay.kirill.glassOfWater.counter.ui.LottieAnimationSource
 
 @Composable
-actual fun WaterAnimation(modifier: Modifier, progress: Float) {
+actual fun WaterAnimation(
+    modifier: Modifier,
+    progress: Float
+) {
+    val color = if (progress == 1F) {
+        MaterialTheme.colors.secondary
+    } else {
+        MaterialTheme.colors.primary
+    }
+
     val composition by rememberLottieComposition(
         LottieCompositionSpec.JsonString(
             LottieAnimationSource.createJson(
-                r = MaterialTheme.colors.primary.red.toString(),
-                g = MaterialTheme.colors.primary.green.toString(),
-                b = MaterialTheme.colors.primary.blue.toString()
+                r = color.red.toString(),
+                g = color.green.toString(),
+                b = color.blue.toString()
             )
         )
     )

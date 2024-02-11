@@ -11,4 +11,5 @@
     <string name="themeSystem">Системная тема</string>
     <string name="themeAdaptive">Адаптиваная тема</string>
     <string name="applicationSettings">Цель стаканов на день</string>
+    <string name="mainTitle">Ваш счетчик воды</string>
 </resources>

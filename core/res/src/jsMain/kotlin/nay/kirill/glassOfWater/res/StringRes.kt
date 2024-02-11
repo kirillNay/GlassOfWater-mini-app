@@ -16,6 +16,9 @@ private var lastId = currentNanoTime().toInt()
 private val _appName = lastId++
 actual val Res.string.appName: Int get() = _appName
 
+private val _mainTitle = lastId++
+actual val Res.string.mainTitle: Int get() = _mainTitle
+
 private val _settings = lastId++
 actual val Res.string.settings: Int get() = _settings
 

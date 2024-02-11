@@ -36,7 +36,7 @@ fun StatusBar(
             modifier = Modifier
                 .align(Alignment.Center),
             text = text,
-            style = MaterialTheme.typography.h1
+            style = MaterialTheme.typography.h2
         )
     }
 }

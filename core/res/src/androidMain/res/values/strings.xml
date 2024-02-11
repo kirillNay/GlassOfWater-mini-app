@@ -13,4 +13,5 @@
     <string name="themeSystem">System theme</string>
     <string name="themeAdaptive">Adaptive design</string>
     <string name="applicationSettings">Daily goal of glasses</string>
+    <string name="mainTitle">Your water counter</string>
 </resources>

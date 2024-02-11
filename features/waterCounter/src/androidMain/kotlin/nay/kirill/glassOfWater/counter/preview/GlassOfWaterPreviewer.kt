@@ -16,7 +16,7 @@ internal class GlassOfWaterStateProvider : PreviewParameterProvider<WaterCounter
     override val values: Sequence<WaterCounterState> = sequenceOf(
         WaterCounterState.Loading,
         WaterCounterState.Error,
-        WaterCounterState.Content(4)
+        WaterCounterState.Content(4, 6)
     )
 
 }

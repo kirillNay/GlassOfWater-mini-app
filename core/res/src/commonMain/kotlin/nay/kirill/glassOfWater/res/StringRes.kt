@@ -7,6 +7,8 @@ expect fun stringResource(id: Int): String
 
 expect val Res.string.appName: Int
 
+expect val Res.string.mainTitle: Int
+
 expect val Res.string.settings: Int
 
 expect val Res.string.stats: Int

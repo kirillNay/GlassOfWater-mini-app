@@ -1,10 +1,19 @@
 package nay.kirill.glassOfWater.counter
 
+import kotlin.math.min
+
 sealed interface WaterCounterState {
 
     data class Content(
-        val count: Int
-    ) : WaterCounterState
+        val count: Int,
+        val dailyGoal: Int
+    ) : WaterCounterState {
+
+        val progress = min(1F, count.toFloat() / dailyGoal)
+
+        val isComplete = count >= dailyGoal
+
+    }
 
     data object Loading : WaterCounterState
 

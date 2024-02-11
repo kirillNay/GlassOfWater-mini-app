@@ -9,10 +9,12 @@ import kotlinx.coroutines.launch
 import nay.kirill.glassOfWater.navigation.Navigation
 import nay.kirill.glassOfWater.navigation.SharedScreens
 import nay.kirill.healthcare.domain.useCases.GetTodayParamsUseCase
+import nay.kirill.healthcare.domain.useCases.ObserveAppConfigUseCase
 import nay.kirill.healthcare.domain.useCases.UpdateTodayWaterUseCase
 
 class WaterCounterViewModel(
     private val getTodayParamsUseCase: GetTodayParamsUseCase,
+    private val observeAppConfigUseCase: ObserveAppConfigUseCase,
     private val updateTodayWaterUseCase: UpdateTodayWaterUseCase,
     private val navigation: Navigation
 ) : ScreenModel {
@@ -22,8 +24,13 @@ class WaterCounterViewModel(
 
     init {
         launch {
-            val params = getTodayParamsUseCase()
-            _state.value = WaterCounterState.Content(params.waterCount)
+            observeAppConfigUseCase().collect { config ->
+                val params = getTodayParamsUseCase()
+                _state.value = WaterCounterState.Content(
+                    count = params.waterCount,
+                    dailyGoal = config.dailyGoal
+                )
+            }
         }
     }
 

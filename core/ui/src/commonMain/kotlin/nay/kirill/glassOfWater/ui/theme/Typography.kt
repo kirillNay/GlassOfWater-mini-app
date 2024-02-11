@@ -13,6 +13,11 @@ fun appTypography(
 ) = Typography(
     h1 = TextStyle(
         color = colors.onBackground,
+        fontSize = 20.sp,
+        fontWeight = FontWeight.SemiBold
+    ),
+    h2 = TextStyle(
+        color = colors.onBackground,
         fontSize = 18.sp,
         fontWeight = FontWeight.SemiBold
     ),
@@ -25,5 +30,10 @@ fun appTypography(
         color = colors.onBackground,
         fontSize = 15.sp,
         fontWeight = FontWeight.Normal
+    ),
+    caption = TextStyle(
+        color = colors.onBackground,
+        fontSize = 14.sp,
+        fontWeight = FontWeight.SemiBold
     )
 )

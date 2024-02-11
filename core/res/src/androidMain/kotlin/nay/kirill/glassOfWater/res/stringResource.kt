@@ -30,3 +30,5 @@ actual val Res.string.themeSystem: Int get() = R.string.themeSystem
 actual val Res.string.themeAdaptive: Int get() = R.string.themeAdaptive
 
 actual val Res.string.applicationSettings: Int get() = R.string.applicationSettings
+
+actual val Res.string.mainTitle: Int get() = R.string.mainTitle

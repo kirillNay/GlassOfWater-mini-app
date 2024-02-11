@@ -19,6 +19,7 @@ fun buildStingsResources(
             strs[rs.themeDark] = "Темная тема"
             strs[rs.themeSystem] = "Системная тема"
             strs[rs.themeAdaptive] = "Адаптивная тема"
+            strs[rs.mainTitle] = "Ваш счетчик воды"
         }
         else -> {
             strs[rs.appName] = "Glasses Of Water"
@@ -32,6 +33,7 @@ fun buildStingsResources(
             strs[rs.themeDark] = "Dark theme"
             strs[rs.themeSystem] = "System theme"
             strs[rs.themeAdaptive] = "Adaptive theme"
+            strs[rs.mainTitle] = "Your water counter"
         }
     }
     strs[rs.minus] = "-"
