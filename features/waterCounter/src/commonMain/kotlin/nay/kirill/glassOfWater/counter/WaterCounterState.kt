@@ -11,8 +11,6 @@ sealed interface WaterCounterState {
 
         val progress = min(1F, count.toFloat() / dailyGoal)
 
-        val isComplete = count >= dailyGoal
-
     }
 
     data object Loading : WaterCounterState
