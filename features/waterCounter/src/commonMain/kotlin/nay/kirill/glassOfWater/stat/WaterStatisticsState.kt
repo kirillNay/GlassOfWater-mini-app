@@ -1,7 +1,5 @@
 package nay.kirill.glassOfWater.stat
 
-import nay.kirill.healthcare.domain.HealthParams
-
 sealed interface WaterStatisticsState {
 
     data object Loading : WaterStatisticsState

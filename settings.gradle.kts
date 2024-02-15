@@ -21,6 +21,5 @@ include(
     ":core:navigation",
 
     ":domain",
-    ":data",
-    ":utils"
+    ":data"
 )

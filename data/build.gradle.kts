@@ -11,7 +11,6 @@ setupMuliplatformProject(
     platforms = listOf(Platform.JS, Platform.ANDROID),
     commonDeps = {
         implementation(project(":domain"))
-        implementation(project(":utils"))
 
         implementation(libs.kotlinx.datetime)
         implementation(libs.kotlinx.coroutines.core)

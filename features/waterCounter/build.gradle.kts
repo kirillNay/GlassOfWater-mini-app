@@ -16,7 +16,6 @@ setupMuliplatformProject(
         implementation(project(":core:navigation"))
 
         implementation(project(":domain"))
-        implementation(project(":utils"))
 
         implementation(libs.koin.core)
         implementation(libs.koin.compose)
