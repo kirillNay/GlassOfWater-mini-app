@@ -33,7 +33,12 @@ fun appTypography(
     ),
     caption = TextStyle(
         color = colors.onBackground,
-        fontSize = 14.sp,
-        fontWeight = FontWeight.SemiBold
+        fontSize = 10.sp,
+        fontWeight = FontWeight.Normal
+    ),
+    overline = TextStyle(
+        color = colors.onBackground.copy(alpha = 0.5F),
+        fontSize = 7.sp,
+        fontWeight = FontWeight.Bold
     )
 )

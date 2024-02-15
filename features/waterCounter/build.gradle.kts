@@ -16,12 +16,15 @@ setupMuliplatformProject(
         implementation(project(":core:navigation"))
 
         implementation(project(":domain"))
+        implementation(project(":utils"))
 
         implementation(libs.koin.core)
         implementation(libs.koin.compose)
 
         implementation(libs.voyager.koin)
         implementation(libs.voyager.navigator)
+
+        implementation(libs.kotlinx.datetime)
     },
     jsDeps = {
         implementation(libs.tg.miniApp)

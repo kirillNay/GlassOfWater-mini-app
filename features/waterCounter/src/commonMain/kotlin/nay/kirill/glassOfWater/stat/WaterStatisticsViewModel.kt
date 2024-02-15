@@ -8,10 +8,12 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import nay.kirill.glassOfWater.navigation.Navigation
 import nay.kirill.healthcare.domain.useCases.GetAllParamsUseCase
+import nay.kirill.healthcare.domain.useCases.GetAppConfigUseCase
 import kotlin.coroutines.CoroutineContext
 
 class WaterStatisticsViewModel(
     private val getAllParamsUseCase: GetAllParamsUseCase,
+    private val getAppConfigUseCase: GetAppConfigUseCase,
     private val navigation: Navigation
 ) : ScreenModel {
 
@@ -26,16 +28,37 @@ class WaterStatisticsViewModel(
 //            .show()
 
         launch {
-            val params = getAllParamsUseCase()
-                .sortedBy { it.date }
-                .takeLast(5)
-                .map { it.copy(date = it.date.drop(5).replace('-', '/')) }
+            val params = getAllParamsUseCase().params
+
+            val appConfig = getAppConfigUseCase()
+
             if (params.isEmpty()) {
                 _state.value = WaterStatisticsState.Empty
             } else {
-                _state.value = WaterStatisticsState.Content(params)
+                _state.value = WaterStatisticsState.Content(
+                    statItems = params.map {
+                        WaterStatisticsState.StatItem(
+                            date = "${it.date.monthNumber} / ${it.date.dayOfMonth}",
+                            count = it.waterCount,
+                            isAccomplished = it.waterCount >= appConfig.dailyGoal
+                        )
+                    },
+                    maxIndex = params.maxOf { it.waterCount },
+                    midIndex = params.maxOf { it.waterCount } / 2,
+                    minIndex = 0
+                )
             }
         }
+    }
+
+    fun reduce(event: WaterStatisticsEvent) {
+        when (event) {
+            is WaterStatisticsEvent.Back -> back()
+        }
+    }
+
+    private fun back() {
+        navigation.back()
     }
 
     override fun onDispose() {

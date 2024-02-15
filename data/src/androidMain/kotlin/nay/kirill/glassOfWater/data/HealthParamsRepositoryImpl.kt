@@ -1,6 +1,7 @@
 package nay.kirill.glassOfWater.data
 
 import android.content.SharedPreferences
+import kotlinx.datetime.LocalDate
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import nay.kirill.healthcare.domain.HealthParams
@@ -10,14 +11,14 @@ actual class HealthParamsRepositoryImpl(
     private val sharedPreferences: SharedPreferences
 ) : HealthParamsRepository {
 
-    actual override suspend fun getParamByDate(date: String): Result<HealthParams> = runCatching {
+    actual override suspend fun getParamByDate(date: LocalDate): Result<HealthParams> = runCatching {
         sharedPreferences
             .getString("$HEALTH_PARAMS_KEY:$date", null)
             ?.let { Json.decodeFromString<HealthParams>(it) }
             ?: HealthParams(0, date)
     }
 
-    actual override suspend fun setParam(date: String, params: HealthParams) {
+    actual override suspend fun setParam(date: LocalDate, params: HealthParams) {
         sharedPreferences.edit()
             .putString("$HEALTH_PARAMS_KEY:$date", Json.encodeToString(params))
             .apply()

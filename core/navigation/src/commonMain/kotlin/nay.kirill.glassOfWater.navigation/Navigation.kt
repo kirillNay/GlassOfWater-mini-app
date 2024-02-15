@@ -4,14 +4,16 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 
 class Navigation {
 
-    val eventsStack = MutableSharedFlow<Event>()
+    val eventsStack = MutableSharedFlow<Event>(
+        extraBufferCapacity = 1
+    )
 
-    suspend fun navigateTo(screen: SharedScreens) {
-        eventsStack.emit(Event.Forward(screen))
+    fun navigateTo(screen: SharedScreens) {
+        eventsStack.tryEmit(Event.Forward(screen))
     }
 
-    suspend fun back() {
-        eventsStack.emit(Event.Back)
+    fun back() {
+        eventsStack.tryEmit(Event.Back)
     }
 
     sealed interface Event {
