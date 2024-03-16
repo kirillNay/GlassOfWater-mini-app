@@ -20,6 +20,13 @@ fun buildStingsResources(
             strs[rs.themeSystem] = "Системная тема"
             strs[rs.themeAdaptive] = "Адаптивная тема"
             strs[rs.mainTitle] = "Ваш счетчик воды"
+            strs[rs.monday] = "Пн"
+            strs[rs.tuesday] = "Вт"
+            strs[rs.wednesday] = "Ср"
+            strs[rs.thursday] = "Чт"
+            strs[rs.friday] = "Пт"
+            strs[rs.saturday] = "Сб"
+            strs[rs.sunday] = "Вс"
         }
         else -> {
             strs[rs.appName] = "Glasses Of Water"
@@ -34,6 +41,13 @@ fun buildStingsResources(
             strs[rs.themeSystem] = "System theme"
             strs[rs.themeAdaptive] = "Adaptive theme"
             strs[rs.mainTitle] = "Your water counter"
+            strs[rs.monday] = "Mon"
+            strs[rs.tuesday] = "Tue"
+            strs[rs.wednesday] = "Wed"
+            strs[rs.thursday] = "Thu"
+            strs[rs.friday] = "Fri"
+            strs[rs.saturday] = "Sat"
+            strs[rs.sunday] = "Sun"
         }
     }
     strs[rs.minus] = "-"

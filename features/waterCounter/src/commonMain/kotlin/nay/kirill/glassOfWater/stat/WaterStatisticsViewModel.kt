@@ -6,6 +6,7 @@ import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import kotlinx.datetime.LocalDate
 import nay.kirill.glassOfWater.navigation.Navigation
 import nay.kirill.healthcare.domain.useCases.GetAllParamsUseCase
 import nay.kirill.healthcare.domain.useCases.GetAppConfigUseCase
@@ -27,25 +28,37 @@ class WaterStatisticsViewModel(
 //            }
 //            .show()
 
+        loadParams(0)
+    }
+
+    private fun loadParams(week: Int) {
         launch {
-            val params = getAllParamsUseCase().params
+            val page = getAllParamsUseCase(week)
+            val params = page.params
 
             val appConfig = getAppConfigUseCase()
 
             if (params.isEmpty()) {
                 _state.value = WaterStatisticsState.Empty
             } else {
+                val maxIndex = params.maxOf { it.waterCount }.takeIf { it > 1 } ?: appConfig.dailyGoal
+
                 _state.value = WaterStatisticsState.Content(
                     statItems = params.map {
                         WaterStatisticsState.StatItem(
-                            date = "${it.date.monthNumber} / ${it.date.dayOfMonth}",
+                            dayOfWeek = it.date.dayOfWeek.ordinal,
                             count = it.waterCount,
                             isAccomplished = it.waterCount >= appConfig.dailyGoal
                         )
                     },
-                    maxIndex = params.maxOf { it.waterCount },
-                    midIndex = params.maxOf { it.waterCount } / 2,
-                    minIndex = 0
+                    maxIndex = maxIndex,
+                    midIndex = maxIndex / 2,
+                    minIndex = 0,
+                    isNextWeekAvailable = page.weekNumber != 0,
+                    isPrevWeekAvailable = page.totalWeeks > page.weekNumber + 1,
+                    weekText = params.firstOrNull()?.date?.toPrettyDate().orEmpty() + "    —    " +
+                            params.lastOrNull()?.date?.toPrettyDate().orEmpty(),
+                    weekNumber = page.weekNumber
                 )
             }
         }
@@ -54,6 +67,12 @@ class WaterStatisticsViewModel(
     fun reduce(event: WaterStatisticsEvent) {
         when (event) {
             is WaterStatisticsEvent.Back -> back()
+            is WaterStatisticsEvent.Week.Increase -> (state.value as? WaterStatisticsState.Content)?.let {
+                loadParams(it.weekNumber - 1)
+            }
+            is WaterStatisticsEvent.Week.Decrease -> (state.value as? WaterStatisticsState.Content)?.let {
+                loadParams(it.weekNumber + 1)
+            }
         }
     }
 
@@ -79,4 +98,6 @@ class WaterStatisticsViewModel(
     private fun onError(context: CoroutineContext, error: Throwable) {
         _state.value = WaterStatisticsState.Empty
     }
+
+    private fun LocalDate.toPrettyDate() = "${dayOfMonth.toString().padStart(2, '0')}.${monthNumber.toString().padStart(2, '0')}"
 }

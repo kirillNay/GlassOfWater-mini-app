@@ -5,6 +5,7 @@ import androidx.compose.material.Typography
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
 
 @Composable
@@ -21,10 +22,15 @@ fun appTypography(
         fontSize = 18.sp,
         fontWeight = FontWeight.SemiBold
     ),
-    body1 = TextStyle(
+    h3 = TextStyle(
         color = colors.onBackground,
         fontSize = 17.sp,
         fontWeight = FontWeight.SemiBold
+    ),
+    h4 = TextStyle(
+        color = colors.onBackground.copy(alpha = 0.5F),
+        fontSize = 14.sp,
+        fontWeight = FontWeight.Light
     ),
     body2 = TextStyle(
         color = colors.onBackground,
@@ -38,7 +44,8 @@ fun appTypography(
     ),
     overline = TextStyle(
         color = colors.onBackground.copy(alpha = 0.5F),
-        fontSize = 7.sp,
-        fontWeight = FontWeight.Bold
+        fontSize = 9.sp,
+        fontWeight = FontWeight.Bold,
+        textAlign = TextAlign.Center
     )
 )

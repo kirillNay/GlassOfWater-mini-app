@@ -12,4 +12,11 @@
     <string name="themeAdaptive">Адаптиваная тема</string>
     <string name="applicationSettings">Цель стаканов на день</string>
     <string name="mainTitle">Ваш счетчик воды</string>
+    <string name="monday">Пн</string>
+    <string name="tuesday">Вт</string>
+    <string name="wednesday">Ср</string>
+    <string name="thursday">Чт</string>
+    <string name="friday">Пт</string>
+    <string name="saturday">Сб</string>
+    <string name="sunday">Вс</string>
 </resources>

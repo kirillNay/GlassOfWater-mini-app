@@ -174,7 +174,7 @@ private fun SettingsItem(
 ) {
     Text(
         text = title,
-        style = MaterialTheme.typography.body1
+        style = MaterialTheme.typography.h3
     )
     Spacer(modifier = Modifier.height(24.dp))
     Card(

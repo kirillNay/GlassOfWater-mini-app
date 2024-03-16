@@ -14,4 +14,11 @@
     <string name="themeAdaptive">Adaptive design</string>
     <string name="applicationSettings">Daily goal of glasses</string>
     <string name="mainTitle">Your water counter</string>
+    <string name="monday">Mon</string>
+    <string name="tuesday">Tue</string>
+    <string name="wednesday">Wed</string>
+    <string name="thursday">Thu</string>
+    <string name="friday">Fri</string>
+    <string name="saturday">Sat</string>
+    <string name="sunday">Sun</string>
 </resources>

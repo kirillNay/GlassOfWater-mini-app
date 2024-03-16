@@ -8,13 +8,17 @@ sealed interface WaterStatisticsState {
         val statItems: List<StatItem>,
         val maxIndex: Int,
         val midIndex: Int,
-        val minIndex: Int
+        val minIndex: Int,
+        val isNextWeekAvailable: Boolean,
+        val isPrevWeekAvailable: Boolean,
+        val weekNumber: Int,
+        val weekText: String
     ) : WaterStatisticsState
 
     data object Empty : WaterStatisticsState
 
     data class StatItem(
-        val date: String,
+        val dayOfWeek: Int,
         val count: Int,
         val isAccomplished: Boolean
     )

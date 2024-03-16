@@ -32,3 +32,17 @@ actual val Res.string.themeAdaptive: Int get() = R.string.themeAdaptive
 actual val Res.string.applicationSettings: Int get() = R.string.applicationSettings
 
 actual val Res.string.mainTitle: Int get() = R.string.mainTitle
+
+actual val Res.string.monday: Int get() = R.string.monday
+
+actual val Res.string.tuesday: Int get() = R.string.tuesday
+
+actual val Res.string.wednesday: Int get() = R.string.wednesday
+
+actual val Res.string.thursday: Int get() = R.string.thursday
+
+actual val Res.string.friday: Int get() = R.string.friday
+
+actual val Res.string.saturday: Int get() = R.string.saturday
+
+actual val Res.string.sunday: Int get() = R.string.sunday

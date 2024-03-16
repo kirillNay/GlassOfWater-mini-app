@@ -32,3 +32,17 @@ expect val Res.string.themeLight: Int
 expect val Res.string.themeSystem: Int
 
 expect val Res.string.themeAdaptive: Int
+
+expect val Res.string.monday: Int
+
+expect val Res.string.tuesday: Int
+
+expect val Res.string.wednesday: Int
+
+expect val Res.string.thursday: Int
+
+expect val Res.string.friday: Int
+
+expect val Res.string.saturday: Int
+
+expect val Res.string.sunday: Int

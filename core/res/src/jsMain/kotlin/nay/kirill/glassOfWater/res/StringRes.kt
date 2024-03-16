@@ -54,3 +54,24 @@ actual val Res.string.themeAdaptive: Int get() = _adaptiveTheme
 
 private val _systemTheme = lastId++
 actual val Res.string.themeSystem: Int get() = _systemTheme
+
+private val _monday = lastId++
+actual val Res.string.monday: Int get() = _monday
+
+private val _tuesday = lastId++
+actual val Res.string.tuesday: Int get() = _tuesday
+
+private val _wednesday = lastId++
+actual val Res.string.wednesday: Int get() = _wednesday
+
+private val _thursday = lastId++
+actual val Res.string.thursday: Int get() = _thursday
+
+private val _friday = lastId++
+actual val Res.string.friday: Int get() = _friday
+
+private val _saturday = lastId++
+actual val Res.string.saturday: Int get() = _saturday
+
+private val _sunday = lastId++
+actual val Res.string.sunday: Int get() = _sunday
