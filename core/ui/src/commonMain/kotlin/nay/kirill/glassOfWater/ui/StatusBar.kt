@@ -14,23 +14,33 @@ import androidx.compose.ui.unit.dp
 import nay.kirill.glassOfWater.ui.icons.BackIcon
 
 @Composable
-fun StatusBar(
+expect fun StatusBar(
     modifier: Modifier = Modifier,
     text: String,
+    backAction: () -> Unit
+)
+
+@Composable
+internal fun ActualStatusBar(
+    modifier: Modifier = Modifier,
+    text: String,
+    showBackButton: Boolean = true,
     backAction: () -> Unit
 ) {
     Box(
         modifier = modifier
             .fillMaxWidth()
     ) {
-        IconButton(
-            modifier = Modifier.then(Modifier.size(24.dp)),
-            onClick = { backAction() }
-        ) {
-            Icon(
-                imageVector = BackIcon,
-                contentDescription = "Back",
-            )
+        if (showBackButton) {
+            IconButton(
+                modifier = Modifier.then(Modifier.size(24.dp)),
+                onClick = { backAction() }
+            ) {
+                Icon(
+                    imageVector = BackIcon,
+                    contentDescription = "Back",
+                )
+            }
         }
         Text(
             modifier = Modifier
