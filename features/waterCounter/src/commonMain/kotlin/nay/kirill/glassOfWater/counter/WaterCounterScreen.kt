@@ -122,12 +122,58 @@ private fun Content(
                 .fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Spacer(modifier = Modifier.height(20.dp))
-            WaterAnimation(
-                modifier = Modifier.size(250.dp),
-                progress = progress
-            )
-            Spacer(modifier = Modifier.height(74.dp))
+            Spacer(modifier = Modifier.weight(1.5F))
+            Box(
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                WaterAnimation(
+                    modifier = Modifier.size(250.dp).align(Alignment.Center),
+                    progress = progress
+                )
+                Column(
+                    modifier = Modifier.align(Alignment.CenterEnd)
+                ) {
+                    IconButton(
+                        onClick = { accept(WaterCounterEvent.OpenStats) },
+                        modifier = Modifier.align(Alignment.End)
+                    ) {
+                        Box(
+                            modifier = Modifier
+                                .size(36.dp)
+                                .clip(CircleShape)
+                                .background(MaterialTheme.colors.primary),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Icon(
+                                imageVector = IconStats,
+                                contentDescription = "Statistics",
+                                modifier = Modifier.size(18.dp),
+                                tint = MaterialTheme.colors.onPrimary
+                            )
+                        }
+                    }
+                    IconButton(
+                        onClick = { accept(WaterCounterEvent.OpenSettings) },
+                        modifier = Modifier.align(Alignment.End)
+                    ) {
+                        Box(
+                            modifier = Modifier
+                                .size(36.dp)
+                                .clip(CircleShape)
+                                .background(MaterialTheme.colors.primary),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.Settings,
+                                contentDescription = "Settings",
+                                modifier = Modifier.size(18.dp),
+                                tint = MaterialTheme.colors.onPrimary
+                            )
+                        }
+                    }
+                }
+            }
+            Spacer(modifier = Modifier.weight(1F))
             Row {
                 Text(
                     text = state.count.toString(),
@@ -140,56 +186,12 @@ private fun Content(
                     style = MaterialTheme.typography.caption
                 )
             }
-            Spacer(modifier = Modifier.height(32.dp))
+            Spacer(modifier = Modifier.height(18.dp))
             ControlButton(
-                modifier = Modifier.size(64.dp),
+                modifier = Modifier.size(52.dp),
                 text = stringResource(Res.string.plus)
             ) {
                 accept(WaterCounterEvent.IncreaseCount)
-            }
-        }
-        Column(
-            modifier = Modifier
-                .align(Alignment.TopEnd)
-                .padding(top = 56.dp)
-        ) {
-            IconButton(
-                onClick = { accept(WaterCounterEvent.OpenStats) },
-                modifier = Modifier.align(Alignment.End)
-            ) {
-                Box(
-                    modifier = Modifier
-                        .size(36.dp)
-                        .clip(CircleShape)
-                        .background(MaterialTheme.colors.primary),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Icon(
-                        imageVector = IconStats,
-                        contentDescription = "Statistics",
-                        modifier = Modifier.size(18.dp),
-                        tint = MaterialTheme.colors.onPrimary
-                    )
-                }
-            }
-            IconButton(
-                onClick = { accept(WaterCounterEvent.OpenSettings) },
-                modifier = Modifier.align(Alignment.End)
-            ) {
-                Box(
-                    modifier = Modifier
-                        .size(36.dp)
-                        .clip(CircleShape)
-                        .background(MaterialTheme.colors.primary),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Icon(
-                        imageVector = Icons.Default.Settings,
-                        contentDescription = "Settings",
-                        modifier = Modifier.size(18.dp),
-                        tint = MaterialTheme.colors.onPrimary
-                    )
-                }
             }
         }
     }
