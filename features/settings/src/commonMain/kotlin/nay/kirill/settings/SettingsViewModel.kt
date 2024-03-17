@@ -18,7 +18,9 @@ import nay.kirill.healthcare.domain.Theme
 import nay.kirill.healthcare.domain.useCases.GetAppConfigUseCase
 import nay.kirill.healthcare.domain.useCases.SaveAppConfigUseCase
 
-class SettingsViewModel(
+expect class SettingsViewModel : BaseSettingsViewModel
+
+abstract class BaseSettingsViewModel(
     private val getAppConfigUseCase: GetAppConfigUseCase,
     private val saveAppConfigUseCase: SaveAppConfigUseCase,
     private val navigation: Navigation
@@ -68,12 +70,10 @@ class SettingsViewModel(
                     }
             )
         }
+    }
 
-//        webApp.backButton
-//            .onClick {
-//                screenModelScope.launch { navigation.back() }
-//            }
-//            .show()
+    protected fun back() {
+        navigation.back()
     }
 
     private fun updateAdaptiveTheme(event: SettingsEvent.SetTheme) {
@@ -102,15 +102,6 @@ class SettingsViewModel(
                 )
             }
         }
-    }
-
-    override fun onDispose() {
-        super.onDispose()
-//        webApp.backButton
-//            .offClick {
-//                screenModelScope.launch { navigation.back() }
-//            }
-//            .hide()
     }
 
     private fun onError() {

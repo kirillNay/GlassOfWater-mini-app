@@ -12,7 +12,9 @@ import nay.kirill.healthcare.domain.useCases.GetAllParamsUseCase
 import nay.kirill.healthcare.domain.useCases.GetAppConfigUseCase
 import kotlin.coroutines.CoroutineContext
 
-class WaterStatisticsViewModel(
+expect class WaterStatisticsViewModel : BaseWaterStatisticsViewModel
+
+abstract class BaseWaterStatisticsViewModel(
     private val getAllParamsUseCase: GetAllParamsUseCase,
     private val getAppConfigUseCase: GetAppConfigUseCase,
     private val navigation: Navigation
@@ -22,12 +24,6 @@ class WaterStatisticsViewModel(
     val state: StateFlow<WaterStatisticsState> = _state
 
     init {
-//        webApp.backButton
-//            .onClick {
-//                screenModelScope.launch { navigation.back() }
-//            }
-//            .show()
-
         loadParams(0)
     }
 
@@ -76,17 +72,8 @@ class WaterStatisticsViewModel(
         }
     }
 
-    private fun back() {
+    protected fun back() {
         navigation.back()
-    }
-
-    override fun onDispose() {
-        super.onDispose()
-//        webApp.backButton
-//            .offClick {
-//                screenModelScope.launch { navigation.back() }
-//            }
-//            .hide()
     }
 
     private fun launch(block: suspend () -> Unit) {
