@@ -8,6 +8,7 @@ setupMuliplatformProject(
     platforms = listOf(Platform.JS, Platform.ANDROID),
     commonDeps = {
         api(compose.dependencies.runtime)
+        api(compose.dependencies.runtimeSaveable)
 
         implementation(libs.voyager.core)
         implementation(libs.voyager.navigator)
