@@ -7,6 +7,6 @@ class GetAppConfigUseCase(
     private val configRepository: ConfigRepository
 ) {
 
-    suspend operator fun invoke() = configRepository.getConfig().getOrNull() ?: AppConfig.default
+    suspend operator fun invoke(): AppConfig = configRepository.getConfig().getOrNull() ?: AppConfig.default
 
 }

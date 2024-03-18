@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Glasses Of Water</string>
+    <string name="settings">Settings</string>
+    <string name="stats">Statistics</string>
+    <string name="minus" translatable="false">-</string>
+    <string name="plus" translatable="false">+</string>
+    <string name="noStats">Statistics is unavailable</string>
+    <string name="commonError">Something went wrong…</string>
+    <string name="interfaceSettings">Interface</string>
+    <string name="themeLight">Light theme</string>
+    <string name="themeDark">Dark theme</string>
+    <string name="themeSystem">System theme</string>
+    <string name="themeAdaptive">Adaptive design</string>
+    <string name="applicationSettings">Daily goal of glasses</string>
+    <string name="mainTitle">Your water counter</string>
+    <string name="monday">Mon</string>
+    <string name="tuesday">Tue</string>
+    <string name="wednesday">Wed</string>
+    <string name="thursday">Thu</string>
+    <string name="friday">Fri</string>
+    <string name="saturday">Sat</string>
+    <string name="sunday">Sun</string>
+</resources>

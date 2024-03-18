@@ -5,36 +5,40 @@ import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
+import androidx.compose.material.Card
 import androidx.compose.material.CircularProgressIndicator
+import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.drawBehind
-import androidx.compose.ui.geometry.CornerRadius
-import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.geometry.Size
-import androidx.compose.ui.layout.FirstBaseline
-import androidx.compose.ui.layout.HorizontalAlignmentLine
-import androidx.compose.ui.layout.LastBaseline
-import androidx.compose.ui.layout.Layout
-import androidx.compose.ui.platform.LocalDensity
-import androidx.compose.ui.text.ExperimentalTextApi
-import androidx.compose.ui.text.drawText
-import androidx.compose.ui.text.rememberTextMeasurer
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import cafe.adriel.voyager.core.registry.screenModule
+import cafe.adriel.voyager.core.screen.Screen
+import cafe.adriel.voyager.koin.getScreenModel
+import nay.kirill.glassOfWater.navigation.SharedScreens
 import nay.kirill.glassOfWater.res.Res
 import nay.kirill.glassOfWater.res.dimenRes
 import nay.kirill.glassOfWater.res.horizontalPadding
@@ -43,41 +47,62 @@ import nay.kirill.glassOfWater.res.stats
 import nay.kirill.glassOfWater.res.stringResource
 import nay.kirill.glassOfWater.res.verticalPadding
 import nay.kirill.glassOfWater.ui.ErrorState
-import nay.kirill.healthcare.domain.HealthParams
-import kotlin.math.max
-import kotlin.math.roundToInt
+import nay.kirill.glassOfWater.ui.StatusBar
+
+val statsScreenModule = screenModule {
+    register<SharedScreens.Stats> {
+        WaterStatisticsScreen()
+    }
+}
+
+class WaterStatisticsScreen : Screen {
+
+    @Composable
+    override fun Content() {
+        val viewModel: WaterStatisticsViewModel = getScreenModel()
+        val state by viewModel.state.collectAsState()
+
+        WaterStatisticsContent(
+            state = state,
+            accept = viewModel::reduce
+        )
+    }
+
+}
 
 @Composable
-fun WaterStatisticsScreen(
-    viewModel: WaterStatisticsViewModel
+private fun WaterStatisticsContent(
+    state: WaterStatisticsState,
+    accept: (WaterStatisticsEvent) -> Unit
 ) {
-    val state by viewModel.state.collectAsState()
-
     Column(
         modifier = Modifier
-            .fillMaxSize()
-            .padding(
-                horizontal = dimenRes(Res.dimens.horizontalPadding),
-                vertical = dimenRes(Res.dimens.verticalPadding)
-            ),
+            .fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(
+        StatusBar(
             text = stringResource(Res.string.stats),
-            style = MaterialTheme.typography.h5,
-            modifier = Modifier.padding(bottom = 36.dp)
+            modifier = Modifier.padding(
+                start = dimenRes(Res.dimens.horizontalPadding),
+                end = dimenRes(Res.dimens.horizontalPadding),
+                top = dimenRes(Res.dimens.verticalPadding),
+                bottom = 36.dp
+            ),
+            backAction = { accept(WaterStatisticsEvent.Back) }
         )
 
         Box(
-            modifier = Modifier.fillMaxSize().padding(top = 46.dp),
+            modifier = Modifier.fillMaxSize().padding(top = 12.dp),
             contentAlignment = Alignment.TopCenter
         ) {
             State(isVisible = state is WaterStatisticsState.Content) {
                 Content(
                     state as WaterStatisticsState.Content,
                     modifier = Modifier
-                        .width(300.dp)
-                        .height(200.dp)
+                        .fillMaxWidth()
+                        .height(300.dp)
+                        .padding(6.dp),
+                    accept = accept
                 )
             }
 
@@ -114,158 +139,79 @@ private fun State(
 @Composable
 private fun Content(
     state: WaterStatisticsState.Content,
-    modifier: Modifier = Modifier
-) {
-    BarChart(
-        state.paramsList,
-        modifier = modifier,
-    )
-}
-
-private val maxChartValue = FirstBaseline
-
-private val minChartValue = LastBaseline
-
-private val midChatValue = HorizontalAlignmentLine(merger = { old, new ->
-    max(old, new)
-})
-
-@Composable
-private fun BarChart(
-    params: List<HealthParams>,
     modifier: Modifier = Modifier,
+    accept: (WaterStatisticsEvent) -> Unit
 ) {
-    val counts = remember(params) { params.map { it.waterCount } }
-    val maxValue = remember(params) { params.maxOf { it.waterCount } }
-    val midValue = remember(maxValue) { maxValue / 2 }
+    Column {
+        Card(
+            modifier = modifier
+                .fillMaxWidth(),
+            shape = RoundedCornerShape(30.dp),
+            elevation = 4.dp
+        ) {
+            Column {
+                Text(
+                    modifier = Modifier
+                        .padding(top = 18.dp)
+                        .align(Alignment.CenterHorizontally),
+                    text = state.weekText,
+                    style = MaterialTheme.typography.h4
+                )
 
-    Layout(
-        content = {
-            Text(
-                text = counts.max().toString(),
-                style = MaterialTheme.typography.subtitle1
-            )
-            Text(
-                text = midValue.toString(),
-                style = MaterialTheme.typography.subtitle1
-            )
-            Text(
-                text = "0",
-                style = MaterialTheme.typography.subtitle1
-            )
-            StatBarChart(params, Modifier.height(300.dp))
-        },
-        modifier = modifier
-    ) { measurables, constraints ->
-        check(measurables.size == 4)
-        val placeables = measurables.map {
-            it.measure(constraints.copy(minWidth = 0, minHeight = 0))
+                BarChart(
+                    state = state,
+                    modifier = Modifier.padding(start = 12.dp, top = 18.dp, bottom = 18.dp)
+                )
+            }
         }
-
-        val maxTextPlaceable = placeables[0]
-        val midTextPlaceable = placeables[1]
-        val minTextPlaceable = placeables[2]
-        val barChartPlaceable = placeables[3]
-
-        // Obtain the alignment lines from BarChart to position the Text
-        val minValueBaseline = barChartPlaceable[minChartValue]
-        val maxValueBaseline = barChartPlaceable[maxChartValue]
-        val midValueBaseline = barChartPlaceable[midChatValue]
-        layout(constraints.maxWidth, constraints.maxHeight) {
-            maxTextPlaceable.placeRelative(
-                x = 0,
-                y = maxValueBaseline - maxTextPlaceable.height
-            )
-            midTextPlaceable.placeRelative(
-                x = 0,
-                y = midValueBaseline - midTextPlaceable.height
-            )
-            minTextPlaceable.placeRelative(
-                x = 0,
-                y = minValueBaseline - minTextPlaceable.height
-            )
-            barChartPlaceable.placeRelative(
-                x = max(maxTextPlaceable.width, minTextPlaceable.width) + 20,
-                y = 0
-            )
+        Row(
+            modifier = Modifier
+                .padding(top = 24.dp)
+                .fillMaxWidth(),
+            horizontalArrangement = Arrangement.Center
+        ) {
+            Controller(
+                modifier = Modifier.size(44.dp),
+                imageVector = Icons.Default.ArrowBack,
+                contentDescription = "Previous week",
+                isAvailable = state.isPrevWeekAvailable
+            ) {
+                accept(WaterStatisticsEvent.Week.Decrease)
+            }
+            Spacer(modifier = Modifier.width(12.dp))
+            Controller(
+                modifier = Modifier.padding(start = 12.dp).size(44.dp),
+                imageVector = Icons.Default.ArrowForward,
+                contentDescription = "Next week",
+                isAvailable = state.isNextWeekAvailable
+            ) {
+                accept(WaterStatisticsEvent.Week.Increase)
+            }
         }
     }
 }
 
-@OptIn(ExperimentalTextApi::class)
 @Composable
-private fun StatBarChart(
-    params: List<HealthParams>,
-    modifier: Modifier = Modifier
+private fun Controller(
+    modifier: Modifier = Modifier,
+    imageVector: ImageVector,
+    contentDescription: String,
+    isAvailable: Boolean,
+    onClick: () -> Unit
 ) {
-    val counts = remember(params) { params.map { it.waterCount } }
-
-    BoxWithConstraints(modifier = modifier) {
-        val density = LocalDensity.current
-        val maxValue = remember(counts) { counts.max() * 1.2F }
-        with(density) {
-            val yPositionRatio = remember(density, maxHeight, maxValue) {
-                (maxHeight - 40.dp).toPx() / maxValue
-            }
-            val xPositionRatio = remember(density, maxWidth, counts) {
-                maxWidth.toPx() / (counts.size + 1)
-            }
-            val xOffset = remember(density) { // center points in the graph
-                xPositionRatio / (counts.size + 1)
-            }
-
-            // Calculate baselines
-            val maxYBaseline = remember(counts) {
-                counts.maxOrNull()?.let { (maxValue - it) * yPositionRatio } ?: 0f
-            }
-            val midYBaseline = remember(counts) {
-                (maxValue - (counts.max() / 2)) * yPositionRatio
-            }
-            val minYBaseline = remember(counts) {
-                maxValue * yPositionRatio
-            }
-
-            val chartColor = MaterialTheme.colors.primary
-            val textMeasure = rememberTextMeasurer()
-            val textStyle = MaterialTheme.typography.subtitle2
-
-            Layout(
-                content = {},
-                modifier = Modifier.drawBehind {
-                    params.forEachIndexed { index, param ->
-                        val dataPoint = param.waterCount
-                        val rectSize = Size(20f, dataPoint * yPositionRatio)
-                        val topLeftOffset = Offset(
-                            x = xPositionRatio * (index + 1) - xOffset,
-                            y = (maxValue - dataPoint) * yPositionRatio
-                        )
-                        drawRoundRect(chartColor, topLeftOffset, rectSize, CornerRadius(10F))
-                        drawText(
-                            textMeasurer = textMeasure,
-                            text = param.date,
-                            style = textStyle,
-                            topLeft = Offset(
-                                x = xPositionRatio * (index + 1) - xOffset - 15.sp.toPx(),
-                                y = (maxHeight - 30.dp).toPx()
-                            )
-                        )
-                    }
-                }
-            ) { _, constraints ->
-                with(constraints) {
-                    layout(
-                        width = if (hasBoundedWidth) maxWidth else minWidth,
-                        height = if (hasBoundedHeight) maxHeight else minHeight,
-                        // Custom AlignmentLines are set here. These are propagated
-                        // to direct and indirect parent composables.
-                        alignmentLines = mapOf(
-                            minChartValue to minYBaseline.roundToInt(),
-                            midChatValue to midYBaseline.roundToInt(),
-                            maxChartValue to maxYBaseline.roundToInt()
-                        )
-                    ) {}
-                }
-            }
-        }
+    Button(
+        modifier = modifier,
+        onClick = onClick,
+        enabled = isAvailable,
+        colors = ButtonDefaults.buttonColors(
+            backgroundColor = MaterialTheme.colors.primary,
+            disabledBackgroundColor = MaterialTheme.colors.primary.copy(alpha = 0.2F)
+        ),
+        shape = CircleShape,
+    ) {
+        Icon(
+            imageVector = imageVector,
+            contentDescription = contentDescription,
+        )
     }
 }

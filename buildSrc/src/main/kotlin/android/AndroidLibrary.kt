@@ -7,17 +7,17 @@ import org.gradle.api.JavaVersion
 import org.gradle.api.Project
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
-fun LibraryExtension.setupLibrary(
+fun BaseExtension.androidLibrary(
     target: Project,
-    targetPackage: String
+    targetNamespace: String?
 ) {
-    compileSdk = AppConfig.compileSdk
+    compileSdkVersion(AppConfig.compileSdk)
 
     defaultConfig.apply {
         minSdk = AppConfig.minSdk
         targetSdk = AppConfig.targetSdk
 
-        namespace = targetPackage
+        if (targetNamespace != null) namespace = targetNamespace
     }
 
     compileOptions.apply {
@@ -29,5 +29,9 @@ fun LibraryExtension.setupLibrary(
         kotlinOptions {
             jvmTarget = "11"
         }
+    }
+
+    buildFeatures.apply {
+        compose = true
     }
 }

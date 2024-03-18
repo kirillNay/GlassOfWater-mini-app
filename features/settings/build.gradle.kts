@@ -1,38 +1,38 @@
 plugins {
     kotlin("multiplatform")
     id("org.jetbrains.compose")
+    id("com.android.library")
 }
 
-kotlin {
-    setupPlatforms(
-        platforms = listOf(Platform.JS),
-        commonDeps = {
-            api(compose.runtime)
-            api(compose.foundation)
-            api(compose.material)
-            api(compose.ui)
+setupMuliplatformProject(
+    platforms = listOf(Platform.JS, Platform.ANDROID),
+    commonDeps = {
+        api(compose.dependencies.runtime)
+        api(compose.dependencies.material)
+        api(compose.dependencies.ui)
 
-            implementation(project(":core:res"))
-            implementation(project(":core:arch"))
-            implementation(project(":core:ui"))
+        implementation(project(":core:res"))
+        implementation(project(":core:ui"))
+        implementation(project(":core:navigation"))
 
-            implementation(project(":domain"))
+        implementation(project(":domain"))
 
-            implementation("io.insert-koin:koin-core:3.2.0")
-        },
-        jsDeps = {
-            implementation("io.github.kirillNay:tg-mini-app:1.0.0")
-        }
-    )
-}
+        implementation(libs.koin.core)
+        implementation(libs.koin.compose)
+
+        implementation(libs.voyager.core)
+        implementation(libs.voyager.koin)
+    },
+    jsDeps = {
+        implementation(libs.tg.miniApp)
+    },
+    androidDeps = {
+        implementation(libs.compose.preview)
+        implementation(libs.compose.tooling)
+    },
+    androidNamespace = "nay.kirill.glassOfWater.features.settings"
+)
 
 compose.experimental {
     web.application {}
-}
-
-compose {
-    val composeVersion = project.property("compose.wasm.version") as String
-    kotlinCompilerPlugin.set(composeVersion)
-    val kotlinVersion = project.property("kotlin.version") as String
-    kotlinCompilerPluginArgs.add("suppressKotlinVersionCompatibilityCheck=$kotlinVersion")
 }

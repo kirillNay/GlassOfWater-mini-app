@@ -16,6 +16,9 @@ private var lastId = currentNanoTime().toInt()
 private val _appName = lastId++
 actual val Res.string.appName: Int get() = _appName
 
+private val _mainTitle = lastId++
+actual val Res.string.mainTitle: Int get() = _mainTitle
+
 private val _settings = lastId++
 actual val Res.string.settings: Int get() = _settings
 
@@ -31,20 +34,44 @@ actual val Res.string.plus: Int get() = _plus
 private val _noStats = lastId++
 actual val Res.string.noStats: Int get() = _noStats
 
-private val _clearDataConfirmation = lastId++
-actual val Res.string.clearDataConfirmation: Int get() = _clearDataConfirmation
-
-private val _mockDataConfirmation = lastId++
-actual val Res.string.mockDataConfirmation: Int get() = _mockDataConfirmation
-
-private val _clearDataButton = lastId++
-actual val Res.string.clearDataButton: Int get() = _clearDataButton
-
-private val _mockDataButton = lastId++
-actual val Res.string.mockDataButton: Int get() = _mockDataButton
-
-private val _adaptiveTheme = lastId++
-actual val Res.string.adaptiveTheme: Int get() = _adaptiveTheme
-
 private val _commonError = lastId++
 actual val Res.string.commonError: Int get() = _commonError
+
+private val _interfaceSettings = lastId++
+actual val Res.string.interfaceSettings: Int get() = _interfaceSettings
+
+private val _applicationSettings = lastId++
+actual val Res.string.applicationSettings: Int get() = _applicationSettings
+
+private val _themeDark = lastId++
+actual val Res.string.themeDark: Int get() = _themeDark
+
+private val _themeLight = lastId++
+actual val Res.string.themeLight: Int get() = _themeLight
+
+private val _adaptiveTheme = lastId++
+actual val Res.string.themeAdaptive: Int get() = _adaptiveTheme
+
+private val _systemTheme = lastId++
+actual val Res.string.themeSystem: Int get() = _systemTheme
+
+private val _monday = lastId++
+actual val Res.string.monday: Int get() = _monday
+
+private val _tuesday = lastId++
+actual val Res.string.tuesday: Int get() = _tuesday
+
+private val _wednesday = lastId++
+actual val Res.string.wednesday: Int get() = _wednesday
+
+private val _thursday = lastId++
+actual val Res.string.thursday: Int get() = _thursday
+
+private val _friday = lastId++
+actual val Res.string.friday: Int get() = _friday
+
+private val _saturday = lastId++
+actual val Res.string.saturday: Int get() = _saturday
+
+private val _sunday = lastId++
+actual val Res.string.sunday: Int get() = _sunday

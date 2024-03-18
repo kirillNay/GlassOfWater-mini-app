@@ -4,13 +4,15 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class AppConfig(
-    val isAdaptiveTheme: Boolean,
+    val selectedTheme: Theme,
+    val dailyGoal: Int
 ) {
 
     companion object {
 
         val default = AppConfig(
-            isAdaptiveTheme = false
+            selectedTheme = Theme.SYSTEM,
+            dailyGoal = 4
         )
 
     }

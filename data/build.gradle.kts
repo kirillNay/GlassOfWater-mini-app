@@ -1,20 +1,22 @@
 plugins {
     kotlin("multiplatform")
     kotlin("plugin.serialization")
+    id("com.android.library")
 }
 
 group = "nay.kirill"
 version = "1.0-SNAPSHOT"
 
-kotlin {
-    setupPlatforms(
-        platforms = listOf(Platform.JS),
-        commonDeps = {
-            implementation(project(":domain"))
-            implementation("io.github.kirillNay:tg-mini-app:1.0.0")
-            implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
-            implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.1")
-        }
-    )
-}
+setupMuliplatformProject(
+    platforms = listOf(Platform.JS, Platform.ANDROID),
+    commonDeps = {
+        implementation(project(":domain"))
 
+        implementation(libs.kotlinx.datetime)
+        implementation(libs.kotlinx.coroutines.core)
+        implementation(libs.kotlinx.serialization.json)
+    },
+    jsDeps = {
+        implementation(libs.tg.miniApp)
+    }
+)

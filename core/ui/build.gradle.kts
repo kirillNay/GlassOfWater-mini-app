@@ -1,29 +1,24 @@
 plugins {
     kotlin("multiplatform")
     id("org.jetbrains.compose")
+    id("com.android.library")
 }
 
-kotlin {
-    setupPlatforms(
-        platforms = listOf(Platform.JS),
-        commonDeps = {
-            api(compose.runtime)
-            api(compose.foundation)
-            api(compose.material)
-            api(compose.ui)
+setupMuliplatformProject(
+    platforms = listOf(Platform.JS, Platform.ANDROID),
+    commonDeps = {
+        api(compose.dependencies.runtime)
+        api(compose.dependencies.material)
+        api(compose.dependencies.ui)
 
-            implementation(project(":core:res"))
-        }
-    )
-}
+        implementation(project(":core:res"))
+    },
+    jsDeps = {
+        implementation(libs.tg.miniApp)
+    },
+    androidNamespace = "nay.kirill.glassOfWater.ui"
+)
 
 compose.experimental {
     web.application {}
-}
-
-compose {
-    val composeVersion = project.property("compose.wasm.version") as String
-    kotlinCompilerPlugin.set(composeVersion)
-    val kotlinVersion = project.property("kotlin.version") as String
-    kotlinCompilerPluginArgs.add("suppressKotlinVersionCompatibilityCheck=$kotlinVersion")
 }

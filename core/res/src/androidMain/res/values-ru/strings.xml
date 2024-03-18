@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Glasses Of Water</string>
+    <string name="settings">Настройки</string>
+    <string name="stats">Статистика</string>
+    <string name="noStats">Статистика недоступна</string>
+    <string name="commonError">Что-то пошло не так…</string>
+    <string name="interfaceSettings">Интерфейс</string>
+    <string name="themeLight">Светлая тема</string>
+    <string name="themeDark">Темная тема</string>
+    <string name="themeSystem">Системная тема</string>
+    <string name="themeAdaptive">Адаптиваная тема</string>
+    <string name="applicationSettings">Цель стаканов на день</string>
+    <string name="mainTitle">Ваш счетчик воды</string>
+    <string name="monday">Пн</string>
+    <string name="tuesday">Вт</string>
+    <string name="wednesday">Ср</string>
+    <string name="thursday">Чт</string>
+    <string name="friday">Пт</string>
+    <string name="saturday">Сб</string>
+    <string name="sunday">Вс</string>
+</resources>

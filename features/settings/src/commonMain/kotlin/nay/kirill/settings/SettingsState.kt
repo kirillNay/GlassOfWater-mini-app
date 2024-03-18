@@ -1,11 +1,15 @@
 package nay.kirill.settings
 
+import nay.kirill.healthcare.domain.Theme
+
 sealed interface SettingsState {
 
     data object Loading : SettingsState
 
     data class Content(
-        val isAdaptiveBoolean: Boolean
+        val selectedTheme: Theme,
+        val dailyGoal: Int,
+        val listOfThemes: List<ThemeItem>
     ) : SettingsState
 
     data object Error : SettingsState
@@ -16,3 +20,8 @@ sealed interface SettingsState {
     }
 
 }
+
+data class ThemeItem(
+    val theme: Theme,
+    val titleId: Int
+)

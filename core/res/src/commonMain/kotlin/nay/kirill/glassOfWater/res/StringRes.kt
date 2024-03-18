@@ -7,6 +7,8 @@ expect fun stringResource(id: Int): String
 
 expect val Res.string.appName: Int
 
+expect val Res.string.mainTitle: Int
+
 expect val Res.string.settings: Int
 
 expect val Res.string.stats: Int
@@ -17,14 +19,30 @@ expect val Res.string.plus: Int
 
 expect val Res.string.noStats: Int
 
-expect val Res.string.clearDataConfirmation: Int
-
-expect val Res.string.mockDataConfirmation: Int
-
-expect val Res.string.clearDataButton: Int
-
-expect val Res.string.mockDataButton: Int
-
-expect val Res.string.adaptiveTheme: Int
-
 expect val Res.string.commonError: Int
+
+expect val Res.string.interfaceSettings: Int
+
+expect val Res.string.applicationSettings: Int
+
+expect val Res.string.themeDark: Int
+
+expect val Res.string.themeLight: Int
+
+expect val Res.string.themeSystem: Int
+
+expect val Res.string.themeAdaptive: Int
+
+expect val Res.string.monday: Int
+
+expect val Res.string.tuesday: Int
+
+expect val Res.string.wednesday: Int
+
+expect val Res.string.thursday: Int
+
+expect val Res.string.friday: Int
+
+expect val Res.string.saturday: Int
+
+expect val Res.string.sunday: Int
