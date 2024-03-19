@@ -24,7 +24,7 @@ To build and run android application you should first connect device or emulator
 
 ### Mini app
 
-<img src="https://github.com/kirillNay/GlassOfWater-mini-app/assets/56832972/660e9179-f4e1-453c-96b5-174725cfdc4b" width="296" height="584"/>
+<img src="https://github.com/kirillNay/GlassOfWater-mini-app/assets/56832972/660e9179-f4e1-453c-96b5-174725cfdc4b" width="197" height="389"/>
 
 #### How to run
 To build js application you should call run task of gradle:
