@@ -12,8 +12,8 @@ Guideline of implementation you can fide [here](https://github.com/kirillNay/tg-
 
 ### Android application
 
-<img src="https://github.com/kirillNay/GlassOfWater-mini-app/assets/56832972/f8688ee9-eb2e-4b1e-8a97-6096e6f95962" width="162" heigth="318">
-<img src="https://github.com/kirillNay/GlassOfWater-mini-app/assets/56832972/9769daea-d055-444c-82a3-e53edcbb37e1" width="162" heigth="318">
+<img src="https://github.com/kirillNay/GlassOfWater-mini-app/assets/56832972/f8688ee9-eb2e-4b1e-8a97-6096e6f95962" width="162" heigth="318">&emsp;
+<img src="https://github.com/kirillNay/GlassOfWater-mini-app/assets/56832972/9769daea-d055-444c-82a3-e53edcbb37e1" width="162" heigth="318">&emsp;
 <img src="https://github.com/kirillNay/GlassOfWater-mini-app/assets/56832972/e96da025-7c53-4d8f-964f-df6ac990325b" width="162" heigth="318">
 
 #### How to run
