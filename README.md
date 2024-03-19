@@ -16,15 +16,21 @@ Guideline of implementation you can fide [here](https://github.com/kirillNay/tg-
 <img src="https://github.com/kirillNay/GlassOfWater-mini-app/assets/56832972/9769daea-d055-444c-82a3-e53edcbb37e1" width="162" heigth="318">&emsp;
 <img src="https://github.com/kirillNay/GlassOfWater-mini-app/assets/56832972/e96da025-7c53-4d8f-964f-df6ac990325b" width="162" heigth="318">
 
+You can install apk of latest release from [releases page]([url](https://github.com/kirillNay/GlassOfWater-mini-app/releases)) in Github page.
+
 #### How to run
 To build and run android application you should first connect device or emulator via adb and then call install task of gradle:
 ```
 ./gradlew app:installDebug
 ```
 
+---
+
 ### Mini app
 
 <img src="https://github.com/kirillNay/GlassOfWater-mini-app/assets/56832972/660e9179-f4e1-453c-96b5-174725cfdc4b" width="197" height="389"/>
+
+You can access GlassOfWater mini app with [direct link](https://t.me/health_bodycare_bot/glassOfWater).
 
 #### How to run
 To build js application you should call run task of gradle:
